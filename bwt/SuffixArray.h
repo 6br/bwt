@@ -54,6 +54,7 @@ class SuffixArray : public ::x10::lang::X10Class   {
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual ::x10::lang::Rail< x10_long >* run();
+    virtual ::x10::lang::Rail< x10_long >* bwtable();
     virtual void constructSample();
     virtual void sortSample();
     virtual void sortNonSample();

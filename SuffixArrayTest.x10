@@ -31,17 +31,21 @@ public class SuffixArrayTest {
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     }
+    val bwt = bwa.bwtable();
+    for (i in 0..(bwt.size-1)){
+      Console.OUT.println(bwt(i));
+    }
 
-    val nmax:Long = 10;
+    val nmax:Long = 4;
     val b:Long = 4;
     for(n in 2..nmax){
       val N = (Math.pow(b, n)+0.5) as Int;
       var s:Rail[Long] = new Rail[Long](n+3);
       var sa_result:Rail[Long] = new Rail[Long](n+3);
-      for(i in 0..n){s(i)=1;sa_result(i)=1;}
-      s(n)=0;
-      s(n+1)=0;
-      s(n+2)=0;
+      for(i in 0..n){s(i) = 1; sa_result(i) = 1;}
+      s(n)   = 0;
+      s(n+1) = 0;
+      s(n+2) = 0;
       for(i in 0..(N-1)){
         val aa = new SuffixArray(s, b);
         sa_result = aa.run();

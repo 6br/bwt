@@ -50,6 +50,16 @@ public class SuffixArray {
     return this.SA;
   }
 
+  def bwtable(): Rail[Long] {
+    val bwt: RailBuilder[Long] = new RailBuilder[Long]();
+    for(i in 0..(n-1)){
+      if(SA(i) != 0){
+        bwt.add(string(SA(i) - 1));
+      }
+    }
+    return bwt.result();
+  }
+
   def constructSample() {
     R = new Rail[Long](n02+3);
     R(n02) = 0;
