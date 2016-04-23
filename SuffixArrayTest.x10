@@ -10,10 +10,10 @@ public class SuffixArrayTest {
   }
 
   static def sleq(s1: Rail[Long], s2: Rail[Long], c1: Long, c2: Long):Boolean {
-    if(c2 >= s2.size) return false;
-    if(c1 >= s1.size) return true;
-    if(s1(c1) > s2(c2)) return false;
-    if(s1(c1) < s2(c2)) return true;
+    if (c2 >= s2.size) return false;
+    if (c1 >= s1.size) return true;
+    if (s1(c1) > s2(c2)) return false;
+    if (s1(c1) < s2(c2)) return true;
     return sleq(s1, s2, c1+1, c2+1);
   }
 

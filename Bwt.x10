@@ -1,84 +1,74 @@
 package bwt;
 import x10.io.Console;
+import x10.io.File;
 import x10.util.RailBuilder;
+import x10.util.Timer;
 
 public class Bwt {
-  val string: Rail[Byte];
-  val n: Long;
-  val n0: Long;
-  val n1: Long;
-  val n2: Long;
-  val k: Int;
-  val n02: Long;
-  var R: Rail[Long];
-  var SA12: Rail[Long];
+  var SA: SuffixArray;
 
-  def this(input: String, k: int) {
-    val strBuilder = new RailBuilder[Byte](input.length());
+  def this(input: String, k: int, isDigit: Boolean) {
+    val strBuilder = new RailBuilder[Long](input.length());
     val inputBytes = input.bytes();
     val length = input.length();
 
-    for(i in 0..length) {
+    for (i in 0..(length-1)) {
       val c = inputBytes(i);
-      val base = ((c >> 2) ^ (c >> 3) & 3) as Byte;
+      val base:Long;
+      if (isDigit) {
+        base = c - 47; 
+      } else {
+        base = ((((c >> 2) ^ (c >> 1)) & 3) + 1) as Long;
+      }
       strBuilder.add(base);
     }
-    string = strBuilder.result();
-    
-    //string = ['4','0','3','0','0','3','0','4','1','2','0','3','0','0','3','0','0'];//input;
-    n = string.size;
-    n0 = (n + 2) / 3;
-    n1 = (n + 1) / 3;
-    n2 = n / 3;
-    n02 = n0 + n2;
-    k = k;
-    //R = new Rail[Long](n02+3);
-  }
-
-  def constructSample() {
-    val r:RailBuilder[Long] = new RailBuilder[Long]();
-    //var j = 0;
-    for(i in 0..(n + n0 - n1)) {
-      if (i % 3 != 0){
-        //R(j) = i;
-        //j+=1;
-        r.add(i);
-      } 
+    for (i in 0..2){
+      strBuilder.add(0);
     }
-    for(i in 0..3){
-      r.add(0);
+    val string = strBuilder.result();
+
+    SA = new SuffixArray(string, k);
+    val sa = SA.run();
+    for (i in 0..(sa.size-1)){
+      Console.OUT.println(sa(i));
     }
-    R = r.result();
-    SA12 = new Rail[Long](n02+3);
-    SA12(n02) = 0;
-    SA12(n02+1) = 0;
-    SA12(n02+2) = 0;
   }
 
-  def sortSample() {
-     
+  def this(filename: String, k: Int) {
+    val string = fileio(filename);
+    val time = Timer.nanoTime();
+    SA = new SuffixArray(string, k);
+    val sa = SA.run();
+    val difftime = Timer.nanoTime() - time;
+    for (i in 0..(sa.size-1)){
+      Console.OUT.println(sa(i));
+    } 
+    Console.OUT.println(difftime);
   }
 
-  def sortNonSample() {
+  static def strRail(){
+    //Nop
   }
 
-  def merge() {
-  }
-
-  def show() {
-  }
-
-  // a[0..n-1] to b[0..n-1] with keys in 0..4 from r
-  def radixPass(a:Rail[Long], b:Rail[Long], r:Rail[Byte], n:Int) {
-    
+  static def fileio(filename: String):Rail[Long]{
+    val strBuilder = new RailBuilder[Long]();
+    val input = new File(filename);
+    for( c in input.bytes() ) {
+      val base = ((((c >> 2) ^ (c >> 1)) & 3) + 1) as Long;
+      strBuilder.add(base);
+    }
+    for (i in 0..2){
+      strBuilder.add(0);
+    }
+    val string = strBuilder.result();
+    return string;
   }
 
   public static def main(args:Rail[String]):void {
-    val bwa = new Bwa("40300303120300300");
-    bwa.constructSample();
-    bwa.sortSample();
-    bwa.sortNonSample();
-    bwa.merge();
-    bwa.show();
+    //val string:Rail[Long] = fileio("test.txt");
+    var N:int = Int.parse(args(0)); 
+    val bwa = new Bwt("test.txt", N);
+    //val bwa = new Bwt("40300303120300300", N, true);
+    //val bwa = new Bwt(string, N, false);
   }
 }
