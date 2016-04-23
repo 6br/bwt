@@ -25,7 +25,7 @@ public class SuffixArray {
   }
 
   // a[0..n-1] to b[0..n-1] with keys in 0..k from string+rOffs(et)
-  def radixPass(a:Rail[Long], b:Rail[Long], rOffs:Byte, nt:Long) {
+  def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
@@ -37,7 +37,10 @@ public class SuffixArray {
       c(i) = sum;
       sum += t;
     }
-    for(i in 0..(nt-1)) {b(c(string(a(i) + rOffs))) = a(i); c((string(a(i) + rOffs))) += 1;}
+    for(i in 0..(nt-1)) {
+      b(c(string(a(i) + rOffs))) = a(i);
+      c((string(a(i) + rOffs))) += 1;
+    }
   }
 
   def run():Rail[Long] {
@@ -161,7 +164,7 @@ public class SuffixArray {
     }
   }
 /*
-  public static def main(args:Rail[String]):void {
+  public static def main(args: Rail[String]):void {
     val bwa = new SuffixArray([1L,4L,1L,1L,4L,1L,2L,3L,1L,4L,1L,1L,4L,1L,1L,0L,0L,0L,0L], 5);
     val sa = bwa.run();
     for (i in 0..(sa.size-1)){
