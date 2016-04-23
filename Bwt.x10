@@ -1,8 +1,8 @@
-package bwa;
+package bwt;
 import x10.io.Console;
 import x10.util.RailBuilder;
 
-public class Bwa {
+public class Bwt {
   val string: Rail[Byte];
   val n: Long;
   val n0: Long;
