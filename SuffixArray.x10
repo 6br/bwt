@@ -43,7 +43,7 @@ public class SuffixArray {
     }
   }
 
-  def run():Rail[Long] {
+  def run(): Rail[Long] {
     this.constructSample();
     this.sortSample();
     this.sortNonSample();
@@ -84,6 +84,7 @@ public class SuffixArray {
         c1 = string(SA12(i)+1);
         c2 = string(SA12(i)+2);
       }
+    
       if (SA12(i)%3 == 1) {
         R(SA12(i)/3) = name;
       } else {
@@ -120,9 +121,10 @@ public class SuffixArray {
       k += 1;
       val i = getI(t);
       val j = SA0(p);
+      //// different compares for mod 1 and mod 2 suffixes
       if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
          SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
-        ){
+        ){ // suffix from SA12 is smaller
         SA(k) = i; 
         t += 1;
         if(t == n02) {
@@ -133,7 +135,7 @@ public class SuffixArray {
             k += 1;
           }
         }
-      } else {
+      } else { // suffix from SA0 is smaller
         SA(k) = j;
         p += 1;
         if(p == n0) {

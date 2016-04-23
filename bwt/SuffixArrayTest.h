@@ -25,6 +25,9 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace x10 { namespace lang { 
+class Math;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -35,6 +38,12 @@ class SuffixArrayTest : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
+    static x10_boolean isPerm(::x10::lang::Rail< x10_long >* sa, x10_long n);
+    static x10_boolean sleq(::x10::lang::Rail< x10_long >* s1, ::x10::lang::Rail< x10_long >* s2,
+                            x10_long c1, x10_long c2);
+    static x10_boolean isSorted(::x10::lang::Rail< x10_long >* sa,
+                                ::x10::lang::Rail< x10_long >* s,
+                                x10_long n);
     static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
     virtual ::bwt::SuffixArrayTest* bwt__SuffixArrayTest____this__bwt__SuffixArrayTest(
       );
@@ -42,7 +51,8 @@ class SuffixArrayTest : public ::x10::lang::X10Class   {
     
     static ::bwt::SuffixArrayTest* _make();
     
-    virtual void __fieldInitializers_bwt_SuffixArrayTest();
+    virtual void __fieldInitializers_bwt_SuffixArrayTest(
+      );
     
     // Serialization
     public: static const ::x10aux::serialization_id_t _serialization_id;
