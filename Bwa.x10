@@ -8,11 +8,12 @@ public class Bwa {
   val n0: Long;
   val n1: Long;
   val n2: Long;
+  val k: Int;
   val n02: Long;
   var R: Rail[Long];
   var SA12: Rail[Long];
 
-  def this(input: String) {
+  def this(input: String, k: int) {
     val strBuilder = new RailBuilder[Byte](input.length());
     val inputBytes = input.bytes();
     val length = input.length();
@@ -30,6 +31,7 @@ public class Bwa {
     n1 = (n + 1) / 3;
     n2 = n / 3;
     n02 = n0 + n2;
+    k = k;
     //R = new Rail[Long](n02+3);
   }
 
@@ -47,23 +49,23 @@ public class Bwa {
       r.add(0);
     }
     R = r.result();
-    SA12 = new Rasl[Long](n02+3);
+    SA12 = new Rail[Long](n02+3);
     SA12(n02) = 0;
     SA12(n02+1) = 0;
     SA12(n02+2) = 0;
   }
 
-  def sortSample(){
+  def sortSample() {
      
   }
 
-  def sortNonSample(){
+  def sortNonSample() {
   }
 
-  def merge(){
+  def merge() {
   }
 
-  def show(){
+  def show() {
   }
 
   // a[0..n-1] to b[0..n-1] with keys in 0..4 from r
