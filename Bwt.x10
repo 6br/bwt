@@ -43,11 +43,11 @@ public class Bwt {
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     } 
-    Console.OUT.println(difftime);
+    Console.OUT.printf("Elapsed time: %ld nanotime.\n",difftime);
   }
 
   static def strRail(){
-    //Nop
+    //TODO
   }
 
   static def fileio(filename: String):Rail[Long]{
