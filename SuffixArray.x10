@@ -44,8 +44,11 @@ public class SuffixArray {
   }
 
   def run(): Rail[Long] {
+    Console.ERR.println("Start Constructuring Sample");
     this.constructSample();
+    Console.ERR.println("Start Sort Sample");
     this.sortSample();
+    Console.ERR.println("Start Sort NonSample");
     this.sortNonSample();
     return this.SA;
   }
@@ -123,6 +126,7 @@ public class SuffixArray {
     SA = new Rail[Long](n+3);
     radixPass(R0, SA0, 0y, n0);
 
+    Console.ERR.println("Start Merge");
     // def merge() {
     var p:Long = 0; 
     var t:Long = n0 - n1;

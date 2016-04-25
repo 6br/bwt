@@ -43,7 +43,7 @@ public class Bwt {
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     } 
-    Console.OUT.printf("Elapsed time: %ld nanotime.\n",difftime);
+    Console.ERR.printf("Elapsed time: %ld nanotime.\n",difftime);
   }
 
   static def strRail(){
@@ -66,8 +66,9 @@ public class Bwt {
 
   public static def main(args:Rail[String]):void {
     //val string:Rail[Long] = fileio("test.txt");
-    var N:int = Int.parse(args(0)); 
-    val bwa = new Bwt("test.txt", N);
+    var N:int = Int.parse(args(0));
+    var file:String = args(1); 
+    val bwa = new Bwt(file, N);
     //val bwa = new Bwt("40300303120300300", N, true);
     //val bwa = new Bwt(string, N, false);
   }
