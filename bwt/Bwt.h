@@ -3,6 +3,7 @@
 
 #include <x10rt.h>
 
+#include "input.h"
 
 namespace bwt { 
 class SuffixArray;
@@ -28,6 +29,9 @@ class Any;
 namespace x10 { namespace util { 
 class Timer;
 } } 
+namespace x10 { namespace util { 
+class StringBuilder;
+} } 
 namespace x10 { namespace io { 
 class File;
 } } 
@@ -38,14 +42,25 @@ namespace x10 { namespace io {
 template<class TPMGL(T)> class ReaderIterator;
 } } 
 namespace x10 { namespace compiler { 
+class Native;
+} } 
+namespace x10 { namespace compiler { 
 class Synthetic;
+} } 
+namespace x10 { namespace compiler { 
+class NativeCPPInclude;
+} } 
+namespace x10 { namespace compiler { 
+class NativeCPPCompilationUnit;
 } } 
 
 namespace bwt { 
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__2732;
+    static ::x10::lang::String sl__3055;
+    static ::x10::lang::String sl__3053;
+    static ::x10::lang::String sl__3054;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
@@ -62,7 +77,9 @@ class Bwt : public ::x10::lang::X10Class   {
     
     static ::bwt::Bwt* _make(::x10::lang::String* filename, x10_int k);
     
-    static void strRail();
+    static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
+                                                    x10_boolean isDigit);
+    static ::x10::lang::String* fileioImproved(::x10::lang::String* filename);
     static ::x10::lang::Rail< x10_long >* fileio(::x10::lang::String* filename);
     static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
     virtual ::bwt::Bwt* bwt__Bwt____this__bwt__Bwt();

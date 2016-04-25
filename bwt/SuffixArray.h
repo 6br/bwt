@@ -3,6 +3,7 @@
 
 #include <x10rt.h>
 
+#include "parallel_radix_sort.h"
 
 #define X10_LANG_LONG_H_NODEPS
 #include <x10/lang/Long.h>
@@ -12,6 +13,9 @@
 #undef X10_LANG_LONG_H_NODEPS
 namespace x10 { namespace lang { 
 template<class TPMGL(T)> class Rail;
+} } 
+namespace x10 { namespace compiler { 
+class Native;
 } } 
 namespace x10 { namespace io { 
 class Printer;
@@ -28,15 +32,18 @@ template<class TPMGL(T)> class RailBuilder;
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
+namespace x10 { namespace compiler { 
+class NativeCPPInclude;
+} } 
 
 namespace bwt { 
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__2743;
-    static ::x10::lang::String sl__2745;
-    static ::x10::lang::String sl__2744;
-    static ::x10::lang::String sl__2742;
+    static ::x10::lang::String sl__3069;
+    static ::x10::lang::String sl__3071;
+    static ::x10::lang::String sl__3070;
+    static ::x10::lang::String sl__3068;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -68,6 +75,8 @@ class SuffixArray : public ::x10::lang::X10Class   {
     static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
                                      x10_long charsize);
     
+    virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
+                           x10_ulong num_elems, x10_int num_threads);
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual ::x10::lang::Rail< x10_long >* run();
@@ -75,9 +84,10 @@ class SuffixArray : public ::x10::lang::X10Class   {
     virtual void constructSample();
     virtual void sortSample();
     virtual void sortNonSample();
-    x10_boolean leq(x10_long a1, x10_long a2, x10_long b1, x10_long b2);
-    x10_boolean leq(x10_long a1, x10_long a2, x10_long a3, x10_long b1,
-                    x10_long b2, x10_long b3);
+    x10_boolean leq(x10_long a1, x10_long a2, x10_long b1,
+                    x10_long b2);
+    x10_boolean leq(x10_long a1, x10_long a2, x10_long a3,
+                    x10_long b1, x10_long b2, x10_long b3);
     x10_long getI(x10_long t);
     virtual ::bwt::SuffixArray* bwt__SuffixArray____this__bwt__SuffixArray(
       );

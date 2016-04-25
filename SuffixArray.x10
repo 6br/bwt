@@ -1,6 +1,12 @@
 package bwt;
 import x10.io.Console;
 import x10.util.RailBuilder;
+import x10.array.Array;
+
+import x10.compiler.Native;
+import x10.compiler.NativeCPPInclude;
+
+@NativeCPPInclude("parallel_radix_sort.h")
 
 public class SuffixArray {
   val string: Rail[Long];
@@ -24,7 +30,10 @@ public class SuffixArray {
     n02 = n0 + n2;
   }
 
-  // a[0..n-1] to b[0..n-1] with keys in 0..k from string+rOffs(et)
+  @Native("c++", "parallel_radix_sort::SortPairsLong((#1)->raw, (#2)->raw, #3, #4)")
+  native def sortPairs(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+
+  // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
@@ -44,6 +53,19 @@ public class SuffixArray {
   }
 
   def run(): Rail[Long] {
+    // There are experimental codes below.
+    /*var array:Rail[Long] = new Rail[Long](n);
+    for( i in 0..(n-1)){
+      array(i) = i;
+    }
+    val size = n as ULong;
+    val num_threads = 4 as Int;
+    Console.OUT.println(array);
+    Console.OUT.println(string);
+    sortPairs(string, array, size, num_threads);
+    Console.OUT.println(array);
+    Console.OUT.println(string);*/
+
     Console.ERR.println("Start Constructuring Sample");
     this.constructSample();
     Console.ERR.println("Start Sort Sample");
