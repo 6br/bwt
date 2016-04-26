@@ -51,6 +51,17 @@ public class Bwt {
     val time = Timer.nanoTime();
     SA = new SuffixArray(string, k);
     val sa = SA.run();
+    Console.ERR.printf("Elapsed time: %ld nanotime.\n",difftime);
+    val difftime = Timer.nanoTime() - time;
+    for (i in 0..(sa.size-1)){
+      Console.OUT.println(sa(i));
+    }
+  }
+
+  def this(string: Rail[Long], k: Int) {
+    val time = Timer.nanoTime();
+    SA = new SuffixArray(string, k);
+    val sa = SA.run();
     val difftime = Timer.nanoTime() - time;
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
@@ -96,7 +107,7 @@ public class Bwt {
     return string;
   }
 
-  @Native("c++", "fileiocpp((#1)->c_str(), (#2)->raw);")
+  @Native("c++", "input_fgets((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Long]): void;
 
   static def fileio(filename: String):Rail[Long]{
@@ -121,11 +132,13 @@ public class Bwt {
 
   public static def main(args:Rail[String]):void {
     //val string:Rail[Long] = fileio("test.txt");
-    var N:int = Int.parse(args(0));
+    val N:Int = Int.parse(args(0));
+    val length:Int = Int.parse(args(1));
     var file:String = args(1); 
-    val e = new Rail[Long](2);
+    val e = new Rail[Long](length);
     fileioCPP(file, e);
     Console.OUT.println(e);
+    val bwa = new Bwt(e, N);
     //val bwa = new Bwt(file, N);
     //val bwa = new Bwt(file, N, false);
   }
