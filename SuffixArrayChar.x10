@@ -8,8 +8,8 @@ import x10.compiler.NativeCPPInclude;
 
 @NativeCPPInclude("parallel_radix_sort.h")
 
-public class SuffixArray {
-  val string: Rail[Long];
+public class SuffixArrayChar {
+  val string: Rail[Byte];
   val n: Long;
   val n0: Long;
   val n1: Long;
@@ -20,7 +20,7 @@ public class SuffixArray {
   var SA12: Rail[Long];
   var SA: Rail[Long];
  
-  def this(input: Rail[Long], charsize: Long){
+  def this(input: Rail[Byte], charsize: Long){
     string = input;
     k = charsize;
     n = input.size - 3;
@@ -105,16 +105,13 @@ public class SuffixArray {
 
   def sortSample() {
     radixPass(R, SA12, 2y, n02);
-    Console.ERR.println("Ended 1st Radix Sort");
     radixPass(SA12, R, 1y, n02);
-    Console.ERR.println("Ended 2nd Radix Sort");
     radixPass(R, SA12, 0y, n02);
-    Console.ERR.println("Ended 3rd Radix Sort");
 
     var name:Long = 0;
-    var c0:Long = -1;
-    var c1:Long = -1;
-    var c2:Long = -1;
+    var c0:Byte = -1y;
+    var c1:Byte = -1y;
+    var c2:Byte = -1y;
     for (i in 0..(n02 - 1)){
       if (string(SA12(i)) != c0 || string(SA12(i)+1) != c1 || string(SA12(i)+2) != c2) {
         name += 1;
@@ -129,7 +126,6 @@ public class SuffixArray {
         R(SA12(i)/3 + n0) = name;
       }
     }
-    Console.ERR.println("Ended Sort Sample");
 
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
@@ -205,13 +201,12 @@ public class SuffixArray {
       return (SA12(t) - n0) * 3 + 2;
     }
   }
-/*
+
   public static def main(args: Rail[String]):void {
-    val bwa = new SuffixArray([1L,4L,1L,1L,4L,1L,2L,3L,1L,4L,1L,1L,4L,1L,1L,0L,0L,0L,0L], 5);
+    val bwa = new SuffixArrayChar([1y,4y,1y,1y,4y,1y,2y,3y,1y,4y,1y,1y,4y,1y,1y,0y,0y,0y,0y], 5);
     val sa = bwa.run();
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     }
   }
-*/
 }

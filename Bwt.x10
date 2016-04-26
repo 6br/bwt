@@ -110,6 +110,10 @@ public class Bwt {
   @Native("c++", "input_fgets((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Long]): void;
 
+  @Native("c++", "input_fgets_malloc((#1)->c_str(), #2);")
+  native static def fileioCPP(filename: String, data: Long): Rail[Long];
+
+
   static def fileio(filename: String):Rail[Long]{
     val strBuilder = new RailBuilder[Long]();
     val input = new File(filename);
@@ -136,8 +140,9 @@ public class Bwt {
     val length:Long = Long.parse(args(1));
     var file:String = args(2); 
     Console.OUT.println("Start Malloc");
-    val e = new Rail[Long](length);
+    val e = new Rail[Long](length);//2577003486);
     Console.OUT.println("End Malloc");
+    //val e = fileioCPP(file, length);
     fileioCPP(file, e);
     Console.OUT.println(e(0));
     val bwa = new Bwt(e, N);

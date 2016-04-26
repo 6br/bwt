@@ -1,10 +1,13 @@
-#ifndef __BWT_SUFFIXARRAY_H
-#define __BWT_SUFFIXARRAY_H
+#ifndef __BWT_SUFFIXARRAYCHAR_H
+#define __BWT_SUFFIXARRAYCHAR_H
 
 #include <x10rt.h>
 
 #include "parallel_radix_sort.h"
 
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
 #define X10_LANG_LONG_H_NODEPS
 #include <x10/lang/Long.h>
 #undef X10_LANG_LONG_H_NODEPS
@@ -29,6 +32,15 @@ class Any;
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
 } } 
+namespace bwt { 
+class SuffixArray;
+} 
+namespace x10 { namespace lang { 
+class String;
+} } 
+namespace x10 { namespace lang { 
+class Unsafe;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -38,23 +50,19 @@ class NativeCPPInclude;
 
 namespace bwt { 
 
-class SuffixArray_Strings {
+class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__3188;
-    static ::x10::lang::String sl__3187;
-    static ::x10::lang::String sl__3185;
-    static ::x10::lang::String sl__3190;
-    static ::x10::lang::String sl__3189;
-    static ::x10::lang::String sl__3191;
-    static ::x10::lang::String sl__3186;
-    static ::x10::lang::String sl__3184;
+    static ::x10::lang::String sl__4668;
+    static ::x10::lang::String sl__4670;
+    static ::x10::lang::String sl__4669;
+    static ::x10::lang::String sl__4667;
 };
 
-class SuffixArray : public ::x10::lang::X10Class   {
+class SuffixArrayChar : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
-    ::x10::lang::Rail< x10_long >* FMGL(string);
+    ::x10::lang::Rail< x10_byte >* FMGL(string);
     
     x10_long FMGL(n);
     
@@ -74,10 +82,10 @@ class SuffixArray : public ::x10::lang::X10Class   {
     
     ::x10::lang::Rail< x10_long >* FMGL(SA);
     
-    void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize);
+    void _constructor(::x10::lang::Rail< x10_byte >* input, x10_long charsize);
     
-    static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
-                                     x10_long charsize);
+    static ::bwt::SuffixArrayChar* _make(::x10::lang::Rail< x10_byte >* input,
+                                         x10_long charsize);
     
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads);
@@ -93,9 +101,11 @@ class SuffixArray : public ::x10::lang::X10Class   {
     x10_boolean leq(x10_long a1, x10_long a2, x10_long a3,
                     x10_long b1, x10_long b2, x10_long b3);
     x10_long getI(x10_long t);
-    virtual ::bwt::SuffixArray* bwt__SuffixArray____this__bwt__SuffixArray(
+    static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
+    virtual ::bwt::SuffixArrayChar* bwt__SuffixArrayChar____this__bwt__SuffixArrayChar(
       );
-    virtual void __fieldInitializers_bwt_SuffixArray();
+    virtual void __fieldInitializers_bwt_SuffixArrayChar(
+      );
     
     // Serialization
     public: static const ::x10aux::serialization_id_t _serialization_id;
@@ -114,15 +124,15 @@ class SuffixArray : public ::x10::lang::X10Class   {
 
 
 } 
-#endif // BWT_SUFFIXARRAY_H
+#endif // BWT_SUFFIXARRAYCHAR_H
 
 namespace bwt { 
-class SuffixArray;
+class SuffixArrayChar;
 } 
 
-#ifndef BWT_SUFFIXARRAY_H_NODEPS
-#define BWT_SUFFIXARRAY_H_NODEPS
-#ifndef BWT_SUFFIXARRAY_H_GENERICS
-#define BWT_SUFFIXARRAY_H_GENERICS
-#endif // BWT_SUFFIXARRAY_H_GENERICS
-#endif // __BWT_SUFFIXARRAY_H_NODEPS
+#ifndef BWT_SUFFIXARRAYCHAR_H_NODEPS
+#define BWT_SUFFIXARRAYCHAR_H_NODEPS
+#ifndef BWT_SUFFIXARRAYCHAR_H_GENERICS
+#define BWT_SUFFIXARRAYCHAR_H_GENERICS
+#endif // BWT_SUFFIXARRAYCHAR_H_GENERICS
+#endif // __BWT_SUFFIXARRAYCHAR_H_NODEPS

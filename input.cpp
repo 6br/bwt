@@ -5,6 +5,7 @@
 #include <vector>
 #include <stdio.h>
 #include "input.h"
+#include <stdlib.h>
 
 #define N 101
 
@@ -63,7 +64,7 @@ long int* input_fgets_malloc(const char* filename, long int datasize)
 {
     FILE *fp;
     char buf[N] = {'\0'};
-    long int* data = (long int*)malloc(sizeof(long int) * datasize)); 
+    long int* data = (long int*)malloc(sizeof(long int) * datasize); 
     long int j = 0;
 
     if ((fp = fopen(filename, "r")) == NULL) {
