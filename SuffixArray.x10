@@ -8,8 +8,8 @@ import x10.compiler.NativeCPPInclude;
 
 @NativeCPPInclude("parallel_radix_sort.h")
 
-public class SuffixArray {
-  val string: Rail[Long];
+public class SuffixArray[T] {
+  val string: Rail[T];
   val n: Long;
   val n0: Long;
   val n1: Long;
@@ -20,7 +20,7 @@ public class SuffixArray {
   var SA12: Rail[Long];
   var SA: Rail[Long];
  
-  def this(input: Rail[Long], charsize: Long){
+  def this(input: Rail[T], charsize: Long){
     string = input;
     k = charsize;
     n = input.size - 3;

@@ -3,7 +3,10 @@
 #include <string>
 #include <iterator>
 #include <vector>
+#include <stdio.h>
 #include "input.h"
+
+#define N 101
 
 using namespace std;
 
@@ -16,10 +19,41 @@ void fileiocpp(const char* filename, long int* data)
         std::cerr << "Error" << std::endl;
         return;
     }
-    std::vector<long int> a;// = new vector<long int>(0);
+    long int i = 0;
     while (getline(ifs, str))
     {
       data[0] = 1;
     } 
+    return;
+}
+
+void input_fgets(const char* filename, long int* data)
+{
+    FILE *fp;
+    char buf[N] = {'\0'};
+    long int j = 0;
+
+    if ((fp = fopen(filename, "r")) == NULL) {
+        fprintf(stderr, "Fail to open %s\n", filename);
+        return;
+    }
+
+    while (fgets(buf, N, fp) != NULL) {
+        for (int i = 0; i < N; i++, j++){
+            if (buf[i] == '\0' ){
+                data[j] = 0;
+                i = N;
+            } else {
+                data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
+            }
+            if (j % (1024 * 1024) == 0){
+                std::cerr << j / (1024*1024) << "MB read." << std::endl;
+            }
+        }
+    }
+
+    fclose(fp);
+
+    std::cerr << "File has read." << std::endl;
     return;
 }

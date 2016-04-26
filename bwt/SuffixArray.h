@@ -40,10 +40,10 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__3069;
-    static ::x10::lang::String sl__3071;
-    static ::x10::lang::String sl__3070;
-    static ::x10::lang::String sl__3068;
+    static ::x10::lang::String sl__3181;
+    static ::x10::lang::String sl__3183;
+    static ::x10::lang::String sl__3182;
+    static ::x10::lang::String sl__3180;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {

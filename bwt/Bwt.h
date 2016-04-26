@@ -58,9 +58,11 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__3055;
-    static ::x10::lang::String sl__3053;
-    static ::x10::lang::String sl__3054;
+    static ::x10::lang::String sl__3164;
+    static ::x10::lang::String sl__3162;
+    static ::x10::lang::String sl__3160;
+    static ::x10::lang::String sl__3161;
+    static ::x10::lang::String sl__3163;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
@@ -76,6 +78,10 @@ class Bwt : public ::x10::lang::X10Class   {
     void _constructor(::x10::lang::String* filename, x10_int k);
     
     static ::bwt::Bwt* _make(::x10::lang::String* filename, x10_int k);
+    
+    void _constructor(::x10::lang::Rail< x10_long >* string, x10_int k);
+    
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_long >* string, x10_int k);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
                                                     x10_boolean isDigit);
