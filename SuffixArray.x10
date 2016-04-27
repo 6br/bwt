@@ -19,6 +19,7 @@ public class SuffixArray {
   var R: Rail[Long];
   var SA12: Rail[Long];
   var SA: Rail[Long];
+  var c:Rail[Long];
  
   def this(input: Rail[Long], charsize: Long){
     string = input;
@@ -30,12 +31,11 @@ public class SuffixArray {
     n02 = n0 + n2;
   }
 
-  @Native("c++", "parallel_radix_sort::SortPairsLong((#1)->raw, (#2)->raw, #3, #4)")
-  native def sortPairs(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+  @Native("c++", "parallel_radix_sort::SortPairsLong((#1)->raw, (#2)->raw, #3, #4, #5)")
+  native def sortPairs(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int, offset: Byte): void;
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
-    var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
       c(string(a(i) + rOffs)) += 1;
@@ -53,19 +53,6 @@ public class SuffixArray {
   }
 
   def run(): Rail[Long] {
-    // There are experimental codes below.
-    /*var array:Rail[Long] = new Rail[Long](n);
-    for( i in 0..(n-1)){
-      array(i) = i;
-    }
-    val size = n as ULong;
-    val num_threads = 4 as Int;
-    Console.OUT.println(array);
-    Console.OUT.println(string);
-    sortPairs(string, array, size, num_threads);
-    Console.OUT.println(array);
-    Console.OUT.println(string);*/
-
     Console.ERR.println("Start Constructuring Sample");
     this.constructSample();
     Console.ERR.println("Start Sort Sample");
@@ -86,30 +73,51 @@ public class SuffixArray {
   }
 
   def constructSample() {
-    R = new Rail[Long](n02+3);
-    R(n02) = 0;
-    R(n02+1) = 0;
-    R(n02+2) = 0;
-    var j:Long = 0;
-    for(i in 0..(n + n0 - n1 - 1)) {
-      if (i % 3 != 0){
-        R(j) = i;
-        j += 1;
-      } 
-    }
     SA12 = new Rail[Long](n02+3);
     SA12(n02) = 0;
     SA12(n02+1) = 0;
     SA12(n02+2) = 0;
+    var j:Long = 0;
+    for(i in 0..(n + n0 - n1 - 1)) {
+      if (i % 3 != 0){
+        SA12(j) = i;
+        j += 1;
+      } 
+    }
+    R = new Rail[Long](n02+3);
+    /*SA12(n02) = 0;
+    SA12(n02+1) = 0;
+    SA12(n02+2) = 0;*/
   }
 
   def sortSample() {
-    radixPass(R, SA12, 2y, n02);
+    // There are experimental codes below.
+    /*var array:Rail[Long] = new Rail[Long](n);
+    for( i in 0..(n-1)){
+      array(i) = i;
+    }
+    val size = n as ULong;
+    val num_threads = 4 as Int;
+    Console.OUT.println(array);
+    Console.OUT.println(string);
+    sortPairs(string, array, size, num_threads);
+    Console.OUT.println(array);
+    Console.OUT.println(string);*/
+
+    val size = n02 as ULong;
+    val num_threads = 6 as Int;
+    sortPairs(string, SA12, size, num_threads, 2y);
     Console.ERR.println("Ended 1st Radix Sort");
-    radixPass(SA12, R, 1y, n02);
-    Console.ERR.println("Ended 2nd Radix Sort");
-    radixPass(R, SA12, 0y, n02);
-    Console.ERR.println("Ended 3rd Radix Sort");
+    sortPairs(string, SA12, size, num_threads, 1y);
+    Console.ERR.println("Ended 2st Radix Sort");
+    sortPairs(string, SA12, size, num_threads, 0y);
+ 
+    //radixPass(R, SA12, 2y, n02);
+    //Console.ERR.println("Ended 1st Radix Sort");
+    //radixPass(SA12, R, 1y, n02);
+    //Console.ERR.println("Ended 2nd Radix Sort");
+    //radixPass(R, SA12, 0y, n02);
+    Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
 
     var name:Long = 0;
     var c0:Long = -1;
@@ -147,12 +155,15 @@ public class SuffixArray {
         R0B.add(3 * SA12(i));
       }  
     }
-    val R0:Rail[Long] = R0B.result();
-    val SA0 = new Rail[Long](n0);
-    SA = new Rail[Long](n+3);
-    radixPass(R0, SA0, 0y, n0);
+    val SA0:Rail[Long] = R0B.result();
+    //val SA0 = new Rail[Long](n0);
+    //radixPass(R0, SA0, 0y, n0);
+    val size = n0 as ULong;
+    val num_threads = 6 as Int;
+    sortPairs(string, SA0, size, num_threads, 0y);
 
     Console.ERR.println("Start Merge");
+    SA = new Rail[Long](n+3);
     // def merge() {
     var p:Long = 0; 
     var t:Long = n0 - n1;

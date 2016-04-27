@@ -2,10 +2,11 @@
 #include <iostream>
 #include <string>
 #include <iterator>
-#include <vector>
+
 #include <stdio.h>
 #include "input.h"
 #include <stdlib.h>
+#include <stdint.h>
 
 #define N 101
 
@@ -59,11 +60,11 @@ void input_fgets(const char* filename, long int* data)
     return;
 }
 
-void input_fgets_char(const char* filename, signed char* data)
+void input_fgets_char(const char* filename, int8_t* data)
 {
     FILE *fp;
     char buf[N] = {'\0'};
-    long int j = 0;
+    uint64_t j = 0;
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Fail to open %s\n", filename);
@@ -71,7 +72,7 @@ void input_fgets_char(const char* filename, signed char* data)
     }
 
     while (fgets(buf, N, fp) != NULL) {
-        for (int i = 0; i < N; i++, j++){
+        for (uint_fast16_t i = 0; i < N; i++, j++){
             if (buf[i] == '\0' ){
                 data[j] = 0;
                 break;

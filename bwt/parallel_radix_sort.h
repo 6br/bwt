@@ -613,10 +613,13 @@ void SortPairs(KeyType *keys, ValueType *vals, size_t num_elems, int num_threads
   PairSort<KeyType, ValueType>::InitAndSort(keys, vals, num_elems, num_threads);
 }
 
-static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
-  PairSort<long, long>::InitAndSort(keys, vals, num_elems, num_threads);
+static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
+  PairSort<long, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
 }
 
+static void SortPairsByte(signed char *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
+  PairSort<signed char, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
+}
 };  // namespace parallel radix sort
 
 #endif  // PARALLEL_RADIX_SORT_H_

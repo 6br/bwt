@@ -51,7 +51,7 @@ public class SuffixArrayTestChar {
         val aa = new SuffixArrayChar(s, b);
         sa_result = aa.run();
         Console.OUT.println(s);
-        //Console.OUT.println(sa_result);
+        Console.OUT.println(sa_result);
         assert(sa_result(n) == 0);
         assert(sa_result(n+1) == 0);
         assert(s(n) == 0y);

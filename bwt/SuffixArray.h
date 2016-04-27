@@ -40,14 +40,14 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__5450;
-    static ::x10::lang::String sl__5449;
-    static ::x10::lang::String sl__5447;
-    static ::x10::lang::String sl__5452;
-    static ::x10::lang::String sl__5451;
-    static ::x10::lang::String sl__5453;
-    static ::x10::lang::String sl__5448;
-    static ::x10::lang::String sl__5446;
+    static ::x10::lang::String sl__5344;
+    static ::x10::lang::String sl__5343;
+    static ::x10::lang::String sl__5341;
+    static ::x10::lang::String sl__5346;
+    static ::x10::lang::String sl__5347;
+    static ::x10::lang::String sl__5342;
+    static ::x10::lang::String sl__5345;
+    static ::x10::lang::String sl__5340;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -74,13 +74,16 @@ class SuffixArray : public ::x10::lang::X10Class   {
     
     ::x10::lang::Rail< x10_long >* FMGL(SA);
     
+    ::x10::lang::Rail< x10_long >* FMGL(c);
+    
     void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize);
     
     static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
                                      x10_long charsize);
     
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
-                           x10_ulong num_elems, x10_int num_threads);
+                           x10_ulong num_elems, x10_int num_threads,
+                           x10_byte offset);
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual ::x10::lang::Rail< x10_long >* run();
