@@ -47,7 +47,7 @@ void input_fgets(const char* filename, long int* data)
             } else {
                 data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
             }
-            if (j % (1024 * 1024) == 0){
+            if (j % (1024 * 1024 * 100) == 0){
                 std::cerr << j / (1024*1024) << "MB read." << std::endl;
             }
         }
@@ -78,7 +78,7 @@ void input_fgets_char(const char* filename, signed char* data)
             } else {
                 data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
             }
-            if (j % (1024 * 1024) == 0){
+            if (j % (1024 * 1024 * 100) == 0){
                 std::cerr << j / (1024*1024) << "MB read." << std::endl;
             }
         }

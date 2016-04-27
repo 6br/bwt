@@ -66,11 +66,11 @@ public class SuffixArrayChar {
     Console.OUT.println(array);
     Console.OUT.println(string);*/
 
-    Console.ERR.println("Start Constructuring Sample");
+    Console.ERR.println("Start Constructuring Char Sample");
     this.constructSample();
-    Console.ERR.println("Start Sort Sample");
+    Console.ERR.println("Start Sort Char Sample");
     this.sortSample();
-    Console.ERR.println("Start Sort NonSample");
+    Console.ERR.println("Start Sort Char NonSample");
     this.sortNonSample();
     return this.SA;
   }
@@ -105,8 +105,11 @@ public class SuffixArrayChar {
 
   def sortSample() {
     radixPass(R, SA12, 2y, n02);
+    Console.ERR.println("Ended 1st Char Radix Sort");
     radixPass(SA12, R, 1y, n02);
+    Console.ERR.println("Ended 2nd Char Radix Sort");
     radixPass(R, SA12, 0y, n02);
+    Console.ERR.println("Ended 3rd Char Radix Sort");
 
     var name:Long = 0;
     var c0:Byte = -1y;
@@ -126,6 +129,8 @@ public class SuffixArrayChar {
         R(SA12(i)/3 + n0) = name;
       }
     }
+
+    Console.ERR.println("Ended Sort Sample");
 
     if (name < n02) {
       val bwa = new SuffixArray(R, name);

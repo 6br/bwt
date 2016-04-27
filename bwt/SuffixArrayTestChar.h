@@ -1,5 +1,5 @@
-#ifndef __BWT_SUFFIXARRAYTEST_H
-#define __BWT_SUFFIXARRAYTEST_H
+#ifndef __BWT_SUFFIXARRAYTESTCHAR_H
+#define __BWT_SUFFIXARRAYTESTCHAR_H
 
 #include <x10rt.h>
 
@@ -37,7 +37,7 @@ class Synthetic;
 
 namespace bwt { 
 
-class SuffixArrayTest : public ::x10::lang::X10Class   {
+class SuffixArrayTestChar : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
@@ -48,13 +48,13 @@ class SuffixArrayTest : public ::x10::lang::X10Class   {
                                 ::x10::lang::Rail< x10_byte >* s,
                                 x10_long n);
     static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
-    virtual ::bwt::SuffixArrayTest* bwt__SuffixArrayTest____this__bwt__SuffixArrayTest(
+    virtual ::bwt::SuffixArrayTestChar* bwt__SuffixArrayTestChar____this__bwt__SuffixArrayTestChar(
       );
     void _constructor();
     
-    static ::bwt::SuffixArrayTest* _make();
+    static ::bwt::SuffixArrayTestChar* _make();
     
-    virtual void __fieldInitializers_bwt_SuffixArrayTest(
+    virtual void __fieldInitializers_bwt_SuffixArrayTestChar(
       );
     
     // Serialization
@@ -74,15 +74,15 @@ class SuffixArrayTest : public ::x10::lang::X10Class   {
 
 
 } 
-#endif // BWT_SUFFIXARRAYTEST_H
+#endif // BWT_SUFFIXARRAYTESTCHAR_H
 
 namespace bwt { 
-class SuffixArrayTest;
+class SuffixArrayTestChar;
 } 
 
-#ifndef BWT_SUFFIXARRAYTEST_H_NODEPS
-#define BWT_SUFFIXARRAYTEST_H_NODEPS
-#ifndef BWT_SUFFIXARRAYTEST_H_GENERICS
-#define BWT_SUFFIXARRAYTEST_H_GENERICS
-#endif // BWT_SUFFIXARRAYTEST_H_GENERICS
-#endif // __BWT_SUFFIXARRAYTEST_H_NODEPS
+#ifndef BWT_SUFFIXARRAYTESTCHAR_H_NODEPS
+#define BWT_SUFFIXARRAYTESTCHAR_H_NODEPS
+#ifndef BWT_SUFFIXARRAYTESTCHAR_H_GENERICS
+#define BWT_SUFFIXARRAYTESTCHAR_H_GENERICS
+#endif // BWT_SUFFIXARRAYTESTCHAR_H_GENERICS
+#endif // __BWT_SUFFIXARRAYTESTCHAR_H_NODEPS
