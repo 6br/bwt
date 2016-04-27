@@ -8,6 +8,9 @@
 namespace bwt { 
 class SuffixArray;
 } 
+namespace bwt { 
+class SuffixArrayChar;
+} 
 namespace x10 { namespace lang { 
 class String;
 } } 
@@ -58,11 +61,12 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__3168;
-    static ::x10::lang::String sl__3166;
-    static ::x10::lang::String sl__3164;
-    static ::x10::lang::String sl__3165;
-    static ::x10::lang::String sl__3167;
+    static ::x10::lang::String sl__5521;
+    static ::x10::lang::String sl__5519;
+    static ::x10::lang::String sl__5517;
+    static ::x10::lang::String sl__5522;
+    static ::x10::lang::String sl__5518;
+    static ::x10::lang::String sl__5520;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
@@ -70,6 +74,8 @@ class Bwt : public ::x10::lang::X10Class   {
     RTT_H_DECLS_CLASS
     
     ::bwt::SuffixArray* FMGL(SA);
+    
+    ::bwt::SuffixArrayChar* FMGL(SAC);
     
     void _constructor(::x10::lang::String* input, x10_int k, x10_boolean isDigit);
     
@@ -82,6 +88,10 @@ class Bwt : public ::x10::lang::X10Class   {
     void _constructor(::x10::lang::Rail< x10_long >* string, x10_int k);
     
     static ::bwt::Bwt* _make(::x10::lang::Rail< x10_long >* string, x10_int k);
+    
+    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k);
+    
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
                                                     x10_boolean isDigit);

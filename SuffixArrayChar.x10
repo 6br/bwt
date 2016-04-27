@@ -201,7 +201,7 @@ public class SuffixArrayChar {
       return (SA12(t) - n0) * 3 + 2;
     }
   }
-
+/*
   public static def main(args: Rail[String]):void {
     val bwa = new SuffixArrayChar([1y,4y,1y,1y,4y,1y,2y,3y,1y,4y,1y,1y,4y,1y,1y,0y,0y,0y,0y], 5);
     val sa = bwa.run();
@@ -209,4 +209,5 @@ public class SuffixArrayChar {
       Console.OUT.println(sa(i));
     }
   }
+*/
 }

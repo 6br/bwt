@@ -35,12 +35,6 @@ template<class TPMGL(T)> class RailBuilder;
 namespace bwt { 
 class SuffixArray;
 } 
-namespace x10 { namespace lang { 
-class String;
-} } 
-namespace x10 { namespace lang { 
-class Unsafe;
-} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -52,10 +46,10 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__4668;
-    static ::x10::lang::String sl__4670;
-    static ::x10::lang::String sl__4669;
-    static ::x10::lang::String sl__4667;
+    static ::x10::lang::String sl__5601;
+    static ::x10::lang::String sl__5603;
+    static ::x10::lang::String sl__5602;
+    static ::x10::lang::String sl__5600;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
@@ -101,7 +95,6 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     x10_boolean leq(x10_long a1, x10_long a2, x10_long a3,
                     x10_long b1, x10_long b2, x10_long b3);
     x10_long getI(x10_long t);
-    static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
     virtual ::bwt::SuffixArrayChar* bwt__SuffixArrayChar____this__bwt__SuffixArrayChar(
       );
     virtual void __fieldInitializers_bwt_SuffixArrayChar(
