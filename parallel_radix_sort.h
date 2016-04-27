@@ -614,7 +614,14 @@ void SortPairs(KeyType *keys, ValueType *vals, size_t num_elems, int num_threads
 }
 
 static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
-  PairSort<long, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
+  long *sortkeys;
+  sortkeys = (long *) malloc(sizeof(long)*num_elems);
+  for(long i=0; i<num_elems; i++){
+    sortkeys[i] = keys[vals[i]+offset];
+  }
+  //memcpy(sortkeys, keys, sizeof(long)*num_elems);
+  PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  free(sortkeys);
 }
 
 static void SortPairsByte(signed char *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {

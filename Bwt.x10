@@ -151,7 +151,7 @@ public class Bwt {
   public static def main(args:Rail[String]):void {
     //val string:Rail[Long] = fileio("test.txt");
     val N:Int = Int.parse(args(0));
-    val length:Long = Long.parse(args(1));
+    val length:Long = Long.parse(args(1))+3L;
     var file:String = args(2); 
     Console.ERR.println("Start Malloc");
     //val e = new Rail[Long](length);//2577003486);

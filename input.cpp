@@ -73,7 +73,7 @@ void input_fgets_char(const char* filename, int8_t* data)
 
     while (fgets(buf, N, fp) != NULL) {
         for (uint_fast16_t i = 0; i < N; i++, j++){
-            if (buf[i] == '\0' ){
+            if (buf[i] == '\0' || buf[i] == '$' ){
                 data[j] = 0;
                 break;
             } else {

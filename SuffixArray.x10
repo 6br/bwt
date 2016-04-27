@@ -19,7 +19,6 @@ public class SuffixArray {
   var R: Rail[Long];
   var SA12: Rail[Long];
   var SA: Rail[Long];
-  var c:Rail[Long];
  
   def this(input: Rail[Long], charsize: Long){
     string = input;
@@ -36,6 +35,7 @@ public class SuffixArray {
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
+    var c:Rail[Long] = new Rail[Long](nt);
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
       c(string(a(i) + rOffs)) += 1;
@@ -85,17 +85,11 @@ public class SuffixArray {
       } 
     }
     R = new Rail[Long](n02+3);
-    /*SA12(n02) = 0;
-    SA12(n02+1) = 0;
-    SA12(n02+2) = 0;*/
   }
 
   def sortSample() {
     // There are experimental codes below.
-    /*var array:Rail[Long] = new Rail[Long](n);
-    for( i in 0..(n-1)){
-      array(i) = i;
-    }
+    /*var array:Rail[Long] = n   }
     val size = n as ULong;
     val num_threads = 4 as Int;
     Console.OUT.println(array);
@@ -103,22 +97,23 @@ public class SuffixArray {
     sortPairs(string, array, size, num_threads);
     Console.OUT.println(array);
     Console.OUT.println(string);*/
-
+    
     val size = n02 as ULong;
     val num_threads = 6 as Int;
     sortPairs(string, SA12, size, num_threads, 2y);
     Console.ERR.println("Ended 1st Radix Sort");
     sortPairs(string, SA12, size, num_threads, 1y);
-    Console.ERR.println("Ended 2st Radix Sort");
+    Console.ERR.println("Ended 2nd Radix Sort");
     sortPairs(string, SA12, size, num_threads, 0y);
- 
-    //radixPass(R, SA12, 2y, n02);
-    //Console.ERR.println("Ended 1st Radix Sort");
-    //radixPass(SA12, R, 1y, n02);
-    //Console.ERR.println("Ended 2nd Radix Sort");
-    //radixPass(R, SA12, 0y, n02);
     Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
-
+    /*
+    radixPass(R, SA12, 2y, n02);
+    Console.ERR.println("Ended 1st Radix Sort");
+    radixPass(SA12, R, 1y, n02);
+    Console.ERR.println("Ended 2nd Radix Sort");
+    radixPass(R, SA12, 0y, n02);
+    Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
+    */
     var name:Long = 0;
     var c0:Long = -1;
     var c1:Long = -1;
@@ -156,8 +151,7 @@ public class SuffixArray {
       }  
     }
     val SA0:Rail[Long] = R0B.result();
-    //val SA0 = new Rail[Long](n0);
-    //radixPass(R0, SA0, 0y, n0);
+    //radixPass(SA0, R0, 0y, n0);
     val size = n0 as ULong;
     val num_threads = 6 as Int;
     sortPairs(string, SA0, size, num_threads, 0y);
