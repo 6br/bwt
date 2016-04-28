@@ -5,21 +5,15 @@
 
 #include "input.h"
 
-namespace bwt { 
-class SuffixArray;
-} 
-namespace bwt { 
-class SuffixArrayChar;
-} 
-namespace x10 { namespace lang { 
-class String;
-} } 
-namespace x10 { namespace util { 
-template<class TPMGL(T)> class RailBuilder;
-} } 
 namespace x10 { namespace lang { 
 template<class TPMGL(T)> class Rail;
 } } 
+namespace x10 { namespace util { 
+class Timer;
+} } 
+namespace bwt { 
+class SuffixArrayChar;
+} 
 namespace x10 { namespace io { 
 class Printer;
 } } 
@@ -29,8 +23,11 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace x10 { namespace lang { 
+class String;
+} } 
 namespace x10 { namespace util { 
-class Timer;
+template<class TPMGL(T)> class RailBuilder;
 } } 
 namespace x10 { namespace util { 
 class StringBuilder;
@@ -61,33 +58,17 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__6171;
-    static ::x10::lang::String sl__6169;
-    static ::x10::lang::String sl__6167;
-    static ::x10::lang::String sl__6172;
-    static ::x10::lang::String sl__6168;
-    static ::x10::lang::String sl__6170;
+    static ::x10::lang::String sl__5737;
+    static ::x10::lang::String sl__5741;
+    static ::x10::lang::String sl__5739;
+    static ::x10::lang::String sl__5738;
+    static ::x10::lang::String sl__5742;
+    static ::x10::lang::String sl__5740;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
-    
-    ::bwt::SuffixArray* FMGL(SA);
-    
-    ::bwt::SuffixArrayChar* FMGL(SAC);
-    
-    void _constructor(::x10::lang::String* input, x10_int k, x10_boolean isDigit);
-    
-    static ::bwt::Bwt* _make(::x10::lang::String* input, x10_int k, x10_boolean isDigit);
-    
-    void _constructor(::x10::lang::String* filename, x10_int k);
-    
-    static ::bwt::Bwt* _make(::x10::lang::String* filename, x10_int k);
-    
-    void _constructor(::x10::lang::Rail< x10_long >* string, x10_int k);
-    
-    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_long >* string, x10_int k);
     
     void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k);
     

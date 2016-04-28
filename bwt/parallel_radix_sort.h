@@ -625,7 +625,15 @@ static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_thre
 }
 
 static void SortPairsByte(signed char *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
-  PairSort<signed char, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
+  //PairSort<signed char, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
+  signed char *sortkeys;
+  sortkeys = (signed char *) malloc(sizeof(signed char)*num_elems);
+  for(long i=0; i<num_elems; i++){
+    sortkeys[i] = keys[vals[i]+offset];
+  }
+  //memcpy(sortkeys, keys, sizeof(long)*num_elems);
+  PairSort<signed char, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  free(sortkeys);
 }
 };  // namespace parallel radix sort
 

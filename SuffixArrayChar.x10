@@ -31,8 +31,8 @@ public class SuffixArrayChar {
     n02 = n0 + n2;
   }
 
-  @Native("c++", "parallel_radix_sort::SortPairsLong((#1)->raw, (#2)->raw, #3, #4)")
-  native def sortPairs(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+  @Native("c++", "parallel_radix_sort::SortPairsByte((#1)->raw, (#2)->raw, #3, #4, #5)")
+  native def sortPairs(keys: Rail[Byte], values: Rail[Long], num_elems: ULong, num_threads: Int, offset: Byte): void;
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
@@ -149,10 +149,15 @@ public class SuffixArrayChar {
         R0B.add(3 * SA12(i));
       }  
     }
-    val R0:Rail[Long] = R0B.result();
-    val SA0 = new Rail[Long](n0);
+    val SA0:Rail[Long] = R0B.result();
+    //radixPass(SA0, R0, 0y, n0);
+    val size = n0 as ULong;
+    val num_threads = 6 as Int;
+    sortPairs(string, SA0, size, num_threads, 0y);
+    //val R0:Rail[Long] = R0B.result();
+    //val SA0 = new Rail[Long](n0);
     SA = new Rail[Long](n+3);
-    radixPass(R0, SA0, 0y, n0);
+    //radixPass(R0, SA0, 0y, n0);
 
     Console.ERR.println("Start Merge Final");
     // def merge() {

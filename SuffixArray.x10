@@ -99,7 +99,7 @@ public class SuffixArray {
     Console.OUT.println(string);*/
     
     val size = n02 as ULong;
-    val num_threads = 6 as Int;
+    val num_threads = 11 as Int;
     sortPairs(string, SA12, size, num_threads, 2y);
     Console.ERR.println("Ended 1st Radix Sort");
     sortPairs(string, SA12, size, num_threads, 1y);

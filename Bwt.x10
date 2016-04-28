@@ -13,9 +13,9 @@ import x10.compiler.NativeCPPCompilationUnit;
 @NativeCPPCompilationUnit("input.cpp")
 
 public class Bwt {
-  var SA: SuffixArray;
-  var SAC: SuffixArrayChar;
-
+  //val SA: SuffixArray;
+  //val SAC: SuffixArrayChar;
+/*
   def this(input: String, k: int, isDigit: Boolean) {
     val strBuilder = new RailBuilder[Long](input.length());
     val inputBytes = input.bytes();
@@ -69,14 +69,16 @@ public class Bwt {
       Console.OUT.println(sa(i));
     } 
   }
-
+*/
   def this(string: Rail[Byte], k: Int) {
-    val time = Timer.nanoTime();
-    SAC = new SuffixArrayChar(string, k);
+    val time = Timer.milliTime();
+    val SAC = new SuffixArrayChar(string, k);
     val sa = SAC.run();
-    val difftime = Timer.nanoTime() - time;
-    Console.ERR.printf("Elapsed time: %ld nanotime.\n",difftime);
-    for (i in 0..(sa.size-1)){
+    val difftime = Timer.milliTime() - time;
+    Console.ERR.printf("Elapsed time: %ld millitime.\n",difftime);
+    var j:Long = sa.size - 1;
+    if (j > 15) {j = 15;}
+    for (i in 0..j){
       Console.OUT.println(sa(i));
     } 
   }
