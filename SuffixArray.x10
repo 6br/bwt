@@ -35,7 +35,7 @@ public class SuffixArray {
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
-    var c:Rail[Long] = new Rail[Long](nt);
+    var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
       c(string(a(i) + rOffs)) += 1;
@@ -89,14 +89,6 @@ public class SuffixArray {
 
   def sortSample() {
     // There are experimental codes below.
-    /*var array:Rail[Long] = n   }
-    val size = n as ULong;
-    val num_threads = 4 as Int;
-    Console.OUT.println(array);
-    Console.OUT.println(string);
-    sortPairs(string, array, size, num_threads);
-    Console.OUT.println(array);
-    Console.OUT.println(string);*/
     
     val size = n02 as ULong;
     val num_threads = 11 as Int;
@@ -150,11 +142,12 @@ public class SuffixArray {
         R0B.add(3 * SA12(i));
       }  
     }
-    val SA0:Rail[Long] = R0B.result();
-    //radixPass(SA0, R0, 0y, n0);
-    val size = n0 as ULong;
-    val num_threads = 6 as Int;
-    sortPairs(string, SA0, size, num_threads, 0y);
+    val R0:Rail[Long] = R0B.result();
+    var SA0:Rail[Long] = new Rail[Long](n0);
+    radixPass(R0, SA0, 0y, n0);
+    //val size = n0 as ULong;
+    //val num_threads = 6 as Int;
+    //sortPairs(string, SA0, size, num_threads, 0y);
 
     Console.ERR.println("Start Merge");
     SA = new Rail[Long](n+3);
