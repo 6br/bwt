@@ -624,14 +624,32 @@ static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_thre
 }
 
 static void SortPairsLongThree(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
-  long *sortkeys;
-  sortkeys = (long *) malloc(sizeof(long)*num_elems);
-  for(int offset = 2; offset >=0; offset--){
+  long long *sortkeys;
+  sortkeys = (long long *) malloc(sizeof(long long)*num_elems);
+  for(long i=0; i<num_elems; i++){
+    sortkeys[i] = (keys[vals[i]+1] << 32) + keys[vals[i]+2];
+  }
+  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  for(long i=0; i<num_elems; i++){
+    sortkeys[i] = keys[vals[i]];// << 42) + (keys[vals[i]+1] << 21) + keys[vals[i]+2];
+  }
+  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  /*for(int offset = 2; offset >=0; offset--){
     for(long i=0; i<num_elems; i++){
       sortkeys[i] = keys[vals[i]+offset];
     }
     PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  }*/
+  free(sortkeys);
+}
+
+static void SortPairsLongThreeFast(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
+  long long *sortkeys;
+  sortkeys = (long long *) malloc(sizeof(long long)*num_elems);
+  for(long i=0; i<num_elems; i++){
+    sortkeys[i] = (keys[vals[i]] << 42) + (keys[vals[i]+1] << 21) + keys[vals[i]+2];
   }
+  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define N 101
+#define N 102
 
 using namespace std;
 
@@ -72,15 +72,48 @@ void input_fgets_char(const char* filename, int8_t* data)
     }
 
     while (fgets(buf, N, fp) != NULL) {
-        for (uint_fast16_t i = 0; i < N; i++, j++){
+        for (uint_fast16_t i = 0; i <= N; i++, j++){
             if (buf[i] == '\0' || buf[i] == '$' ){
                 data[j] = 0;
                 break;
             } else {
                 data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
             }
-            if (j % (1024 * 1024 * 100) == 0){
+            if (j % (1024 * 1024 * 200) == 0){
                 std::cerr << j / (1024*1024) << "MB read." << std::endl;
+            }
+        }
+    }
+
+    fclose(fp);
+
+    std::cerr << "File has read." << std::endl;
+    return;
+}
+
+void input_fgets_fixed_char(const char* filename, int8_t* data, int64_t length)
+{
+    FILE *fp;
+    char buf[N] = {'\0'};
+    uint64_t j = 0;
+
+    if ((fp = fopen(filename, "r")) == NULL) {
+        fprintf(stderr, "Fail to open %s\n", filename);
+        return;
+    }
+
+    for (int64_t k = 0; k < length; k++) {
+        if(fgets(buf, N, fp)!=NULL) {
+            for (uint_fast16_t i = 0; i <= N; i++, j++){
+                if (buf[i] == '\n' || buf[i] == '\0' || buf[i] == '$' ){
+                    data[j] = 0;
+                    break;
+                } else {
+                    data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
+                }
+                if (j % (1024 * 1024 * 100) == 0){
+                    std::cerr << j / (1024*1024) << "MB read." << std::endl;
+                }
             }
         }
     }

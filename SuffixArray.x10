@@ -38,6 +38,9 @@ public class SuffixArray {
   @Native("c++", "parallel_radix_sort::SortPairsLongThree((#1)->raw, (#2)->raw, #3, #4)")
   native def sortPairsThree(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
 
+  @Native("c++", "parallel_radix_sort::SortPairsLongThreeFast((#1)->raw, (#2)->raw, #3, #4)")
+  native def sortPairsThreeFast(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     var c:Rail[Long] = new Rail[Long](k+1);
@@ -101,7 +104,12 @@ public class SuffixArray {
   def sortSample() {
     val size = n02 as ULong;
     val num_threads = 11 as Int;
-    sortPairsThree(string, SA12, size, num_threads);
+    if(k < 2097152){
+      sortPairsThreeFast(string, SA12, size, num_threads);
+    }else{
+      sortPairsThree(string, SA12, size, num_threads);
+    }
+    Console.ERR.printf("Ended 3rd Radix Sort %ld, max: %ld\n", n02, k);
     /*
     sortPairs(string, SA12, size, num_threads, 2y);
     Console.ERR.println("Ended 1st Radix Sort");

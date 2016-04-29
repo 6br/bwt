@@ -124,11 +124,11 @@ public class Bwt {
   @Native("c++", "input_fgets((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Long]): void;
 
-  @Native("c++", "input_fgets_malloc((#1)->c_str(), #2);")
-  native static def fileioCPP(filename: String, data: Long): Rail[Long];
-
   @Native("c++", "input_fgets_char((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Byte]): void;
+
+  @Native("c++", "input_fgets_fixed_char((#1)->c_str(), (#2)->raw, #3);")
+  native static def fileioCPP(filename: String, data: Rail[Byte], length: Long): void;
 
   static def fileio(filename: String):Rail[Long]{
     val strBuilder = new RailBuilder[Long]();
@@ -153,13 +153,15 @@ public class Bwt {
   public static def main(args:Rail[String]):void {
     //val string:Rail[Long] = fileio("test.txt");
     val N:Int = Int.parse(args(0));
-    val length:Long = Long.parse(args(1))+3L;
+    val height:Long = Long.parse(args(1));
+    val length:Long = (height < 100) ? height : height * 101 + 2L;
     var file:String = args(2); 
     Console.ERR.println("Start Malloc");
-    val e = new Rail[Byte](length);//2577003486);
+    var e:Rail[Byte] = new Rail[Byte](length);//2577003486);
+    e(length-1) = 0y;
+    e(length-2) = 0y;
     Console.ERR.println("End Malloc");
-    fileioCPP(file, e);
-    Console.ERR.println("Files has read");
+    fileioCPP(file, e, height);
     val bwa = new Bwt(e, N);
     //val bwa = new Bwt(file, N);
     //val bwa = new Bwt(file, N, false);
