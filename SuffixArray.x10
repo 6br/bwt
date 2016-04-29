@@ -85,6 +85,7 @@ public class SuffixArray {
       } 
     }
     R = new Rail[Long](n02+3);
+    SA = new Rail[Long](n+3);
   }
 
   def sortSample() {
@@ -136,21 +137,25 @@ public class SuffixArray {
   }
 
   def sortNonSample() {
-    val R0B = new RailBuilder[Long]();
+    var SA0:Rail[Long] = new Rail[Long](n0);
+    var m:Long = 0; 
+    //val R0B = new RailBuilder[Long]();
     for(i in 0..(n02-1)){
       if(SA12(i) < n0) {
-        R0B.add(3 * SA12(i));
+        //R0B.add(3 * SA12(i));
+        SA0(m) = 3 * SA12(i);
+        m += 1;
       }  
     }
-    val R0:Rail[Long] = R0B.result();
-    var SA0:Rail[Long] = new Rail[Long](n0);
-    radixPass(R0, SA0, 0y, n0);
-    //val size = n0 as ULong;
-    //val num_threads = 6 as Int;
-    //sortPairs(string, SA0, size, num_threads, 0y);
+    //var SA0:Rail[Long] = R0B.result();
+    //var SA0:Rail[Long] = new Rail[Long](n0);
+    //radixPass(R0, SA0, 0y, n0);
+    val size = n0 as ULong;
+    val num_threads = 6 as Int;
+    Console.ERR.println("Start SortPairs");
+    sortPairs(string, SA0, size, num_threads, 0y);
 
     Console.ERR.println("Start Merge");
-    SA = new Rail[Long](n+3);
     // def merge() {
     var p:Long = 0; 
     var t:Long = n0 - n1;

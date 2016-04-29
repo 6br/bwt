@@ -19,7 +19,7 @@ public class SuffixArrayChar {
   var R: Rail[Long];
   var SA12: Rail[Long];
   var SA: Rail[Long];
-  //var c:Rail[Long];
+  var c:Rail[Long];
  
   def this(input: Rail[Byte], charsize: Long){
     string = input;
@@ -36,7 +36,6 @@ public class SuffixArrayChar {
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
-    var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
       c(string(a(i) + rOffs)) += 1;
@@ -68,7 +67,7 @@ public class SuffixArrayChar {
     Console.OUT.println(string);*/
 
     Console.ERR.println("Start Constructuring Char Sample");
-    this.constructSample();
+    this.constructSampleR();
     Console.ERR.println("Start Sort Char Sample");
     this.sortSample();
     Console.ERR.println("Start Sort Char NonSample");
@@ -87,7 +86,9 @@ public class SuffixArrayChar {
   }
 
   def constructSample() {
+    Console.ERR.println("R");
     R = new Rail[Long](n02+3);
+    Console.ERR.println("SA12");
     SA12 = new Rail[Long](n02+3);
     SA12(n02) = 0;
     SA12(n02+1) = 0;
@@ -99,12 +100,34 @@ public class SuffixArrayChar {
         j += 1;
       } 
     }
+    SA = new Rail[Long](n+3);
+  }
+
+  def constructSampleR() {
     R = new Rail[Long](n02+3);
+    R(n02) = 0;
+    R(n02+1) = 0;
+    R(n02+2) = 0;
+    var j:Long = 0;
+    for(i in 0..(n + n0 - n1 - 1)) {
+      if (i % 3 != 0){
+        R(j) = i;
+        j += 1;
+      } 
+    }
+    SA12 = new Rail[Long](n02+3);
+    SA12(n02) = 0;
+    SA12(n02+1) = 0;
+    SA12(n02+2) = 0;
+    c = new Rail[Long](k+1);
   }
 
   def sortSample() {
+    radixPass(R, SA12, 2y, n02);
+    radixPass(SA12, R, 1y, n02);
+    radixPass(R, SA12, 0y, n02);
     // There are experimental codes below.
-    
+    /*
     val size = n02 as ULong;
     val num_threads = 11 as Int;
     sortPairs(string, SA12, size, num_threads, 2y);
@@ -113,7 +136,7 @@ public class SuffixArrayChar {
     Console.ERR.println("Ended 2nd Radix Sort");
     sortPairs(string, SA12, size, num_threads, 0y);
     Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
-
+    */
     var name:Long = 0;
     var c0:Byte = -1y;
     var c1:Byte = -1y;
@@ -145,23 +168,27 @@ public class SuffixArrayChar {
   }
 
   def sortNonSample() {
-    val R0B = new RailBuilder[Long]();
+    var SA0:Rail[Long] = new Rail[Long](n0);
+    var m:Long = 0; 
+    //val R0B = new RailBuilder[Long]();
     for(i in 0..(n02-1)){
       if(SA12(i) < n0) {
-        R0B.add(3 * SA12(i));
+        //R0B.add(3 * SA12(i));
+        SA0(m) = 3 * SA12(i);
+        m += 1;
       }  
     }
-    val R0:Rail[Long] = R0B.result();
+    //var SA0:Rail[Long] = R0B.result();
     //radixPass(SA0, R0, 0y, n0);
-    //val size = n0 as ULong;
-    //val num_threads = 6 as Int;
-    //sortPairs(string, SA0, size, num_threads, 0y);
+    val size = n0 as ULong;
+    val num_threads = 6 as Int;
+    Console.ERR.println("Start SortPairs Char");
+    sortPairs(string, SA0, size, num_threads, 0y);
     //val R0:Rail[Long] = R0B.result();
-    var SA0:Rail[Long] = new Rail[Long](n0);
-    radixPass(R0, SA0, 0y, n0);
+    //var SA0:Rail[Long] = new Rail[Long](n0);
+    //radixPass(R0, SA0, 0y, n0);
 
     Console.ERR.println("Start Merge Final");
-    SA = new Rail[Long](n+3);
     // def merge() {
     var p:Long = 0; 
     var t:Long = n0 - n1;

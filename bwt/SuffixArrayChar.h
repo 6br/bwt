@@ -46,14 +46,14 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__5797;
-    static ::x10::lang::String sl__5795;
-    static ::x10::lang::String sl__5796;
-    static ::x10::lang::String sl__5794;
-    static ::x10::lang::String sl__5799;
-    static ::x10::lang::String sl__5798;
-    static ::x10::lang::String sl__5800;
-    static ::x10::lang::String sl__5793;
+    static ::x10::lang::String sl__6034;
+    static ::x10::lang::String sl__6036;
+    static ::x10::lang::String sl__6033;
+    static ::x10::lang::String sl__6037;
+    static ::x10::lang::String sl__6035;
+    static ::x10::lang::String sl__6039;
+    static ::x10::lang::String sl__6038;
+    static ::x10::lang::String sl__6032;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
@@ -80,6 +80,8 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     
     ::x10::lang::Rail< x10_long >* FMGL(SA);
     
+    ::x10::lang::Rail< x10_long >* FMGL(c);
+    
     void _constructor(::x10::lang::Rail< x10_byte >* input, x10_long charsize);
     
     static ::bwt::SuffixArrayChar* _make(::x10::lang::Rail< x10_byte >* input,
@@ -93,6 +95,7 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     virtual ::x10::lang::Rail< x10_long >* run();
     virtual ::x10::lang::Rail< x10_long >* bwtable();
     virtual void constructSample();
+    virtual void constructSampleR();
     virtual void sortSample();
     virtual void sortNonSample();
     x10_boolean leq(x10_long a1, x10_long a2, x10_long b1,
