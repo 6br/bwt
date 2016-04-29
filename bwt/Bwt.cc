@@ -278,21 +278,21 @@ void bwt::Bwt::main(::x10::lang::Rail< ::x10::lang::String* >* args) {
     ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
       reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__6258)));
     
-    //#line 160 "Bwt.x10"
+    //#line 159 "Bwt.x10"
     ::x10::lang::Rail< x10_byte >* e = ::x10::lang::Rail< x10_byte >::_make(length);
     
-    //#line 161 "Bwt.x10"
+    //#line 160 "Bwt.x10"
     ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
       reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__6259)));
     
-    //#line 162 "Bwt.x10"
+    //#line 161 "Bwt.x10"
     input_fgets_char((file)->c_str(), (e)->raw);;
     
-    //#line 163 "Bwt.x10"
+    //#line 162 "Bwt.x10"
     ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
       reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__6260)));
     
-    //#line 164 "Bwt.x10"
+    //#line 163 "Bwt.x10"
     ::bwt::Bwt* bwa =  (new (::x10aux::alloc_z< ::bwt::Bwt>()) ::bwt::Bwt());
     (bwa)->::bwt::Bwt::_constructor(e, N);
     

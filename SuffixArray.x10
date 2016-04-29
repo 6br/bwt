@@ -99,8 +99,6 @@ public class SuffixArray {
   }
 
   def sortSample() {
-    // There are experimental codes below.
-    
     val size = n02 as ULong;
     val num_threads = 11 as Int;
     sortPairsThree(string, SA12, size, num_threads);

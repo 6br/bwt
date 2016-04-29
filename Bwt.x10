@@ -156,7 +156,6 @@ public class Bwt {
     val length:Long = Long.parse(args(1))+3L;
     var file:String = args(2); 
     Console.ERR.println("Start Malloc");
-    //val e = new Rail[Long](length);//2577003486);
     val e = new Rail[Byte](length);//2577003486);
     Console.ERR.println("End Malloc");
     fileioCPP(file, e);

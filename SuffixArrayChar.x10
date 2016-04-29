@@ -92,20 +92,20 @@ public class SuffixArrayChar {
 
   def constructSample() {
     finish {
-    async SA = new Rail[Long](n+3);
-    async SA0 = new Rail[Long](n0);
-    async R = new Rail[Long](n02+3);
-    SA12 = new Rail[Long](n02+3);
-    SA12(n02) = 0;
-    SA12(n02+1) = 0;
-    SA12(n02+2) = 0;
-    var j:Long = 0;
-    for(i in 0..(n + n0 - n1 - 1)) {
-      if (i % 3 != 0){
-        SA12(j) = i;
-        j += 1;
-      } 
-    }
+      async SA = new Rail[Long](n+3);
+      async SA0 = new Rail[Long](n0);
+      async R = new Rail[Long](n02+3);
+      SA12 = new Rail[Long](n02+3);
+      SA12(n02) = 0;
+      SA12(n02+1) = 0;
+      SA12(n02+2) = 0;
+      var j:Long = 0;
+      for(i in 0..(n + n0 - n1 - 1)) {
+        if (i % 3 != 0){
+          SA12(j) = i;
+          j += 1;
+        } 
+      }
     }
   }
 
@@ -135,7 +135,6 @@ public class SuffixArrayChar {
   }
 
   def sortSample() {
-
     val size = n02 as ULong;
     val num_threads = 11 as Int;
     sortPairsThree(string, SA12, size, num_threads);
@@ -143,7 +142,6 @@ public class SuffixArrayChar {
     //radixPass(R, SA12, 2y, n02);
     //radixPass(SA12, R, 1y, n02);
     //radixPass(R, SA12, 0y, n02);
-    // There are experimental codes below.
     /*
     val size = n02 as ULong;
     val num_threads = 11 as Int;
@@ -212,12 +210,8 @@ public class SuffixArrayChar {
       Console.ERR.println("Start SortPairs Char");
       sortPairs(string, SA0, size, num_threads, 0y);
     }
-    //val R0:Rail[Long] = R0B.result();
-    //var SA0:Rail[Long] = new Rail[Long](n0);
-    //radixPass(R0, SA0, 0y, n0);
 
     Console.ERR.println("Start Merge Final");
-    // def merge() {
     var p:Long = 0; 
     var t:Long = n0 - n1;
     var k:Long = -1;
