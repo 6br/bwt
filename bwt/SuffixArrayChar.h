@@ -61,16 +61,14 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__6302;
-    static ::x10::lang::String sl__6304;
-    static ::x10::lang::String sl__6301;
-    static ::x10::lang::String sl__6306;
-    static ::x10::lang::String sl__6307;
-    static ::x10::lang::String sl__6303;
-    static ::x10::lang::String sl__6305;
-    static ::x10::lang::String sl__6309;
-    static ::x10::lang::String sl__6308;
-    static ::x10::lang::String sl__6300;
+    static ::x10::lang::String sl__6347;
+    static ::x10::lang::String sl__6346;
+    static ::x10::lang::String sl__6349;
+    static ::x10::lang::String sl__6350;
+    static ::x10::lang::String sl__6348;
+    static ::x10::lang::String sl__6352;
+    static ::x10::lang::String sl__6351;
+    static ::x10::lang::String sl__6345;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
@@ -111,6 +109,9 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     virtual void sortPairs(::x10::lang::Rail< x10_byte >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
                            x10_byte offset);
+    virtual void sortPairsThree(::x10::lang::Rail< x10_byte >* keys,
+                                ::x10::lang::Rail< x10_long >* values,
+                                x10_ulong num_elems, x10_int num_threads);
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual ::x10::lang::Rail< x10_long >* run();

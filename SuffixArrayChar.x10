@@ -36,6 +36,9 @@ public class SuffixArrayChar {
   @Native("c++", "parallel_radix_sort::SortPairsByte((#1)->raw, (#2)->raw, #3, #4, #5)")
   native def sortPairs(keys: Rail[Byte], values: Rail[Long], num_elems: ULong, num_threads: Int, offset: Byte): void;
 
+  @Native("c++", "parallel_radix_sort::SortPairsByteThree((#1)->raw, (#2)->raw, #3, #4)")
+  native def sortPairsThree(keys: Rail[Byte], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     for(i in 0..k) {c(i) = 0;}
@@ -69,7 +72,7 @@ public class SuffixArrayChar {
     Console.OUT.println(string);*/
 
     Console.ERR.println("Start Constructuring Char Sample");
-    this.constructSampleR();
+    this.constructSample();
     Console.ERR.println("Start Sort Char Sample");
     this.sortSample();
     Console.ERR.println("Start Sort Char NonSample");
@@ -88,9 +91,10 @@ public class SuffixArrayChar {
   }
 
   def constructSample() {
-    Console.ERR.println("R");
-    R = new Rail[Long](n02+3);
-    Console.ERR.println("SA12");
+    finish {
+    async SA = new Rail[Long](n+3);
+    async SA0 = new Rail[Long](n0);
+    async R = new Rail[Long](n02+3);
     SA12 = new Rail[Long](n02+3);
     SA12(n02) = 0;
     SA12(n02+1) = 0;
@@ -101,6 +105,7 @@ public class SuffixArrayChar {
         SA12(j) = i;
         j += 1;
       } 
+    }
     }
   }
 
@@ -130,9 +135,14 @@ public class SuffixArrayChar {
   }
 
   def sortSample() {
-    radixPass(R, SA12, 2y, n02);
-    radixPass(SA12, R, 1y, n02);
-    radixPass(R, SA12, 0y, n02);
+
+    val size = n02 as ULong;
+    val num_threads = 11 as Int;
+    sortPairsThree(string, SA12, size, num_threads);
+
+    //radixPass(R, SA12, 2y, n02);
+    //radixPass(SA12, R, 1y, n02);
+    //radixPass(R, SA12, 0y, n02);
     // There are experimental codes below.
     /*
     val size = n02 as ULong;
