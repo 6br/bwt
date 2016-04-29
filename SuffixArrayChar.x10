@@ -100,11 +100,13 @@ public class SuffixArrayChar {
         j += 1;
       } 
     }
-    SA = new Rail[Long](n+3);
   }
 
   def constructSampleR() {
-    R = new Rail[Long](n02+3);
+    finish {
+    async c = new Rail[Long](k+1);
+    async SA = new Rail[Long](n+3);
+    async {R = new Rail[Long](n02+3);
     R(n02) = 0;
     R(n02+1) = 0;
     R(n02+2) = 0;
@@ -115,11 +117,13 @@ public class SuffixArrayChar {
         j += 1;
       } 
     }
+    }
     SA12 = new Rail[Long](n02+3);
     SA12(n02) = 0;
     SA12(n02+1) = 0;
     SA12(n02+2) = 0;
-    c = new Rail[Long](k+1);
+    }
+    Console.ERR.println("Malloc End");
   }
 
   def sortSample() {
@@ -161,7 +165,8 @@ public class SuffixArrayChar {
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
       SA12 = bwa.run();
-      for(i in 0..(n02-1)){ R(SA12(i)) = i + 1; }
+      Console.ERR.println("Ended BWA run");
+      for(i in 0..(n02-1)){ R(SA12(i)) = i + 1; } //futurize
     } else {
       for(i in 0..(n02-1)){ SA12(R(i) - 1) = i; }
     }
@@ -181,7 +186,7 @@ public class SuffixArrayChar {
     //var SA0:Rail[Long] = R0B.result();
     //radixPass(SA0, R0, 0y, n0);
     val size = n0 as ULong;
-    val num_threads = 6 as Int;
+    val num_threads = 11 as Int;
     Console.ERR.println("Start SortPairs Char");
     sortPairs(string, SA0, size, num_threads, 0y);
     //val R0:Rail[Long] = R0B.result();

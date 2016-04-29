@@ -33,6 +33,9 @@ public class SuffixArray {
   @Native("c++", "parallel_radix_sort::SortPairsLong((#1)->raw, (#2)->raw, #3, #4, #5)")
   native def sortPairs(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int, offset: Byte): void;
 
+  @Native("c++", "parallel_radix_sort::SortPairsLongThree((#1)->raw, (#2)->raw, #3, #4)")
+  native def sortPairsThree(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     var c:Rail[Long] = new Rail[Long](k+1);
@@ -73,19 +76,21 @@ public class SuffixArray {
   }
 
   def constructSample() {
-    SA12 = new Rail[Long](n02+3);
-    SA12(n02) = 0;
-    SA12(n02+1) = 0;
-    SA12(n02+2) = 0;
-    var j:Long = 0;
-    for(i in 0..(n + n0 - n1 - 1)) {
-      if (i % 3 != 0){
-        SA12(j) = i;
-        j += 1;
-      } 
+    finish {
+      async R = new Rail[Long](n02+3);
+      async SA = new Rail[Long](n+3);
+      SA12 = new Rail[Long](n02+3);
+      SA12(n02) = 0;
+      SA12(n02+1) = 0;
+      SA12(n02+2) = 0;
+      var j:Long = 0;
+      for(i in 0..(n + n0 - n1 - 1)) {
+        if (i % 3 != 0){
+          SA12(j) = i;
+          j += 1;
+        } 
+      }
     }
-    R = new Rail[Long](n02+3);
-    SA = new Rail[Long](n+3);
   }
 
   def sortSample() {
@@ -93,12 +98,15 @@ public class SuffixArray {
     
     val size = n02 as ULong;
     val num_threads = 11 as Int;
+    sortPairsThree(string, SA12, size, num_threads);
+    /*
     sortPairs(string, SA12, size, num_threads, 2y);
     Console.ERR.println("Ended 1st Radix Sort");
     sortPairs(string, SA12, size, num_threads, 1y);
     Console.ERR.println("Ended 2nd Radix Sort");
     sortPairs(string, SA12, size, num_threads, 0y);
     Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
+    */
     /*
     radixPass(R, SA12, 2y, n02);
     Console.ERR.println("Ended 1st Radix Sort");
@@ -130,6 +138,7 @@ public class SuffixArray {
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
       SA12 = bwa.run();
+      Console.ERR.println("Ended BWA run");
       for(i in 0..(n02-1)){ R(SA12(i)) = i + 1; }
     } else {
       for(i in 0..(n02-1)){ SA12(R(i) - 1) = i; }
@@ -140,8 +149,8 @@ public class SuffixArray {
     var SA0:Rail[Long] = new Rail[Long](n0);
     var m:Long = 0; 
     //val R0B = new RailBuilder[Long]();
-    for(i in 0..(n02-1)){
-      if(SA12(i) < n0) {
+    for (i in 0..(n02-1)) {
+      if (SA12(i) < n0) {
         //R0B.add(3 * SA12(i));
         SA0(m) = 3 * SA12(i);
         m += 1;
@@ -151,7 +160,7 @@ public class SuffixArray {
     //var SA0:Rail[Long] = new Rail[Long](n0);
     //radixPass(R0, SA0, 0y, n0);
     val size = n0 as ULong;
-    val num_threads = 6 as Int;
+    val num_threads = 11 as Int;
     Console.ERR.println("Start SortPairs");
     sortPairs(string, SA0, size, num_threads, 0y);
 

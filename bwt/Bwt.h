@@ -58,12 +58,12 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__5955;
-    static ::x10::lang::String sl__5959;
-    static ::x10::lang::String sl__5957;
-    static ::x10::lang::String sl__5956;
-    static ::x10::lang::String sl__5960;
-    static ::x10::lang::String sl__5958;
+    static ::x10::lang::String sl__5941;
+    static ::x10::lang::String sl__5945;
+    static ::x10::lang::String sl__5943;
+    static ::x10::lang::String sl__5942;
+    static ::x10::lang::String sl__5946;
+    static ::x10::lang::String sl__5944;
 };
 
 class Bwt : public ::x10::lang::X10Class   {

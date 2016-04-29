@@ -32,6 +32,21 @@ class Any;
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
 } } 
+namespace x10 { namespace xrx { 
+class Runtime;
+} } 
+namespace x10 { namespace xrx { 
+class FinishState;
+} } 
+namespace x10 { namespace lang { 
+class VoidFun_0_0;
+} } 
+namespace x10 { namespace compiler { 
+class AsyncClosure;
+} } 
+namespace x10 { namespace lang { 
+class CheckedThrowable;
+} } 
 namespace bwt { 
 class SuffixArray;
 } 
@@ -46,14 +61,16 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__6034;
-    static ::x10::lang::String sl__6036;
-    static ::x10::lang::String sl__6033;
-    static ::x10::lang::String sl__6037;
-    static ::x10::lang::String sl__6035;
-    static ::x10::lang::String sl__6039;
-    static ::x10::lang::String sl__6038;
-    static ::x10::lang::String sl__6032;
+    static ::x10::lang::String sl__5689;
+    static ::x10::lang::String sl__5691;
+    static ::x10::lang::String sl__5688;
+    static ::x10::lang::String sl__5693;
+    static ::x10::lang::String sl__5694;
+    static ::x10::lang::String sl__5690;
+    static ::x10::lang::String sl__5692;
+    static ::x10::lang::String sl__5696;
+    static ::x10::lang::String sl__5695;
+    static ::x10::lang::String sl__5687;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {

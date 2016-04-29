@@ -29,6 +29,21 @@ class Any;
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
 } } 
+namespace x10 { namespace xrx { 
+class Runtime;
+} } 
+namespace x10 { namespace xrx { 
+class FinishState;
+} } 
+namespace x10 { namespace lang { 
+class VoidFun_0_0;
+} } 
+namespace x10 { namespace compiler { 
+class AsyncClosure;
+} } 
+namespace x10 { namespace lang { 
+class CheckedThrowable;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -40,15 +55,13 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__5974;
-    static ::x10::lang::String sl__5973;
-    static ::x10::lang::String sl__5971;
-    static ::x10::lang::String sl__5976;
-    static ::x10::lang::String sl__5977;
-    static ::x10::lang::String sl__5978;
-    static ::x10::lang::String sl__5972;
-    static ::x10::lang::String sl__5975;
-    static ::x10::lang::String sl__5970;
+    static ::x10::lang::String sl__4785;
+    static ::x10::lang::String sl__4787;
+    static ::x10::lang::String sl__4789;
+    static ::x10::lang::String sl__4788;
+    static ::x10::lang::String sl__4790;
+    static ::x10::lang::String sl__4786;
+    static ::x10::lang::String sl__4784;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -83,6 +96,9 @@ class SuffixArray : public ::x10::lang::X10Class   {
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
                            x10_byte offset);
+    virtual void sortPairsThree(::x10::lang::Rail< x10_long >* keys,
+                                ::x10::lang::Rail< x10_long >* values,
+                                x10_ulong num_elems, x10_int num_threads);
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual ::x10::lang::Rail< x10_long >* run();
