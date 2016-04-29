@@ -151,24 +151,24 @@ void bwt::SuffixArrayTestChar::main(::x10::lang::Rail< ::x10::lang::String* >* a
     
     //#line 29 "SuffixArrayTestChar.x10"
     ::bwt::SuffixArray* bwa = ::bwt::SuffixArray::_make((__extension__ ({
-                                                            ::x10::lang::Rail< x10_long >* t__4747 =
+                                                            ::x10::lang::Rail< x10_long >* t__5612 =
                                                               ::x10::lang::Rail< x10_long >::_makeUnsafe(((x10_long)5ll), false);
-                                                            t__4747->x10::lang::Rail< x10_long >::__set(
+                                                            t__5612->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)0ll),
                                                               ((x10_long)1ll));
-                                                            t__4747->x10::lang::Rail< x10_long >::__set(
+                                                            t__5612->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)1ll),
                                                               ((x10_long)1ll));
-                                                            t__4747->x10::lang::Rail< x10_long >::__set(
+                                                            t__5612->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)2ll),
                                                               ((x10_long)0ll));
-                                                            t__4747->x10::lang::Rail< x10_long >::__set(
+                                                            t__5612->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)3ll),
                                                               ((x10_long)0ll));
-                                                            t__4747->x10::lang::Rail< x10_long >::__set(
+                                                            t__5612->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)4ll),
                                                               ((x10_long)0ll));
-                                                            t__4747;
+                                                            t__5612;
                                                         }))
                                                         ,
                                                         ((x10_long)5ll));

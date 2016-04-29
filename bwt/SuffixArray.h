@@ -55,13 +55,13 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__4785;
-    static ::x10::lang::String sl__4787;
-    static ::x10::lang::String sl__4789;
-    static ::x10::lang::String sl__4788;
-    static ::x10::lang::String sl__4790;
-    static ::x10::lang::String sl__4786;
-    static ::x10::lang::String sl__4784;
+    static ::x10::lang::String sl__5650;
+    static ::x10::lang::String sl__5652;
+    static ::x10::lang::String sl__5654;
+    static ::x10::lang::String sl__5653;
+    static ::x10::lang::String sl__5655;
+    static ::x10::lang::String sl__5651;
+    static ::x10::lang::String sl__5649;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -87,6 +87,10 @@ class SuffixArray : public ::x10::lang::X10Class   {
     ::x10::lang::Rail< x10_long >* FMGL(SA12);
     
     ::x10::lang::Rail< x10_long >* FMGL(SA);
+    
+    ::x10::lang::Rail< x10_long >* FMGL(SA0);
+    
+    x10_long FMGL(name);
     
     void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize);
     

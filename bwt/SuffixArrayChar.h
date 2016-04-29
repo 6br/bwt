@@ -61,16 +61,16 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__5689;
-    static ::x10::lang::String sl__5691;
-    static ::x10::lang::String sl__5688;
-    static ::x10::lang::String sl__5693;
-    static ::x10::lang::String sl__5694;
-    static ::x10::lang::String sl__5690;
-    static ::x10::lang::String sl__5692;
-    static ::x10::lang::String sl__5696;
-    static ::x10::lang::String sl__5695;
-    static ::x10::lang::String sl__5687;
+    static ::x10::lang::String sl__5711;
+    static ::x10::lang::String sl__5713;
+    static ::x10::lang::String sl__5710;
+    static ::x10::lang::String sl__5715;
+    static ::x10::lang::String sl__5716;
+    static ::x10::lang::String sl__5712;
+    static ::x10::lang::String sl__5714;
+    static ::x10::lang::String sl__5718;
+    static ::x10::lang::String sl__5717;
+    static ::x10::lang::String sl__5709;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
@@ -97,7 +97,11 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     
     ::x10::lang::Rail< x10_long >* FMGL(SA);
     
+    ::x10::lang::Rail< x10_long >* FMGL(SA0);
+    
     ::x10::lang::Rail< x10_long >* FMGL(c);
+    
+    x10_long FMGL(name);
     
     void _constructor(::x10::lang::Rail< x10_byte >* input, x10_long charsize);
     

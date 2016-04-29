@@ -19,7 +19,9 @@ public class SuffixArrayChar {
   var R: Rail[Long];
   var SA12: Rail[Long];
   var SA: Rail[Long];
+  var SA0: Rail[Long];
   var c:Rail[Long];
+  var name: Long;
  
   def this(input: Rail[Byte], charsize: Long){
     string = input;
@@ -106,6 +108,7 @@ public class SuffixArrayChar {
     finish {
     async c = new Rail[Long](k+1);
     async SA = new Rail[Long](n+3);
+    async SA0 = new Rail[Long](n0);
     async {R = new Rail[Long](n02+3);
     R(n02) = 0;
     R(n02+1) = 0;
@@ -141,7 +144,7 @@ public class SuffixArrayChar {
     sortPairs(string, SA12, size, num_threads, 0y);
     Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
     */
-    var name:Long = 0;
+    name = 0;
     var c0:Byte = -1y;
     var c1:Byte = -1y;
     var c2:Byte = -1y;
@@ -161,22 +164,21 @@ public class SuffixArrayChar {
     }
 
     Console.ERR.println("Ended Sort Sample");
+  }
 
+  def sortNonSample() {
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
       SA12 = bwa.run();
       Console.ERR.println("Ended BWA run");
-      for(i in 0..(n02-1)){ R(SA12(i)) = i + 1; } //futurize
+      finish for(i in 0..(n02-1)) async { R(SA12(i)) = i + 1; } //futurize
     } else {
-      for(i in 0..(n02-1)){ SA12(R(i) - 1) = i; }
+      finish for(i in 0..(n02-1)) async { SA12(R(i) - 1) = i; }
     }
-  }
 
-  def sortNonSample() {
-    var SA0:Rail[Long] = new Rail[Long](n0);
     var m:Long = 0; 
     //val R0B = new RailBuilder[Long]();
-    for(i in 0..(n02-1)){
+    for(i in 0..(n02-1)) {
       if(SA12(i) < n0) {
         //R0B.add(3 * SA12(i));
         SA0(m) = 3 * SA12(i);
