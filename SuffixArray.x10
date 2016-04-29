@@ -23,9 +23,9 @@ public class SuffixArray {
   var name: Long;
 
   def this(input: Rail[Long], charsize: Long){
+    n = input.size - 3;
     string = input;
     k = charsize;
-    n = input.size - 3;
     n0 = (n + 2) / 3;
     n1 = (n + 1) / 3;
     n2 = n / 3;
@@ -72,6 +72,8 @@ public class SuffixArray {
     for(i in 0..(n-1)){
       if(SA(i) != 0){
         bwt.add(string(SA(i) - 1));
+      }else{
+        bwt.add(string(n-1));
       }
     }
     return bwt.result();
@@ -122,7 +124,7 @@ public class SuffixArray {
     var c0:Long = -1;
     var c1:Long = -1;
     var c2:Long = -1;
-    for (i in 0..(n02 - 1)){
+    for (i in 0..(n02 - 1)) {
       if (string(SA12(i)) != c0 || string(SA12(i)+1) != c1 || string(SA12(i)+2) != c2) {
         name += 1;
         c0 = string(SA12(i));
@@ -143,28 +145,38 @@ public class SuffixArray {
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
       SA12 = bwa.run();
-      Console.ERR.println("Ended BWA run");
-      finish for(i in 0..(n02-1)) async { R(SA12(i)) = i + 1; }
+      Console.ERR.println("End BWA run");
+      finish {
+        async { for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
+        var m:Long = 0; 
+        for(i in 0..(n02-1)) {
+          if(SA12(i) < n0) {
+            SA0(m) = 3 * SA12(i);
+            m += 1;
+          }  
+        }
+        val size = n0 as ULong;
+        val num_threads = 11 as Int;
+        Console.ERR.println("Start SortPairs");
+        sortPairs(string, SA0, size, num_threads, 0y);
+      }
     } else {
-      finish for(i in 0..(n02-1)) async { SA12(R(i) - 1) = i; }
-    }
+      for(i in 0..(n02-1)) { SA12(R(i) - 1) = i; }
+      Console.ERR.println("BWA run End");
 
-    var m:Long = 0; 
-    //val R0B = new RailBuilder[Long]();
-    for (i in 0..(n02-1)) {
-      if (SA12(i) < n0) {
-        //R0B.add(3 * SA12(i));
-        SA0(m) = 3 * SA12(i);
-        m += 1;
-      }  
+      var m:Long = 0; 
+      for(i in 0..(n02-1)) {
+        if(SA12(i) < n0) {
+          //R0B.add(3 * SA12(i));
+          SA0(m) = 3 * SA12(i);
+          m += 1;
+        }  
+      }
+      val size = n0 as ULong;
+      val num_threads = 11 as Int;
+      Console.ERR.println("Start SortPairs");
+      sortPairs(string, SA0, size, num_threads, 0y);
     }
-    //var SA0:Rail[Long] = R0B.result();
-    //var SA0:Rail[Long] = new Rail[Long](n0);
-    //radixPass(R0, SA0, 0y, n0);
-    val size = n0 as ULong;
-    val num_threads = 11 as Int;
-    Console.ERR.println("Start SortPairs");
-    sortPairs(string, SA0, size, num_threads, 0y);
 
     Console.ERR.println("Start Merge");
     // def merge() {
