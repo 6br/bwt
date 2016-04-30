@@ -14,6 +14,9 @@ class Timer;
 namespace bwt { 
 class SuffixArrayChar;
 } 
+namespace bwt { 
+class SuffixArraySimple;
+} 
 namespace x10 { namespace io { 
 class Printer;
 } } 
@@ -28,18 +31,6 @@ class String;
 } } 
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
-} } 
-namespace x10 { namespace util { 
-class StringBuilder;
-} } 
-namespace x10 { namespace io { 
-class File;
-} } 
-namespace x10 { namespace lang { 
-template<class TPMGL(T)> class Iterator;
-} } 
-namespace x10 { namespace io { 
-template<class TPMGL(T)> class ReaderIterator;
 } } 
 namespace x10 { namespace compiler { 
 class Native;
@@ -58,25 +49,23 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__6338;
-    static ::x10::lang::String sl__6342;
-    static ::x10::lang::String sl__6340;
-    static ::x10::lang::String sl__6339;
-    static ::x10::lang::String sl__6341;
+    static ::x10::lang::String sl__8041;
+    static ::x10::lang::String sl__8044;
+    static ::x10::lang::String sl__8042;
+    static ::x10::lang::String sl__8043;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
-    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k);
+    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k, x10_boolean fast);
     
-    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k);
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k,
+                             x10_boolean fast);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
                                                     x10_boolean isDigit);
-    static ::x10::lang::String* fileioImproved(::x10::lang::String* filename);
-    static ::x10::lang::Rail< x10_long >* fileio(::x10::lang::String* filename);
     static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
     virtual ::bwt::Bwt* bwt__Bwt____this__bwt__Bwt();
     virtual void __fieldInitializers_bwt_Bwt();

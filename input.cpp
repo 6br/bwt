@@ -72,7 +72,7 @@ void input_fgets_char(const char* filename, int8_t* data)
     }
 
     while (fgets(buf, N, fp) != NULL) {
-        for (uint_fast16_t i = 0; i <= N; i++, j++){
+        for (uint_fast16_t i = 0; i < N; i++, j++){
             if (buf[i] == '\0' || buf[i] == '$' ){
                 data[j] = 0;
                 break;
@@ -104,7 +104,7 @@ void input_fgets_fixed_char(const char* filename, int8_t* data, int64_t length)
 
     for (int64_t k = 0; k < length; k++) {
         if(fgets(buf, N, fp) != NULL) {
-            for (uint_fast16_t i = 0; i <= N; i++, j++){
+            for (uint_fast16_t i = 0; i < N; i++, j++){
                 if (buf[i] == '\n' || buf[i] == '\0' || buf[i] == '$' ){
                     data[j] = 0;
                     break;
