@@ -65,15 +65,11 @@ public class Bwt {
       val SAC = new SuffixArrayChar(string, k);
       sa = SAC.run();
     } else {
-      val str = new Rail[Long](string.size);
-      for (i in string){
-        str(i) = string(i);
-      }
-      val SAC = new SuffixArraySimple(str, k);
+      val SAC = new SuffixArraySimpleChar(string, k);
       sa = SAC.run();
     }
     val difftime = Timer.milliTime() - time;
-    Console.ERR.printf("Elapsed time: %ld millitime.\n",difftime);
+    Console.ERR.printf("Elapsed time: %ld millisec.\n",difftime);
     var j:Long = sa.size - 1;
     if (j > 15) {j = 15;}
     for (i in 0..j){

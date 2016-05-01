@@ -71,11 +71,11 @@ public class SuffixArrayChar {
     Console.OUT.println(array);
     Console.OUT.println(string);*/
 
-    Console.ERR.println("Start Constructuring Char Sample");
+    //Console.ERR.println("Start Constructuring Char Sample");
     this.constructSample();
-    Console.ERR.println("Start Sort Char Sample");
+    //Console.ERR.println("Start Sort Char Sample");
     this.sortSample();
-    Console.ERR.println("Start Sort Char NonSample");
+    //Console.ERR.println("Start Sort Char NonSample");
     this.sortNonSample();
     return this.SA;
   }
@@ -92,7 +92,6 @@ public class SuffixArrayChar {
 
   def constructSample() {
     finish {
-      async SA = new Rail[Long](n+3);
       async SA0 = new Rail[Long](n0);
       async R = new Rail[Long](n02+3);
       SA12 = new Rail[Long](n02+3);
@@ -131,7 +130,7 @@ public class SuffixArrayChar {
     SA12(n02+1) = 0;
     SA12(n02+2) = 0;
     }
-    Console.ERR.println("Malloc End");
+    //Console.ERR.println("Malloc End");
   }
 
   def sortSample() {
@@ -146,11 +145,11 @@ public class SuffixArrayChar {
     val size = n02 as ULong;
     val num_threads = 11 as Int;
     sortPairs(string, SA12, size, num_threads, 2y);
-    Console.ERR.println("Ended 1st Radix Sort");
+    //Console.ERR.println("Ended 1st Radix Sort");
     sortPairs(string, SA12, size, num_threads, 1y);
-    Console.ERR.println("Ended 2nd Radix Sort");
+    //Console.ERR.println("Ended 2nd Radix Sort");
     sortPairs(string, SA12, size, num_threads, 0y);
-    Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
+    //Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
     */
     name = 0;
     var c0:Byte = -1y;
@@ -171,16 +170,17 @@ public class SuffixArrayChar {
       }
     }
 
-    Console.ERR.println("Ended Sort Sample");
+    //Console.ERR.println("Ended Sort Sample");
   }
 
   def sortNonSample() {
     if (name < n02) {
       val bwa = new SuffixArray(R, name);
       SA12 = bwa.run();
-      Console.ERR.println("Ended BWA run");
+      //Console.ERR.println("Ended BWA run");
       finish{
         async {for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
+        async SA = new Rail[Long](n+3);
         var m:Long = 0; 
         for(i in 0..(n02-1)) {
           if(SA12(i) < n0) {
@@ -191,12 +191,13 @@ public class SuffixArrayChar {
         }
         val size = n0 as ULong;
         val num_threads = 11 as Int;
-        Console.ERR.println("Start SortPairs Char");
+        //Console.ERR.println("Start SortPairs Char");
         sortPairs(string, SA0, size, num_threads, 0y);
       }
     } else {
       finish for(i in 0..(n02-1)) async { SA12(R(i) - 1) = i; }
-
+      finish {
+        async SA = new Rail[Long](n+3);
       var m:Long = 0; 
       for(i in 0..(n02-1)) {
         if(SA12(i) < n0) {
@@ -207,11 +208,13 @@ public class SuffixArrayChar {
       }
       val size = n0 as ULong;
       val num_threads = 11 as Int;
-      Console.ERR.println("Start SortPairs Char");
+      //Console.ERR.println("Start SortPairs Char");
       sortPairs(string, SA0, size, num_threads, 0y);
+      }
     }
 
-    Console.ERR.println("Start Merge Final");
+
+    //Console.ERR.println("Start Merge Final");
     var p:Long = 0; 
     var t:Long = n0 - n1;
     var k:Long = -1;

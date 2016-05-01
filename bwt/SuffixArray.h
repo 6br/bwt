@@ -17,15 +17,6 @@ template<class TPMGL(T)> class Rail;
 namespace x10 { namespace compiler { 
 class Native;
 } } 
-namespace x10 { namespace io { 
-class Printer;
-} } 
-namespace x10 { namespace io { 
-class Console;
-} } 
-namespace x10 { namespace lang { 
-class Any;
-} } 
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
 } } 
@@ -52,19 +43,6 @@ class NativeCPPInclude;
 } } 
 
 namespace bwt { 
-
-class SuffixArray_Strings {
-  public:
-    static ::x10::lang::String sl__8069;
-    static ::x10::lang::String sl__8065;
-    static ::x10::lang::String sl__8071;
-    static ::x10::lang::String sl__8068;
-    static ::x10::lang::String sl__8070;
-    static ::x10::lang::String sl__8072;
-    static ::x10::lang::String sl__8066;
-    static ::x10::lang::String sl__8064;
-    static ::x10::lang::String sl__8067;
-};
 
 class SuffixArray : public ::x10::lang::X10Class   {
     public:
