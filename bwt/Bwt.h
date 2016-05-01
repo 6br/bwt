@@ -49,10 +49,10 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__12704;
-    static ::x10::lang::String sl__12702;
-    static ::x10::lang::String sl__12701;
-    static ::x10::lang::String sl__12703;
+    static ::x10::lang::String sl__12754;
+    static ::x10::lang::String sl__12752;
+    static ::x10::lang::String sl__12751;
+    static ::x10::lang::String sl__12753;
 };
 
 class Bwt : public ::x10::lang::X10Class   {

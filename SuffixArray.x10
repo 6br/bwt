@@ -188,7 +188,7 @@ public class SuffixArray {
 
     Console.ERR.println("Start Merge");
     val thread = 11;
-    if (true){ //SA0.size < thread){
+    if (SA0.size < thread){
     var p:Long = 0; 
     var t:Long = n0 - n1;
     var k:Long = -1;

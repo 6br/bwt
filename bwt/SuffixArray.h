@@ -55,7 +55,7 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__12724;
+    static ::x10::lang::String sl__12774;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
