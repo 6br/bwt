@@ -26,20 +26,20 @@ public class SuffixArrayTestChar {
   
   public static def main(args:Rail[String]):void {
     //val bwa = new SuffixArray([1L,4L,1L,1L,4L,1L,2L,3L,1L,4L,1L,1L,4L,1L,1L,0L,0L,0L,0L], 5);
-    val bwa = new SuffixArray([1L,1L,0L,0L,0L], 5);
-    val sa = bwa.run();
+    //val bwa = new SuffixArray([1L,1L,0L,0L,0L], 5);
+    /*val sa = bwa.run();
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     }
     val bwt = bwa.bwtable();
     for (i in 0..(bwt.size-1)){
       Console.OUT.println(bwt(i));
-    }
+    }*/
 
-    val nmax:Long = 6;
+    val nmax:Long = 20;
     val b:Byte = 4y;
     val bl:Long = b as Long;
-    for(n in 2..nmax){
+    for(n in nmax..nmax){
       val N = (Math.pow(bl, n)+0.5) as Int;
       var s:Rail[Byte] = new Rail[Byte](n+3);
       var sa_result:Rail[Long] = new Rail[Long](n+3);

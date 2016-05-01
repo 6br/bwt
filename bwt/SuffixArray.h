@@ -35,6 +35,15 @@ class AsyncClosure;
 namespace x10 { namespace lang { 
 class CheckedThrowable;
 } } 
+namespace x10 { namespace io { 
+class Printer;
+} } 
+namespace x10 { namespace io { 
+class Console;
+} } 
+namespace x10 { namespace lang { 
+class Any;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -43,6 +52,11 @@ class NativeCPPInclude;
 } } 
 
 namespace bwt { 
+
+class SuffixArray_Strings {
+  public:
+    static ::x10::lang::String sl__12724;
+};
 
 class SuffixArray : public ::x10::lang::X10Class   {
     public:
@@ -72,10 +86,11 @@ class SuffixArray : public ::x10::lang::X10Class   {
     
     x10_long FMGL(name);
     
-    void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize);
+    void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize,
+                      ::x10::lang::Rail< x10_long >* sa);
     
     static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
-                                     x10_long charsize);
+                                     x10_long charsize, ::x10::lang::Rail< x10_long >* sa);
     
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
@@ -88,7 +103,7 @@ class SuffixArray : public ::x10::lang::X10Class   {
                                     x10_ulong num_elems, x10_int num_threads);
     virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
-    virtual ::x10::lang::Rail< x10_long >* run();
+    virtual void run();
     virtual ::x10::lang::Rail< x10_long >* bwtable();
     virtual void constructSample();
     virtual void sortSample();

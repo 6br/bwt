@@ -36,7 +36,7 @@ public class SuffixArrayTest {
       Console.OUT.println(bwt(i));
     }
 
-    val nmax:Long = 4;
+    val nmax:Long = 6;
     val b:Long = 4;
     for(n in 2..nmax){
       val N = (Math.pow(b, n)+0.5) as Int;

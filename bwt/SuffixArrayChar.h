@@ -41,6 +41,15 @@ class CheckedThrowable;
 namespace bwt { 
 class SuffixArray;
 } 
+namespace x10 { namespace io { 
+class Printer;
+} } 
+namespace x10 { namespace io { 
+class Console;
+} } 
+namespace x10 { namespace lang { 
+class Any;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -49,6 +58,11 @@ class NativeCPPInclude;
 } } 
 
 namespace bwt { 
+
+class SuffixArrayChar_Strings {
+  public:
+    static ::x10::lang::String sl__12782;
+};
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
     public:

@@ -62,6 +62,11 @@ public class Bwt {
     val time = Timer.milliTime();
     val sa:Rail[Long];
     if(fast) {
+      var str:Rail[Long] = new Rail[Long](string.size);
+      for(i in string){
+        str(i) = string(i) as Long;
+      }
+      //val SAC = new SuffixArray(str, k);
       val SAC = new SuffixArrayChar(string, k);
       sa = SAC.run();
     } else {
@@ -122,7 +127,7 @@ public class Bwt {
     e(length-3) = 0y;
     Console.ERR.println("End Malloc");
     fileioCPP(file, e, height);
-    val bwa = new Bwt(e, N, false);
+    val bwa = new Bwt(e, N, true);
     //val bwa = new Bwt(file, N);
     //val bwa = new Bwt(file, N, false);
   }

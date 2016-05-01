@@ -175,8 +175,9 @@ public class SuffixArrayChar {
 
   def sortNonSample() {
     if (name < n02) {
-      val bwa = new SuffixArray(R, name);
-      SA12 = bwa.run();
+      SA12 = new Rail[Long](R.size + 3);
+      val bwa = new SuffixArray(R, name, SA12);
+      bwa.run();
       //Console.ERR.println("Ended BWA run");
       finish{
         async {for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
@@ -213,11 +214,133 @@ public class SuffixArrayChar {
       }
     }
 
-
-    //Console.ERR.println("Start Merge Final");
+    Console.ERR.println("Start Merge Final");
+    val thread = 11;
+    if (SA0.size < thread){
     var p:Long = 0; 
     var t:Long = n0 - n1;
     var k:Long = -1;
+    while(k < n) {
+      k += 1;
+      val i = getI(t);
+      val j = SA0(p);
+      //// different compares for mod 1 and mod 2 suffixes
+      if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
+         SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
+        ){ // suffix from SA12 is smaller
+        SA(k) = i; 
+        t += 1;
+        if(t == n02) {
+          k += 1;
+          for(q in 0..(n0-p-1)){
+            SA(k) = SA0(p);
+            p += 1;
+            k += 1;
+          }
+        }
+      } else { // suffix from SA0 is smaller
+        SA(k) = j;
+        p += 1;
+        if(p == n0) {
+          k += 1;
+          for(q in 0..(n02-t-1)){
+            SA(k) = getI(t);
+            t += 1;
+            k += 1;
+        }
+      }
+     }
+   }
+}else{
+    var sa:Rail[Rail[Long]] = new Rail[Rail[Long]](thread);
+    var bothstart:Rail[Long] = new Rail[Long](thread);
+
+    finish for (l in 0..(thread - 1)) async {
+      val rb = new RailBuilder[Long]();
+      var p:Long = 0 + n0 / thread * l;
+      var t:Long = n0 - n1 + n02 / thread * l;
+      val initp = p;
+      val initt = t;
+      var lastp:Long = p + n0 / thread + 1;
+      var lastt:Long = t + n02 / thread + 1;
+      while (t < SA12.size && p < SA0.size && (p < lastp || t < lastt)) {
+        val i = getI(t);
+        val j = SA0(p);
+      //// different compares for mod 1 and mod 2 suffixes
+      if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
+         SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
+        ){ // suffix from SA12 is smaller
+        rb.add(i);
+        t += 1;
+        if(p == initp){
+          bothstart(l) += 1;
+        }
+        if(t == n02) {
+          for(q in 0..(n0-p-1)){
+            rb.add(SA0(p));
+            p += 1;
+          }
+          break;
+        }
+      } else { // suffix from SA0 is smaller
+        rb.add(j);
+        p += 1;
+        if(t == initt){
+          bothstart(l) += 1;
+        }
+        if(p == n0) {
+          for(q in 0..(n02-t-1)){
+            rb.add(getI(t));
+            t += 1;
+          }
+          break;
+        }
+      }
+      }
+      sa(l) = rb.result();
+    }
+    //Console.ERR.println(sa(2).size - bothstart(2));
+    Rail.copy(sa(0), 0, SA, 0, sa(0).size);
+    for (i in 1..(thread - 1)){
+      //if(sa(i-1).size == 0){bothstart(i) = 0;}
+      bothstart(i) += 1;
+    }
+    var nowsize:Long = sa(0).size;
+    for (i in 1..(thread - 1)){
+      Console.ERR.println(bothstart(i));
+      val nextsize = sa(i).size - bothstart(i);
+      val width = (nowsize + nextsize < n+2) ? nextsize : n+2 - nowsize;
+      if (nowsize < n){
+        Rail.copy(sa(i), bothstart(i), SA, nowsize, width);
+        nowsize += nextsize;
+      }
+    }
+    SA(n) = 0;
+    SA(n+1) = 0;
+    SA(n+2) = 0;
+  }
+  }
+
+  private def leq(a1: Long, a2: Long, b1: Long, b2: Long):Boolean {
+    return (a1 < b1 || a1 == b1 && a2 <= b2 );
+  }
+
+  private def leq(a1: Long, a2: Long, a3: Long, b1: Long, b2: Long, b3: Long):Boolean {
+    return (a1 < b1 || a1 == b1 && leq(a2, a3, b2, b3));
+  }
+
+  private def getI(t: Long):Long {
+    if(SA12(t) < n0){
+      return SA12(t) * 3 + 1; 
+    } else {
+      return (SA12(t) - n0) * 3 + 2;
+    }
+  }
+/*
+      }
+
+    }
+
     while(k < n) {
       k += 1;
       val i = getI(t);

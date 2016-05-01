@@ -5,7 +5,6 @@
 #include <x10/lang/Rail.h>
 #include <x10/lang/Long.h>
 #include <x10/lang/Boolean.h>
-#include <x10/lang/Byte.h>
 #include <x10/lang/String.h>
 #include <bwt/SuffixArray.h>
 #include <x10/lang/Unsafe.h>
@@ -15,7 +14,6 @@
 #include <x10/lang/Int.h>
 #include <x10/lang/Double.h>
 #include <x10/lang/Math.h>
-#include <bwt/SuffixArrayChar.h>
 #include <x10/compiler/Synthetic.h>
 
 //#line 4 "SuffixArrayTest.x10"
@@ -26,40 +24,40 @@ x10_boolean bwt::SuffixArrayTest::isPerm(::x10::lang::Rail< x10_long >* sa,
     ::x10::lang::Rail< x10_boolean >* seen = ::x10::lang::Rail< x10_boolean >::_make(((n) + (((x10_long)1ll))));
     
     //#line 6 "SuffixArrayTest.x10"
-    x10_long i__3714min__3857 = ((x10_long)0ll);
-    x10_long i__3714max__3858 = n;
+    x10_long i__4541min__4684 = ((x10_long)0ll);
+    x10_long i__4541max__4685 = n;
     {
-        x10_long i__3859;
-        for (i__3859 = i__3714min__3857; ((i__3859) <= (i__3714max__3858));
-             i__3859 = ((i__3859) + (((x10_long)1ll)))) {
-            x10_long i__3860 = i__3859;
-            seen->x10::lang::Rail< x10_boolean >::__set(i__3860, false);
+        x10_long i__4686;
+        for (i__4686 = i__4541min__4684; ((i__4686) <= (i__4541max__4685));
+             i__4686 = ((i__4686) + (((x10_long)1ll)))) {
+            x10_long i__4687 = i__4686;
+            seen->x10::lang::Rail< x10_boolean >::__set(i__4687, false);
         }
     }
     
     //#line 7 "SuffixArrayTest.x10"
-    x10_long i__3730min__3861 = ((x10_long)0ll);
-    x10_long i__3730max__3862 = n;
+    x10_long i__4557min__4688 = ((x10_long)0ll);
+    x10_long i__4557max__4689 = n;
     {
-        x10_long i__3863;
-        for (i__3863 = i__3730min__3861; ((i__3863) <= (i__3730max__3862));
-             i__3863 = ((i__3863) + (((x10_long)1ll)))) {
-            x10_long i__3864 = i__3863;
+        x10_long i__4690;
+        for (i__4690 = i__4557min__4688; ((i__4690) <= (i__4557max__4689));
+             i__4690 = ((i__4690) + (((x10_long)1ll)))) {
+            x10_long i__4691 = i__4690;
             seen->x10::lang::Rail< x10_boolean >::__set(::x10aux::nullCheck(sa)->x10::lang::Rail< x10_long >::__apply(
-                                                          i__3864),
+                                                          i__4691),
                                                         true);
         }
     }
     
     //#line 8 "SuffixArrayTest.x10"
-    x10_long i__3746min__3865 = ((x10_long)0ll);
-    x10_long i__3746max__3866 = n;
+    x10_long i__4573min__4692 = ((x10_long)0ll);
+    x10_long i__4573max__4693 = n;
     {
-        x10_long i__3867;
-        for (i__3867 = i__3746min__3865; ((i__3867) <= (i__3746max__3866));
-             i__3867 = ((i__3867) + (((x10_long)1ll)))) {
-            x10_long i__3868 = i__3867;
-            if (!(seen->x10::lang::Rail< x10_boolean >::__apply(i__3868)))
+        x10_long i__4694;
+        for (i__4694 = i__4573min__4692; ((i__4694) <= (i__4573max__4693));
+             i__4694 = ((i__4694) + (((x10_long)1ll)))) {
+            x10_long i__4695 = i__4694;
+            if (!(seen->x10::lang::Rail< x10_boolean >::__apply(i__4695)))
             {
                 return false;
                 
@@ -74,8 +72,8 @@ x10_boolean bwt::SuffixArrayTest::isPerm(::x10::lang::Rail< x10_long >* sa,
 }
 
 //#line 12 "SuffixArrayTest.x10"
-x10_boolean bwt::SuffixArrayTest::sleq(::x10::lang::Rail< x10_byte >* s1,
-                                       ::x10::lang::Rail< x10_byte >* s2,
+x10_boolean bwt::SuffixArrayTest::sleq(::x10::lang::Rail< x10_long >* s1,
+                                       ::x10::lang::Rail< x10_long >* s2,
                                        x10_long c1, x10_long c2) {
     
     //#line 13 "SuffixArrayTest.x10"
@@ -93,16 +91,16 @@ x10_boolean bwt::SuffixArrayTest::sleq(::x10::lang::Rail< x10_byte >* s1,
     }
     
     //#line 15 "SuffixArrayTest.x10"
-    if (((::x10aux::nullCheck(s1)->x10::lang::Rail< x10_byte >::__apply(
-            c1)) > (::x10aux::nullCheck(s2)->x10::lang::Rail< x10_byte >::__apply(
+    if (((::x10aux::nullCheck(s1)->x10::lang::Rail< x10_long >::__apply(
+            c1)) > (::x10aux::nullCheck(s2)->x10::lang::Rail< x10_long >::__apply(
                       c2)))) {
         return false;
         
     }
     
     //#line 16 "SuffixArrayTest.x10"
-    if (((::x10aux::nullCheck(s1)->x10::lang::Rail< x10_byte >::__apply(
-            c1)) < (::x10aux::nullCheck(s2)->x10::lang::Rail< x10_byte >::__apply(
+    if (((::x10aux::nullCheck(s1)->x10::lang::Rail< x10_long >::__apply(
+            c1)) < (::x10aux::nullCheck(s2)->x10::lang::Rail< x10_long >::__apply(
                       c2)))) {
         return true;
         
@@ -116,23 +114,23 @@ x10_boolean bwt::SuffixArrayTest::sleq(::x10::lang::Rail< x10_byte >* s1,
 
 //#line 20 "SuffixArrayTest.x10"
 x10_boolean bwt::SuffixArrayTest::isSorted(::x10::lang::Rail< x10_long >* sa,
-                                           ::x10::lang::Rail< x10_byte >* s,
+                                           ::x10::lang::Rail< x10_long >* s,
                                            x10_long n) {
     
     //#line 21 "SuffixArrayTest.x10"
-    x10_long i__3762min__3869 = ((x10_long)0ll);
-    x10_long i__3762max__3870 = ((n) - (((x10_long)1ll)));
+    x10_long i__4589min__4696 = ((x10_long)0ll);
+    x10_long i__4589max__4697 = ((n) - (((x10_long)1ll)));
     {
-        x10_long i__3871;
-        for (i__3871 = i__3762min__3869; ((i__3871) <= (i__3762max__3870));
-             i__3871 = ((i__3871) + (((x10_long)1ll)))) {
-            x10_long i__3872 = i__3871;
+        x10_long i__4698;
+        for (i__4698 = i__4589min__4696; ((i__4698) <= (i__4589max__4697));
+             i__4698 = ((i__4698) + (((x10_long)1ll)))) {
+            x10_long i__4699 = i__4698;
             
             //#line 22 "SuffixArrayTest.x10"
             if (!(::bwt::SuffixArrayTest::sleq(s, s, ::x10aux::nullCheck(sa)->x10::lang::Rail< x10_long >::__apply(
-                                                       i__3872),
+                                                       i__4699),
                                                ::x10aux::nullCheck(sa)->x10::lang::Rail< x10_long >::__apply(
-                                                 ((i__3872) + (((x10_long)1ll)))))))
+                                                 ((i__4699) + (((x10_long)1ll)))))))
             {
                 return false;
                 
@@ -151,24 +149,24 @@ void bwt::SuffixArrayTest::main(::x10::lang::Rail< ::x10::lang::String* >* args)
     
     //#line 29 "SuffixArrayTest.x10"
     ::bwt::SuffixArray* bwa = ::bwt::SuffixArray::_make((__extension__ ({
-                                                            ::x10::lang::Rail< x10_long >* t__5420 =
+                                                            ::x10::lang::Rail< x10_long >* t__6701 =
                                                               ::x10::lang::Rail< x10_long >::_makeUnsafe(((x10_long)5ll), false);
-                                                            t__5420->x10::lang::Rail< x10_long >::__set(
+                                                            t__6701->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)0ll),
                                                               ((x10_long)1ll));
-                                                            t__5420->x10::lang::Rail< x10_long >::__set(
+                                                            t__6701->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)1ll),
                                                               ((x10_long)1ll));
-                                                            t__5420->x10::lang::Rail< x10_long >::__set(
+                                                            t__6701->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)2ll),
                                                               ((x10_long)0ll));
-                                                            t__5420->x10::lang::Rail< x10_long >::__set(
+                                                            t__6701->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)3ll),
                                                               ((x10_long)0ll));
-                                                            t__5420->x10::lang::Rail< x10_long >::__set(
+                                                            t__6701->x10::lang::Rail< x10_long >::__set(
                                                               ((x10_long)4ll),
                                                               ((x10_long)0ll));
-                                                            t__5420;
+                                                            t__6701;
                                                         }))
                                                         ,
                                                         ((x10_long)5ll));
@@ -177,18 +175,18 @@ void bwt::SuffixArrayTest::main(::x10::lang::Rail< ::x10::lang::String* >* args)
     ::x10::lang::Rail< x10_long >* sa = bwa->run();
     
     //#line 31 "SuffixArrayTest.x10"
-    x10_long i__3778min__3889 = ((x10_long)0ll);
-    x10_long i__3778max__3890 = (((x10_long)(::x10aux::nullCheck(sa)->FMGL(size))) - (((x10_long)1ll)));
+    x10_long i__4605min__4716 = ((x10_long)0ll);
+    x10_long i__4605max__4717 = (((x10_long)(::x10aux::nullCheck(sa)->FMGL(size))) - (((x10_long)1ll)));
     {
-        x10_long i__3891;
-        for (i__3891 = i__3778min__3889; ((i__3891) <= (i__3778max__3890));
-             i__3891 = ((i__3891) + (((x10_long)1ll)))) {
-            x10_long i__3892 = i__3891;
+        x10_long i__4718;
+        for (i__4718 = i__4605min__4716; ((i__4718) <= (i__4605max__4717));
+             i__4718 = ((i__4718) + (((x10_long)1ll)))) {
+            x10_long i__4719 = i__4718;
             
             //#line 32 "SuffixArrayTest.x10"
             ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
               ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(::x10aux::nullCheck(sa)->x10::lang::Rail< x10_long >::__apply(
-                                                                   i__3892)));
+                                                                   i__4719)));
         }
     }
     
@@ -196,176 +194,173 @@ void bwt::SuffixArrayTest::main(::x10::lang::Rail< ::x10::lang::String* >* args)
     ::x10::lang::Rail< x10_long >* bwt = bwa->bwtable();
     
     //#line 35 "SuffixArrayTest.x10"
-    x10_long i__3794min__3893 = ((x10_long)0ll);
-    x10_long i__3794max__3894 = (((x10_long)(::x10aux::nullCheck(bwt)->FMGL(size))) - (((x10_long)1ll)));
+    x10_long i__4621min__4720 = ((x10_long)0ll);
+    x10_long i__4621max__4721 = (((x10_long)(::x10aux::nullCheck(bwt)->FMGL(size))) - (((x10_long)1ll)));
     {
-        x10_long i__3895;
-        for (i__3895 = i__3794min__3893; ((i__3895) <= (i__3794max__3894));
-             i__3895 = ((i__3895) + (((x10_long)1ll)))) {
-            x10_long i__3896 = i__3895;
+        x10_long i__4722;
+        for (i__4722 = i__4621min__4720; ((i__4722) <= (i__4621max__4721));
+             i__4722 = ((i__4722) + (((x10_long)1ll)))) {
+            x10_long i__4723 = i__4722;
             
             //#line 36 "SuffixArrayTest.x10"
             ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
               ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(::x10aux::nullCheck(bwt)->x10::lang::Rail< x10_long >::__apply(
-                                                                   i__3896)));
+                                                                   i__4723)));
         }
     }
     
     //#line 39 "SuffixArrayTest.x10"
-    x10_long nmax = ((x10_long)4ll);
+    x10_long nmax = ((x10_long)6ll);
     
     //#line 40 "SuffixArrayTest.x10"
-    x10_byte b = ((x10_byte)4);
+    x10_long b = ((x10_long)4ll);
     
     //#line 41 "SuffixArrayTest.x10"
-    x10_long bl = ((x10_long)(b));
-    
-    //#line 42 "SuffixArrayTest.x10"
-    x10_long i__3842min__3897 = ((x10_long)2ll);
-    x10_long i__3842max__3898 = nmax;
+    x10_long i__4669min__4724 = ((x10_long)2ll);
+    x10_long i__4669max__4725 = nmax;
     {
-        x10_long i__3899;
-        for (i__3899 = i__3842min__3897; ((i__3899) <= (i__3842max__3898));
-             i__3899 = ((i__3899) + (((x10_long)1ll)))) {
-            x10_long n__3900 = i__3899;
+        x10_long i__4726;
+        for (i__4726 = i__4669min__4724; ((i__4726) <= (i__4669max__4725));
+             i__4726 = ((i__4726) + (((x10_long)1ll)))) {
+            x10_long n__4727 = i__4726;
+            
+            //#line 42 "SuffixArrayTest.x10"
+            x10_int N__4713 = ::x10::lang::DoubleNatives::toInt(((::x10::lang::Math::pow(
+                                                                    b,
+                                                                    n__4727)) + (0.5)));
             
             //#line 43 "SuffixArrayTest.x10"
-            x10_int N__3886 = ::x10::lang::DoubleNatives::toInt(((::x10::lang::Math::pow(
-                                                                    bl,
-                                                                    n__3900)) + (0.5)));
+            ::x10::lang::Rail< x10_long >* s__4714 = ::x10::lang::Rail< x10_long >::_make(((n__4727) + (((x10_long)3ll))));
             
             //#line 44 "SuffixArrayTest.x10"
-            ::x10::lang::Rail< x10_byte >* s__3887 = ::x10::lang::Rail< x10_byte >::_make(((n__3900) + (((x10_long)3ll))));
+            ::x10::lang::Rail< x10_long >* sa_result__4715 =
+              ::x10::lang::Rail< x10_long >::_make(((n__4727) + (((x10_long)3ll))));
             
             //#line 45 "SuffixArrayTest.x10"
-            ::x10::lang::Rail< x10_long >* sa_result__3888 =
-              ::x10::lang::Rail< x10_long >::_make(((n__3900) + (((x10_long)3ll))));
-            
-            //#line 46 "SuffixArrayTest.x10"
-            x10_long i__3810min__3878 = ((x10_long)0ll);
-            x10_long i__3810max__3879 = n__3900;
+            x10_long i__4637min__4705 = ((x10_long)0ll);
+            x10_long i__4637max__4706 = n__4727;
             {
-                x10_long i__3880;
-                for (i__3880 = i__3810min__3878; ((i__3880) <= (i__3810max__3879));
-                     i__3880 = ((i__3880) + (((x10_long)1ll))))
+                x10_long i__4707;
+                for (i__4707 = i__4637min__4705; ((i__4707) <= (i__4637max__4706));
+                     i__4707 = ((i__4707) + (((x10_long)1ll))))
                 {
-                    x10_long i__3881 = i__3880;
-                    ::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__set(
-                      i__3881, ((x10_byte)1));
-                    ::x10aux::nullCheck(sa_result__3888)->x10::lang::Rail< x10_long >::__set(
-                      i__3881, ((x10_long)1ll));
+                    x10_long i__4708 = i__4707;
+                    ::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__set(
+                      i__4708, ((x10_long)1ll));
+                    ::x10aux::nullCheck(sa_result__4715)->x10::lang::Rail< x10_long >::__set(
+                      i__4708, ((x10_long)1ll));
                 }
             }
             
+            //#line 46 "SuffixArrayTest.x10"
+            ::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__set(
+              n__4727, ((x10_long)0ll));
+            
             //#line 47 "SuffixArrayTest.x10"
-            ::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__set(
-              n__3900, ((x10_byte)0));
+            ::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__set(
+              ((n__4727) + (((x10_long)1ll))), ((x10_long)0ll));
             
             //#line 48 "SuffixArrayTest.x10"
-            ::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__set(
-              ((n__3900) + (((x10_long)1ll))), ((x10_byte)0));
+            ::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__set(
+              ((n__4727) + (((x10_long)2ll))), ((x10_long)0ll));
             
             //#line 49 "SuffixArrayTest.x10"
-            ::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__set(
-              ((n__3900) + (((x10_long)2ll))), ((x10_byte)0));
-            
-            //#line 50 "SuffixArrayTest.x10"
-            x10_long i__3826min__3882 = ((x10_long)0ll);
-            x10_long i__3826max__3883 = ((((x10_long)(N__3886))) - (((x10_long)1ll)));
+            x10_long i__4653min__4709 = ((x10_long)0ll);
+            x10_long i__4653max__4710 = ((((x10_long)(N__4713))) - (((x10_long)1ll)));
             {
-                x10_long i__3884;
-                for (i__3884 = i__3826min__3882; ((i__3884) <= (i__3826max__3883));
-                     i__3884 = ((i__3884) + (((x10_long)1ll))))
+                x10_long i__4711;
+                for (i__4711 = i__4653min__4709; ((i__4711) <= (i__4653max__4710));
+                     i__4711 = ((i__4711) + (((x10_long)1ll))))
                 {
-                    x10_long i__3885 = i__3884;
+                    x10_long i__4712 = i__4711;
+                    
+                    //#line 50 "SuffixArrayTest.x10"
+                    ::bwt::SuffixArray* aa__4703 = ::bwt::SuffixArray::_make(s__4714,
+                                                                             b);
                     
                     //#line 51 "SuffixArrayTest.x10"
-                    ::bwt::SuffixArrayChar* aa__3876 = ::bwt::SuffixArrayChar::_make(s__3887,
-                                                                                     ((x10_long)(b)));
+                    sa_result__4715 = aa__4703->run();
                     
                     //#line 52 "SuffixArrayTest.x10"
-                    sa_result__3888 = aa__3876->run();
+                    ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
+                      reinterpret_cast< ::x10::lang::Any*>(s__4714));
                     
                     //#line 53 "SuffixArrayTest.x10"
                     ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
-                      reinterpret_cast< ::x10::lang::Any*>(s__3887));
+                      reinterpret_cast< ::x10::lang::Any*>(sa_result__4715));
                     
                     //#line 54 "SuffixArrayTest.x10"
-                    ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
-                      reinterpret_cast< ::x10::lang::Any*>(sa_result__3888));
+                    #ifndef NO_ASSERTIONS
+                    if (::x10aux::x10__assertions_enabled)
+                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(sa_result__4715)->x10::lang::Rail< x10_long >::__apply(
+                                                                         n__4727),
+                                                                       ((x10_long)0ll))));
+                    #endif//NO_ASSERTIONS
                     
                     //#line 55 "SuffixArrayTest.x10"
                     #ifndef NO_ASSERTIONS
                     if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(sa_result__3888)->x10::lang::Rail< x10_long >::__apply(
-                                                                         n__3900),
+                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(sa_result__4715)->x10::lang::Rail< x10_long >::__apply(
+                                                                         ((n__4727) + (((x10_long)1ll)))),
                                                                        ((x10_long)0ll))));
                     #endif//NO_ASSERTIONS
                     
                     //#line 56 "SuffixArrayTest.x10"
                     #ifndef NO_ASSERTIONS
                     if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(sa_result__3888)->x10::lang::Rail< x10_long >::__apply(
-                                                                         ((n__3900) + (((x10_long)1ll)))),
+                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__apply(
+                                                                         n__4727),
                                                                        ((x10_long)0ll))));
                     #endif//NO_ASSERTIONS
                     
                     //#line 57 "SuffixArrayTest.x10"
                     #ifndef NO_ASSERTIONS
                     if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__apply(
-                                                                         n__3900),
-                                                                       ((x10_byte)0))));
+                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__apply(
+                                                                         ((n__4727) + (((x10_long)1ll)))),
+                                                                       ((x10_long)0ll))));
                     #endif//NO_ASSERTIONS
                     
                     //#line 58 "SuffixArrayTest.x10"
                     #ifndef NO_ASSERTIONS
                     if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert((::x10aux::struct_equals(::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__apply(
-                                                                         ((n__3900) + (((x10_long)1ll)))),
-                                                                       ((x10_byte)0))));
+                        ::x10aux::x10__assert(::bwt::SuffixArrayTest::isPerm(
+                                                sa_result__4715,
+                                                ((n__4727) - (((x10_long)1ll)))));
                     #endif//NO_ASSERTIONS
                     
                     //#line 59 "SuffixArrayTest.x10"
                     #ifndef NO_ASSERTIONS
                     if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert(::bwt::SuffixArrayTest::isPerm(
-                                                sa_result__3888,
-                                                ((n__3900) - (((x10_long)1ll)))));
+                        ::x10aux::x10__assert(::bwt::SuffixArrayTest::isSorted(
+                                                sa_result__4715,
+                                                s__4714, ((n__4727) - (((x10_long)1ll)))));
                     #endif//NO_ASSERTIONS
                     
-                    //#line 60 "SuffixArrayTest.x10"
-                    #ifndef NO_ASSERTIONS
-                    if (::x10aux::x10__assertions_enabled)
-                        ::x10aux::x10__assert(::bwt::SuffixArrayTest::isSorted(
-                                                sa_result__3888,
-                                                s__3887, ((n__3900) - (((x10_long)1ll)))));
-                    #endif//NO_ASSERTIONS
+                    //#line 61 "SuffixArrayTest.x10"
+                    x10_long k__4704 = ((x10_long)0ll);
                     
                     //#line 62 "SuffixArrayTest.x10"
-                    x10_long k__3877 = ((x10_long)0ll);
-                    
-                    //#line 63 "SuffixArrayTest.x10"
-                    while ((::x10aux::struct_equals(::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__apply(
-                                                      k__3877),
+                    while ((::x10aux::struct_equals(::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__apply(
+                                                      k__4704),
                                                     b))) {
                         
-                        //#line 64 "SuffixArrayTest.x10"
-                        ::x10aux::nullCheck(s__3887)->x10::lang::Rail< x10_byte >::__set(
-                          k__3877, ((x10_byte)1));
+                        //#line 63 "SuffixArrayTest.x10"
+                        ::x10aux::nullCheck(s__4714)->x10::lang::Rail< x10_long >::__set(
+                          k__4704, ((x10_long)1ll));
                         
-                        //#line 65 "SuffixArrayTest.x10"
-                        k__3877 = ((k__3877) + (((x10_long)1ll)));
+                        //#line 64 "SuffixArrayTest.x10"
+                        k__4704 = ((k__4704) + (((x10_long)1ll)));
                     }
                     
-                    //#line 67 "SuffixArrayTest.x10"
-                    ::x10::lang::Rail< x10_byte >* a__3873 =
-                      s__3887;
-                    x10_long i__3874 = k__3877;
-                    x10_byte r__3875 = ((x10_byte) ((::x10aux::nullCheck(a__3873)->x10::lang::Rail< x10_byte >::__apply(
-                                                       i__3874)) + (((x10_byte)1))));
-                    ::x10aux::nullCheck(a__3873)->x10::lang::Rail< x10_byte >::__set(
-                      i__3874, r__3875);
+                    //#line 66 "SuffixArrayTest.x10"
+                    ::x10::lang::Rail< x10_long >* a__4700 =
+                      s__4714;
+                    x10_long i__4701 = k__4704;
+                    x10_long r__4702 = ((::x10aux::nullCheck(a__4700)->x10::lang::Rail< x10_long >::__apply(
+                                           i__4701)) + (((x10_long)1ll)));
+                    ::x10aux::nullCheck(a__4700)->x10::lang::Rail< x10_long >::__set(
+                      i__4701, r__4702);
                 }
             }
             
