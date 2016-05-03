@@ -60,17 +60,24 @@ public class Bwt {
 */
   def this(string: Rail[Byte], k: Int, fast: Boolean) {
     val time = Timer.milliTime();
-    val sa:Rail[Long];
+    var sa:Rail[Long];
     if(fast) {
-      var str:Rail[Long] = new Rail[Long](string.size);
-      for(i in string){
+      /*var str:Rail[Long] = new Rail[Long](string.size);
+      for(i in 0..(string.size-1)){
         str(i) = string(i) as Long;
       }
-      //val SAC = new SuffixArray(str, k);
+      sa= new Rail[Long](string.size);
+      val SAC = new SuffixArray(str, k,sa);
+      SAC.run();*/
       val SAC = new SuffixArrayChar(string, k);
       sa = SAC.run();
     } else {
-      val SAC = new SuffixArraySimpleChar(string, k);
+      var str:Rail[Long] = new Rail[Long](string.size);
+      for(i in 0..(string.size-1)){
+        str(i) = string(i);
+      }
+      val SAC = new SuffixArraySimple(str, k);
+      //val SAC = new SuffixArraySimpleChar(string, k);
       sa = SAC.run();
     }
     val difftime = Timer.milliTime() - time;

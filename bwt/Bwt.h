@@ -15,7 +15,7 @@ namespace bwt {
 class SuffixArrayChar;
 } 
 namespace bwt { 
-class SuffixArraySimpleChar;
+class SuffixArraySimple;
 } 
 namespace x10 { namespace io { 
 class Printer;
@@ -49,10 +49,10 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__12754;
-    static ::x10::lang::String sl__12752;
-    static ::x10::lang::String sl__12751;
-    static ::x10::lang::String sl__12753;
+    static ::x10::lang::String sl__12764;
+    static ::x10::lang::String sl__12762;
+    static ::x10::lang::String sl__12761;
+    static ::x10::lang::String sl__12763;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
