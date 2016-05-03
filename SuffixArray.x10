@@ -188,7 +188,130 @@ public class SuffixArray {
 
     Console.ERR.println("Start Merge");
     val thread = 11;
-    if (SA0.size < thread){
+
+    if(true){
+      var p_lb:Long = 0; //n0
+      var t_lb:Long = n0 - n1;  //n02
+      var p_ub:Long = n0-1;
+      var t_ub:Long = n02-1;
+      val closure = (val t1: Long, val p1: long) => {
+        val i = getI(t1);
+        val j = SA0(p1);
+        if(SA12(t1) < n0 && leq(string(i), R(SA12(t1) + n0), string(j), R(j/3)) ||
+           SA12(t1) >= n0 && leq(string(i), string(i+1), R(SA12(t1) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
+          ){ // suffix from SA12 is smaller
+          return true;
+        } else {
+          return false;
+        }
+      };
+
+      val binary_search = (var t_lb:Long, var t_ub:Long, var p_ub:Long, var p_lb:Long):Rail[Long] => {
+      var t_mid:Long = (t_lb + t_ub)/2;
+      var p_mid:Long = (p_lb + p_ub)/2;
+        while(t_ub - t_lb > 1 || p_ub - p_lb > 1){
+         if(closure(t_mid, p_mid)){
+           t_lb = t_mid;
+           p_ub = p_mid;
+         } else {
+           t_ub = t_mid;
+           p_lb = p_mid;
+         }
+           t_mid = (t_lb + t_ub)/2;
+           p_mid = (p_lb + p_ub)/2;
+        }
+        val lb = new Rail[Long]([t_lb, p_lb]);
+        return lb;
+      };
+
+      val lb = binary_search(t_lb, t_ub, p_ub, p_lb);
+      val lbl:Rail[Long];
+      val lbr:Rail[Long];
+      val lbll:Rail[Long];
+      val lblr:Rail[Long];
+      val lbrl:Rail[Long];
+      val lbrr:Rail[Long];
+      finish {
+        async { lbl = binary_search(t_lb, lb(0), lb(1), p_lb);}
+        lbr = binary_search(lb(0),t_ub,p_ub, lb(1));
+      }
+      finish {
+        async { lbll = binary_search(t_lb, lbl(0), lbl(1), p_lb);}
+        async { lbrr = binary_search(lbr(0),t_ub,p_ub, lbr(1));}
+        async { lblr = binary_search(lbl(0), lb(0), lb(1), lbl(1));}
+        lbrl = binary_search(lb(0), lbr(0), lbr(1), lb(1));
+      }
+
+      val split = 7;
+      val midl = (n%3==1) ? lbl(0) + lbl(1)-1 :lbl(0) + lbl(1);
+      val mid = (n%3==1) ? lb(0) + lb(1)-1 :lb(0) + lb(1);
+      val midr = (n%3==1) ? lbr(0) + lbr(1)-1 :lbr(0) + lbr(1);
+      val midll = (n%3==1) ? lbll(0) + lbll(1)-1 :lbll(0) + lbll(1);
+      val midrl = (n%3==1) ? lbrl(0) + lbrl(1)-1 :lbrl(0) + lbrl(1);
+      val midlr = (n%3==1) ? lblr(0) + lblr(1)-1 :lblr(0) + lblr(1);
+      val midrr = (n%3==1) ? lbrr(0) + lbrr(1)-1 :lbrr(0) + lbrr(1);
+
+      val krail = new Rail[Long]([-1, midll-1, midl-1, midlr-1, mid-1, midrl-1, midr-1, midrr-1]);
+      val nrail = new Rail[Long]([midl+1, midl+1, midlr+1, mid + 1, midrl+1, midr+1, midrr+1, n]);
+      val prail = new Rail[Long]([0, lbll(1), lbl(1), lblr(1), lb(1), lbrl(1), lbr(1), lbrr(1)]);
+      val trail = new Rail[Long]([n0-n1, lbll(0), lbl(0), lblr(0), lb(0), lbrl(0), lbr(0) ,lbrr(0)]);
+      /*val krail = new Rail[Long]([-1, midl-1, mid-1, midr-1]);
+      val nrail = new Rail[Long]([midl+1,mid + 1,midr+1, n]);
+      val prail = new Rail[Long]([0, lbl(1),lb(1), lbr(1)]);
+      val trail = new Rail[Long]([n0-n1, lbl(0),lb(0),lbr(0)]);
+      *///val prail = new Rail[Long]([0, lb(1)]);
+      //val trail = new Rail[Long]([n0-n1, lb(0)]);
+      
+      //val krail = new Rail[Long]([-1, mid-1]);
+      //val nrail = new Rail[Long]([mid + 1, n]);
+      /*   Console.ERR.println(krail);
+         Console.ERR.println(nrail);
+         Console.ERR.println(prail);
+         Console.ERR.println(trail);*/
+      //Console.ERR.println("Start Async");
+
+      finish for (l in 0..split) async {
+        var k:Long = krail(l);
+        var t:Long = trail(l);
+        var p:Long = prail(l); 
+    while(k < nrail(l)) {
+      k += 1;
+      val i = getI(t);
+      val j = SA0(p);
+      //// different compares for mod 1 and mod 2 suffixes
+      if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
+         SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
+        ){ // suffix from SA12 is smaller
+        if(!(l != 0 && k <= krail(l)+1)){
+        SA(k) = i;
+        }
+        t += 1;
+        if(t == n02) {
+          k += 1;
+          for(q in 0..(n0-p-1)){
+            SA(k) = SA0(p);
+            p += 1;
+            k += 1;
+          }
+        }
+      } else { // suffix from SA0 is smaller
+        if(!(l != 0 && k <= krail(l)+1)){
+        SA(k) = j;
+        }
+        p += 1;
+        if(p == n0) {
+          k += 1;
+          for(q in 0..(n02-t-1)){
+            SA(k) = getI(t);
+            t += 1;
+            k += 1;
+        }
+      }
+     }
+   }
+   }
+   }
+    else if (SA0.size < thread){
     var p:Long = 0; 
     var t:Long = n0 - n1;
     var k:Long = -1;

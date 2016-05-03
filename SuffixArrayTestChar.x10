@@ -36,10 +36,10 @@ public class SuffixArrayTestChar {
       Console.OUT.println(bwt(i));
     }*/
 
-    val nmax:Long = 20;
+    val nmax:Long = 10;
     val b:Byte = 4y;
     val bl:Long = b as Long;
-    for(n in nmax..nmax){
+    for(n in 2..nmax){
       val N = (Math.pow(bl, n)+0.5) as Int;
       var s:Rail[Byte] = new Rail[Byte](n+3);
       var sa_result:Rail[Long] = new Rail[Long](n+3);

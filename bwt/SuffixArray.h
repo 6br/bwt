@@ -44,6 +44,9 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace x10 { namespace lang { 
+class Unsafe;
+} } 
 namespace x10 { namespace compiler { 
 class Synthetic;
 } } 
@@ -55,7 +58,7 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__12783;
+    static ::x10::lang::String sl__18644;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
