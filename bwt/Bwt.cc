@@ -46,16 +46,16 @@ void bwt::Bwt::_constructor(::x10::lang::Rail< x10_byte >* string, x10_int k,
         ::x10::lang::Rail< x10_long >* str = ::x10::lang::Rail< x10_long >::_make((x10_long)(::x10aux::nullCheck(string)->FMGL(size)));
         
         //#line 76 "Bwt.x10"
-        x10_long i__11983max__14909 = (((x10_long)(::x10aux::nullCheck(string)->FMGL(size))) - (((x10_long)1ll)));
+        x10_long i__10404max__12925 = (((x10_long)(::x10aux::nullCheck(string)->FMGL(size))) - (((x10_long)1ll)));
         {
-            x10_long i__14910;
-            for (i__14910 = ((x10_long)0ll); ((i__14910) <= (i__11983max__14909));
-                 i__14910 = ((i__14910) + (((x10_long)1ll)))) {
+            x10_long i__12926;
+            for (i__12926 = ((x10_long)0ll); ((i__12926) <= (i__10404max__12925));
+                 i__12926 = ((i__12926) + (((x10_long)1ll)))) {
                 
                 //#line 77 "Bwt.x10"
                 ::x10aux::nullCheck(str)->x10::lang::Rail< x10_long >::__set(
-                  i__14910, ((x10_long)(::x10aux::nullCheck(string)->x10::lang::Rail< x10_byte >::__apply(
-                                          i__14910))));
+                  i__12926, ((x10_long)(::x10aux::nullCheck(string)->x10::lang::Rail< x10_byte >::__apply(
+                                          i__12926))));
             }
         }
         
@@ -72,7 +72,7 @@ void bwt::Bwt::_constructor(::x10::lang::Rail< x10_byte >* string, x10_int k,
     x10_long difftime = ((::x10::lang::RuntimeNatives::currentTimeMillis()) - (time));
     
     //#line 84 "Bwt.x10"
-    ::x10::io::Console::FMGL(ERR__get)()->printf((&::bwt::Bwt_Strings::sl__18508),
+    ::x10::io::Console::FMGL(ERR__get)()->printf((&::bwt::Bwt_Strings::sl__15847),
                                                  ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(difftime));
     
     //#line 85 "Bwt.x10"
@@ -85,15 +85,15 @@ void bwt::Bwt::_constructor(::x10::lang::Rail< x10_byte >* string, x10_int k,
     
     //#line 87 "Bwt.x10"
     {
-        x10_long i__14913;
-        for (i__14913 = ((x10_long)0ll); ((i__14913) <= (j));
-             i__14913 = ((i__14913) + (((x10_long)1ll))))
+        x10_long i__12929;
+        for (i__12929 = ((x10_long)0ll); ((i__12929) <= (j));
+             i__12929 = ((i__12929) + (((x10_long)1ll))))
         {
             
             //#line 88 "Bwt.x10"
             ::x10::io::Console::FMGL(OUT__get)()->x10::io::Printer::println(
               ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(::x10aux::nullCheck(sa)->x10::lang::Rail< x10_long >::__apply(
-                                                                   i__14913)));
+                                                                   i__12929)));
         }
     }
     
@@ -123,44 +123,44 @@ void bwt::Bwt::_constructor(::x10::lang::Rail< x10_byte >* string, x10_int k,
     x10_int length = ::x10aux::nullCheck(input)->x10::lang::String::length();
     
     //#line 97 "Bwt.x10"
-    x10_long i__12015max__14917 = ((((x10_long)(length))) - (((x10_long)1ll)));
+    x10_long i__10436max__12933 = ((((x10_long)(length))) - (((x10_long)1ll)));
     {
-        x10_long i__14918;
-        for (i__14918 = ((x10_long)0ll); ((i__14918) <= (i__12015max__14917));
-             i__14918 = ((i__14918) + (((x10_long)1ll))))
+        x10_long i__12934;
+        for (i__12934 = ((x10_long)0ll); ((i__12934) <= (i__10436max__12933));
+             i__12934 = ((i__12934) + (((x10_long)1ll))))
         {
             
             //#line 98 "Bwt.x10"
-            x10_byte c__14915 = ::x10aux::nullCheck(inputBytes)->x10::lang::Rail< x10_byte >::__apply(
-                                  i__14918);
+            x10_byte c__12931 = ::x10aux::nullCheck(inputBytes)->x10::lang::Rail< x10_byte >::__apply(
+                                  i__12934);
             
             //#line 99 "Bwt.x10"
-            x10_long base__14916;
+            x10_long base__12932;
             
             //#line 100 "Bwt.x10"
             if (isDigit) {
                 
                 //#line 101 "Bwt.x10"
-                base__14916 = ((((x10_long)(c__14915))) - (((x10_long)47ll)));
+                base__12932 = ((((x10_long)(c__12931))) - (((x10_long)47ll)));
             } else {
                 
                 //#line 104 "Bwt.x10"
-                base__14916 = ((((((x10_long)(((x10_byte) ((((x10_byte) ((c__14915) >> (0x7 & (x10_int)(((x10_long)2ll)))))) ^ (((x10_byte) ((c__14915) >> (0x7 & (x10_int)(((x10_long)1ll))))))))))) & (((x10_long)19ll)))) % ::x10aux::zeroCheck(((x10_long)5ll)));
+                base__12932 = ((((((x10_long)(((x10_byte) ((((x10_byte) ((c__12931) >> (0x7 & (x10_int)(((x10_long)2ll)))))) ^ (((x10_byte) ((c__12931) >> (0x7 & (x10_int)(((x10_long)1ll))))))))))) & (((x10_long)19ll)))) % ::x10aux::zeroCheck(((x10_long)5ll)));
             }
             
             //#line 106 "Bwt.x10"
-            if ((::x10aux::struct_equals(((i__14918) % ::x10aux::zeroCheck(((x10_long)1048576ll))),
+            if ((::x10aux::struct_equals(((i__12934) % ::x10aux::zeroCheck(((x10_long)1048576ll))),
                                          ((x10_long)0ll))))
             {
                 
                 //#line 107 "Bwt.x10"
                 ::x10::io::Console::FMGL(ERR__get)()->printf(
-                  (&::bwt::Bwt_Strings::sl__18509), ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(((i__14918) / ::x10aux::zeroCheck(((x10_long)1048576ll)))));
+                  (&::bwt::Bwt_Strings::sl__15848), ::x10aux::class_cast_unchecked< ::x10::lang::Any*>(((i__12934) / ::x10aux::zeroCheck(((x10_long)1048576ll)))));
             }
             
             //#line 109 "Bwt.x10"
             reinterpret_cast< ::x10::util::RailBuilder<x10_long>*>(strBuilder->add(
-                                                                     base__14916));
+                                                                     base__12932));
         }
     }
     
@@ -200,7 +200,7 @@ void bwt::Bwt::main(::x10::lang::Rail< ::x10::lang::String* >* args) {
     
     //#line 130 "Bwt.x10"
     ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
-      reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__18510)));
+      reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__15849)));
     
     //#line 131 "Bwt.x10"
     ::x10::lang::Rail< x10_byte >* e = ::x10::lang::Rail< x10_byte >::_make(length);
@@ -219,7 +219,7 @@ void bwt::Bwt::main(::x10::lang::Rail< ::x10::lang::String* >* args) {
     
     //#line 135 "Bwt.x10"
     ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
-      reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__18511)));
+      reinterpret_cast< ::x10::lang::Any*>((&::bwt::Bwt_Strings::sl__15850)));
     
     //#line 136 "Bwt.x10"
     input_fgets_fixed_char((file)->c_str(), (e)->raw, height);;
@@ -263,10 +263,10 @@ void bwt::Bwt::_initRTT() {
     rtt.initStageTwo("bwt.Bwt",::x10aux::RuntimeType::class_kind, 0, parents, 0, NULL, NULL);
 }
 
-::x10::lang::String bwt::Bwt_Strings::sl__18511("End Malloc");
-::x10::lang::String bwt::Bwt_Strings::sl__18509("%ld MB loaded.\n");
-::x10::lang::String bwt::Bwt_Strings::sl__18508("Elapsed time: %ld millisec.\n");
-::x10::lang::String bwt::Bwt_Strings::sl__18510("Start Malloc");
+::x10::lang::String bwt::Bwt_Strings::sl__15850("End Malloc");
+::x10::lang::String bwt::Bwt_Strings::sl__15848("%ld MB loaded.\n");
+::x10::lang::String bwt::Bwt_Strings::sl__15847("Elapsed time: %ld millisec.\n");
+::x10::lang::String bwt::Bwt_Strings::sl__15849("Start Malloc");
 
 /* END of Bwt */
 /*************************************************/
