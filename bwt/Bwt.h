@@ -49,20 +49,20 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__15850;
-    static ::x10::lang::String sl__15848;
-    static ::x10::lang::String sl__15847;
-    static ::x10::lang::String sl__15849;
+    static ::x10::lang::String sl__15962;
+    static ::x10::lang::String sl__15960;
+    static ::x10::lang::String sl__15959;
+    static ::x10::lang::String sl__15961;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
-    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k, x10_boolean fast);
+    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k, x10_byte fast);
     
     static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k,
-                             x10_boolean fast);
+                             x10_byte fast);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
                                                     x10_boolean isDigit);

@@ -48,7 +48,7 @@ public class SuffixArrayTestChar {
       s(n+1) = 0y;
       s(n+2) = 0y;
       for(i in 0..(N-1)){
-        val aa = new SuffixArrayChar(s, b);
+        val aa = new SuffixArrayChar(s, b, 11y);
         sa_result = aa.run();
         Console.OUT.println(s);
         Console.OUT.println(sa_result);

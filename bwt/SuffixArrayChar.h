@@ -14,6 +14,9 @@
 #define X10_LANG_LONG_H_NODEPS
 #include <x10/lang/Long.h>
 #undef X10_LANG_LONG_H_NODEPS
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
 namespace x10 { namespace lang { 
 template<class TPMGL(T)> class Rail;
 } } 
@@ -64,7 +67,7 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__16340;
+    static ::x10::lang::String sl__16453;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {
@@ -97,10 +100,13 @@ class SuffixArrayChar : public ::x10::lang::X10Class   {
     
     x10_long FMGL(name);
     
-    void _constructor(::x10::lang::Rail< x10_byte >* input, x10_long charsize);
+    x10_byte FMGL(num_threads);
+    
+    void _constructor(::x10::lang::Rail< x10_byte >* input, x10_long charsize,
+                      x10_byte threads);
     
     static ::bwt::SuffixArrayChar* _make(::x10::lang::Rail< x10_byte >* input,
-                                         x10_long charsize);
+                                         x10_long charsize, x10_byte threads);
     
     virtual void sortPairs(::x10::lang::Rail< x10_byte >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,

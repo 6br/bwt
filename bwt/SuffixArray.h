@@ -11,6 +11,12 @@
 #define X10_LANG_LONG_H_NODEPS
 #include <x10/lang/Long.h>
 #undef X10_LANG_LONG_H_NODEPS
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
 namespace x10 { namespace lang { 
 template<class TPMGL(T)> class Rail;
 } } 
@@ -58,7 +64,7 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__15983;
+    static ::x10::lang::String sl__16096;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -89,11 +95,14 @@ class SuffixArray : public ::x10::lang::X10Class   {
     
     x10_long FMGL(name);
     
+    x10_byte FMGL(num_threads);
+    
     void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize,
-                      ::x10::lang::Rail< x10_long >* sa);
+                      ::x10::lang::Rail< x10_long >* sa, x10_byte threads);
     
     static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
-                                     x10_long charsize, ::x10::lang::Rail< x10_long >* sa);
+                                     x10_long charsize, ::x10::lang::Rail< x10_long >* sa,
+                                     x10_byte threads);
     
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
@@ -104,7 +113,8 @@ class SuffixArray : public ::x10::lang::X10Class   {
     virtual void sortPairsThreeFast(::x10::lang::Rail< x10_long >* keys,
                                     ::x10::lang::Rail< x10_long >* values,
                                     x10_ulong num_elems, x10_int num_threads);
-    virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
+    virtual void radixPass(::x10::lang::Rail< x10_long >* a,
+                           ::x10::lang::Rail< x10_long >* b,
                            x10_byte rOffs, x10_long nt);
     virtual void run();
     virtual ::x10::lang::Rail< x10_long >* bwtable();

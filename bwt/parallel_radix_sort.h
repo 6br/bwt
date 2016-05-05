@@ -631,15 +631,9 @@ static void SortPairsLongThree(long *keys, long *vals, size_t num_elems, int num
   }
   PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   for(long i=0; i<num_elems; i++){
-    sortkeys[i] = keys[vals[i]];// << 42) + (keys[vals[i]+1] << 21) + keys[vals[i]+2];
+    sortkeys[i] = keys[vals[i]];
   }
   PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
-  /*for(int offset = 2; offset >=0; offset--){
-    for(long i=0; i<num_elems; i++){
-      sortkeys[i] = keys[vals[i]+offset];
-    }
-    PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
-  }*/
   free(sortkeys);
 }
 
@@ -664,13 +658,11 @@ static void SortPairsByteThree(signed char *keys, long *vals, size_t num_elems, 
 }
 
 static void SortPairsByte(signed char *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
-  //PairSort<signed char, long>::InitAndSort(keys+offset, vals, num_elems, num_threads);
   signed char *sortkeys;
   sortkeys = (signed char *) malloc(sizeof(signed char)*num_elems);
   for(long i=0; i<num_elems; i++){
     sortkeys[i] = keys[vals[i]+offset];
   }
-  //memcpy(sortkeys, keys, sizeof(long)*num_elems);
   PairSort<signed char, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
