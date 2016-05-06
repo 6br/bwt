@@ -10,12 +10,12 @@ template<class TPMGL(T)> class Rail;
 namespace x10 { namespace lang { 
 class String;
 } } 
+namespace x10 { namespace lang { 
+class Math;
+} } 
 namespace bwt { 
 class SuffixArray;
 } 
-namespace x10 { namespace lang { 
-class Unsafe;
-} } 
 namespace x10 { namespace io { 
 class Printer;
 } } 
@@ -24,9 +24,6 @@ class Console;
 } } 
 namespace x10 { namespace lang { 
 class Any;
-} } 
-namespace x10 { namespace lang { 
-class Math;
 } } 
 namespace x10 { namespace compiler { 
 class Synthetic;

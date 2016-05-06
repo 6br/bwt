@@ -51,6 +51,13 @@ namespace x10 { namespace lang {
 class Any;
 } } 
 namespace x10 { namespace lang { 
+template<class TPMGL(Z1), class TPMGL(Z2), class TPMGL(U)> class Fun_0_2;
+} } 
+namespace x10 { namespace lang { 
+template<class TPMGL(Z1), class TPMGL(Z2), class TPMGL(Z3), class TPMGL(Z4), class TPMGL(U)>
+class Fun_0_4;
+} } 
+namespace x10 { namespace lang { 
 class Unsafe;
 } } 
 namespace x10 { namespace compiler { 
@@ -64,7 +71,7 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__16096;
+    static ::x10::lang::String sl__5792;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -104,7 +111,8 @@ class SuffixArray : public ::x10::lang::X10Class   {
                                      x10_long charsize, ::x10::lang::Rail< x10_long >* sa,
                                      x10_byte threads);
     
-    virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
+    virtual void sortPairs(::x10::lang::Rail< x10_long >* keys,
+                           ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
                            x10_byte offset);
     virtual void sortPairsThree(::x10::lang::Rail< x10_long >* keys,
