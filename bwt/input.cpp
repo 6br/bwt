@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <iterator>
+#include <cassert>
 
 #include <stdio.h>
 #include "input.h"
@@ -80,7 +81,7 @@ void input_fgets_char(const char* filename, int8_t* data)
                 data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
             }
             if (j % (1024 * 1024 * 200) == 0){
-                std::cerr << j / (1024*1024) << "MB read." << std::endl;
+                std::cerr << j / (1024 * 1024) << "MB read." << std::endl;
             }
         }
     }
@@ -107,6 +108,7 @@ void input_fgets_fixed_char(const char* filename, int8_t* data, int64_t length)
             for (uint_fast16_t i = 0; i < N; i++, j++){
                 if (buf[i] == '\n' || buf[i] == '\0' || buf[i] == '$' ){
                     data[j] = 0;
+                    j++;
                     break;
                 } else {
                     data[j] = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
@@ -119,6 +121,65 @@ void input_fgets_fixed_char(const char* filename, int8_t* data, int64_t length)
     }
 
     fclose(fp);
+
+    std::cerr << "File has read." << std::endl;
+    return;
+}
+
+//5^27 = 2^64i 
+void input_fgets_fixed_long(const char* filename, int64_t* data, int64_t length)
+{
+    FILE *fp;
+    char buf[N] = {'\0'};
+    int64_t j = 0;
+    int8_t mer = (length <= 100)? 4 : 9; //TODO nEED FIX
+
+    if ((fp = fopen(filename, "r")) == NULL) {
+        fprintf(stderr, "Fail to open %s\n", filename);
+        return;
+    }
+
+    for (int64_t k = 0; k < length; k++) {
+        if(fgets(buf, N, fp) != NULL) {
+            for (uint_fast16_t i = 0; i < N; i++, j++){
+                int8_t number;
+                data[j] = 0;
+                if (buf[i] == '\n' || buf[i] == '\0' || buf[i] == '$' ){
+                    number = 0;
+                    for (int64_t l = j; (l > j - mer && l >= 0) ; l--){
+                      //std::cerr << l << std::endl;
+                      data[l] *= 5;
+                      data[l] += number;
+                    }
+                    j++;
+                    break;
+                } else {
+                    number = (((buf[i] >> 2) ^ (buf[i] >> 1)) & 3) + 1;
+                    assert(number <= 4);
+                }
+                for (int64_t l = j; (l > j - mer && l >= 0) ; l--){
+                  //std::cerr << l << std::endl;
+                  data[l] *= 5;
+                  data[l] += number;
+                }
+                if (j % (1024 * 1024 * 100) == 0){
+                    std::cerr << j / (1024*1024) << "MB read." << std::endl;
+                }
+            }
+        }
+    }
+    int64_t k = (j - mer > 0)? j - mer : 0;
+    for (; k <= j; k++){
+        for (int64_t l = j; (l > k && l >= 0); l--){
+            data[l] *= 5;
+        }
+    }
+
+    fclose(fp);
+    /*
+    for(int i=0; i<length*101;i++){
+        std::cerr << data[i] << std::endl;
+    }*/
 
     std::cerr << "File has read." << std::endl;
     return;
@@ -155,3 +216,4 @@ long int* input_fgets_malloc(const char* filename, long int datasize)
     std::cerr << "File has read." << std::endl;
     return data;
 }
+

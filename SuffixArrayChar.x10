@@ -81,7 +81,6 @@ public class SuffixArrayChar {
 
   def constructSample() {
     finish {
-      async SA0 = new Rail[Long](n0);
       async R = new Rail[Long](n02+3);
       SA12 = new Rail[Long](n02+3);
       SA12(n02) = 0;
@@ -100,7 +99,6 @@ public class SuffixArrayChar {
   def constructSampleR() {
     finish {
       async c = new Rail[Long](k+1);
-      async SA = new Rail[Long](n+3);
       async SA0 = new Rail[Long](n0);
       async {R = new Rail[Long](n02+3);
       R(n02) = 0;
@@ -125,6 +123,7 @@ public class SuffixArrayChar {
   def sortSample() {
     val size = n02 as ULong;
     sortPairsThree(string, SA12, size, num_threads);
+    Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
 
     //radixPass(R, SA12, 2y, n02);
     //radixPass(SA12, R, 1y, n02);
@@ -164,12 +163,17 @@ public class SuffixArrayChar {
   def sortNonSample() {
     if (name < n02) {
       SA12 = new Rail[Long](R.size + 3);
-      val bwa = new SuffixArray(R, name, SA12, num_threads);
-      bwa.run();
+      var sa_iter:(sa12:x10.lang.Rail[x10.lang.Long])=>void = (var sa12:Rail[Long]) => { 
+        val bwa = new SuffixArray(R, name, sa12, num_threads);
+        bwa.run();
+      };
+      sa_iter(SA12);
+      sa_iter = (var sa12:Rail[Long]) => {}; 
       //Console.ERR.println("Ended BWA run");
       finish{
         async {for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
         async SA = new Rail[Long](n+3);
+        SA0 = new Rail[Long](n0);
         var m:Long = 0; 
         for(i in 0..(n02-1)) {
           if(SA12(i) < n0) {
@@ -186,6 +190,7 @@ public class SuffixArrayChar {
       finish for(i in 0..(n02-1)) async { SA12(R(i) - 1) = i; }
       finish {
         async SA = new Rail[Long](n+3);
+        SA0 = new Rail[Long](n0);
       var m:Long = 0; 
       for(i in 0..(n02-1)) {
         if(SA12(i) < n0) {
@@ -245,14 +250,16 @@ public class SuffixArrayChar {
       val lbrl:Rail[Long];
       val lbrr:Rail[Long];
       finish {
-        async { lbl = binary_search(t_lb, lb(0), lb(1), p_lb);}
+        async { lbl = binary_search(t_lb, lb(0), lb(1), p_lb);
+            finish {
+                async { lbll = binary_search(t_lb, lbl(0), lbl(1), p_lb);}
+                lblr = binary_search(lbl(0), lb(0), lb(1), lbl(1));}
+            }
         lbr = binary_search(lb(0),t_ub,p_ub, lb(1));
-      }
-      finish {
-        async { lbll = binary_search(t_lb, lbl(0), lbl(1), p_lb);}
-        async { lbrr = binary_search(lbr(0),t_ub,p_ub, lbr(1));}
-        async { lblr = binary_search(lbl(0), lb(0), lb(1), lbl(1));}
-        lbrl = binary_search(lb(0), lbr(0), lbr(1), lb(1));
+        finish {
+            async { lbrr = binary_search(lbr(0),t_ub,p_ub, lbr(1));}
+            lbrl = binary_search(lb(0), lbr(0), lbr(1), lb(1));
+        }
       }
 
       val split = 7;

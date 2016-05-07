@@ -26,6 +26,9 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace bwt { 
+class SuffixArray;
+} 
 namespace x10 { namespace lang { 
 class String;
 } } 
@@ -49,19 +52,24 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__15962;
-    static ::x10::lang::String sl__15960;
-    static ::x10::lang::String sl__15959;
-    static ::x10::lang::String sl__15961;
+    static ::x10::lang::String sl__21303;
+    static ::x10::lang::String sl__21301;
+    static ::x10::lang::String sl__21300;
+    static ::x10::lang::String sl__21302;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
-    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k, x10_byte fast);
+    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_long k, x10_byte fast);
     
-    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k,
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_long k,
+                             x10_byte fast);
+    
+    void _constructor(::x10::lang::Rail< x10_long >* str, x10_long k, x10_byte fast);
+    
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_long >* str, x10_long k,
                              x10_byte fast);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,

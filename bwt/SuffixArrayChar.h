@@ -41,9 +41,6 @@ class AsyncClosure;
 namespace x10 { namespace lang { 
 class CheckedThrowable;
 } } 
-namespace bwt { 
-class SuffixArray;
-} 
 namespace x10 { namespace io { 
 class Printer;
 } } 
@@ -53,6 +50,12 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace x10 { namespace lang { 
+template<class TPMGL(Z1)> class VoidFun_0_1;
+} } 
+namespace bwt { 
+class SuffixArray;
+} 
 namespace x10 { namespace lang { 
 class Unsafe;
 } } 
@@ -67,7 +70,8 @@ namespace bwt {
 
 class SuffixArrayChar_Strings {
   public:
-    static ::x10::lang::String sl__16453;
+    static ::x10::lang::String sl__21798;
+    static ::x10::lang::String sl__21799;
 };
 
 class SuffixArrayChar : public ::x10::lang::X10Class   {

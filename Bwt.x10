@@ -13,7 +13,7 @@ import x10.compiler.NativeCPPCompilationUnit;
 @NativeCPPCompilationUnit("input.cpp")
 
 public class Bwt {
-  def this(string: Rail[Byte], k: Int, fast: Byte) {
+  def this(string: Rail[Byte], k: Long, fast: Byte) {
     val time = Timer.milliTime();
     var sa:Rail[Long];
     if(fast > 0) {
@@ -42,6 +42,23 @@ public class Bwt {
     for (i in 0..j){
       Console.OUT.println(sa(i));
     } 
+  }
+
+  def this(str: Rail[Long], k:Long, fast:Byte) {
+    val time = Timer.milliTime();
+    var sa:Rail[Long];
+    Console.OUT.println(str.size);
+    sa = new Rail[Long](str.size);
+    Console.OUT.println(str);
+    val SAC = new SuffixArray(str, k, sa, fast);
+    SAC.run();
+    val difftime = Timer.milliTime() - time;
+    Console.ERR.printf("Elapsed time: %ld millisec.\n",difftime);
+    var j:Long = sa.size - 1;
+    if (j > 15) {j = 15;}
+    for (i in 0..j){
+      Console.OUT.println(sa(i));
+    }
   }
 
   static def strToRail(input: String, isDigit: Boolean):Rail[Long]{
@@ -76,21 +93,33 @@ public class Bwt {
   @Native("c++", "input_fgets_fixed_char((#1)->c_str(), (#2)->raw, #3);")
   native static def fileioCPP(filename: String, data: Rail[Byte], length: Long): void;
 
+  @Native("c++", "input_fgets_fixed_long((#1)->c_str(), (#2)->raw, #3);")
+  native static def fileioCPP(filename: String, data: Rail[Long], length: Long): void;
+
   public static def main(args:Rail[String]):void {
-    val N:Int = Int.parse(args(0));
+    var N:Long = Long.parse(args(0));
     val height:Long = Long.parse(args(1));
     val thread:Byte = Byte.parse(args(2));
-    val length:Long = (height < 100) ? height : height * 101 + 3L;
+    val length:Long = (height < 20) ? height : height * 101 + 3L;
     var file:String = args(3); 
 
     Console.ERR.println("Start Malloc");
     var e:Rail[Byte] = new Rail[Byte](length);
+    //var e:Rail[Long] = new Rail[Long](length);
+    //N = (Math.pow(5, 9)) as Long;
     e(length-1) = 0y;
     e(length-2) = 0y;
     e(length-3) = 0y;
     Console.ERR.println("End Malloc");
 
     fileioCPP(file, e, height);
+    /*
+    for (i in 0..(e.size-1)){
+      Console.OUT.println(e(i));
+    }
+    */ 
+    
+
     val bwa = new Bwt(e, N, thread);
   }
 }

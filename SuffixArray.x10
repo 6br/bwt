@@ -41,6 +41,9 @@ public class SuffixArray {
   @Native("c++", "parallel_radix_sort::SortPairsLongThree((#1)->raw, (#2)->raw, #3, #4)")
   native def sortPairsThree(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
 
+  @Native("c++", "parallel_radix_sort::SortPairsLongThreeNormal((#1)->raw, (#2)->raw, #3, #4)")
+  native def sortPairsThreeNormal(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
+
   @Native("c++", "parallel_radix_sort::SortPairsLongThreeFast((#1)->raw, (#2)->raw, #3, #4)")
   native def sortPairsThreeFast(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
 
@@ -87,8 +90,6 @@ public class SuffixArray {
 
   def constructSample() {
     finish {
-      async R = new Rail[Long](n02+3);
-      async SA0 = new Rail[Long](n0);
       SA12 = new Rail[Long](n02+3);
       SA12(n02) = 0;
       SA12(n02+1) = 0;
@@ -105,12 +106,14 @@ public class SuffixArray {
 
   def sortSample() {
     val size = n02 as ULong;
-    if(k < 2097152){
+    if (k < 2097152) {
       sortPairsThreeFast(string, SA12, size, num_threads);
-    }else{
+    } else if (k < 2147483647) {
       sortPairsThree(string, SA12, size, num_threads);
+    } else {
+      sortPairsThreeNormal(string, SA12, size, num_threads);
     }
-    //Console.ERR.printf("Ended 3rd Radix Sort %ld, max: %ld\n", n02, k);
+    Console.ERR.printf("Ended 3rd Radix Sort %ld, max: %ld\n", n02, k);
     /*
     sortPairs(string, SA12, size, num_threads, 2y);
     //Console.ERR.println("Ended 1st Radix Sort");
@@ -127,6 +130,7 @@ public class SuffixArray {
     radixPass(R, SA12, 0y, n02);
     //Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
     */
+    R = new Rail[Long](n02+3);
     name = 0;
     var c0:Long = -1;
     var c1:Long = -1;
@@ -151,11 +155,17 @@ public class SuffixArray {
   def sortNonSample() {
     if (name < n02) {
       SA12 = new Rail[Long](R.size + 3);
-      val bwa = new SuffixArray(R, name, SA12, num_threads);
-      bwa.run();
+      Console.ERR.printf("name: %ld, n02: %ld\n", name, n02);
+      var sa_iter:(sa12:x10.lang.Rail[x10.lang.Long])=>void = (var sa12:Rail[Long]) => { 
+        val bwa = new SuffixArray(R, name, sa12, num_threads);
+        bwa.run();
+      };
+      sa_iter(SA12);
+      sa_iter = (var sa12:Rail[Long]) => {}; 
       //Console.ERR.println("End BWA run");
       finish {
         async { for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
+        SA0 = new Rail[Long](n0);
         var m:Long = 0; 
         for(i in 0..(n02-1)) {
           if(SA12(i) < n0) {
@@ -171,6 +181,7 @@ public class SuffixArray {
       for(i in 0..(n02-1)) { SA12(R(i) - 1) = i; }
       //Console.ERR.println("BWA run End");
       finish {
+      SA0 = new Rail[Long](n0);
       var m:Long = 0; 
       for(i in 0..(n02-1)) {
         if(SA12(i) < n0) {
@@ -205,8 +216,8 @@ public class SuffixArray {
       };
 
       val binary_search = (var t_lb:Long, var t_ub:Long, var p_ub:Long, var p_lb:Long):Rail[Long] => {
-      var t_mid:Long = (t_lb + t_ub)/2;
-      var p_mid:Long = (p_lb + p_ub)/2;
+        var t_mid:Long = (t_lb + t_ub)/2;
+        var p_mid:Long = (p_lb + p_ub)/2;
         while(t_ub - t_lb > 1 || p_ub - p_lb > 1){
          if(closure(t_mid, p_mid)){
            t_lb = t_mid;
@@ -230,14 +241,16 @@ public class SuffixArray {
       val lbrl:Rail[Long];
       val lbrr:Rail[Long];
       finish {
-        async { lbl = binary_search(t_lb, lb(0), lb(1), p_lb);}
+        async { lbl = binary_search(t_lb, lb(0), lb(1), p_lb);
+            finish {
+                async { lbll = binary_search(t_lb, lbl(0), lbl(1), p_lb);}
+                lblr = binary_search(lbl(0), lb(0), lb(1), lbl(1));}
+            }
         lbr = binary_search(lb(0),t_ub,p_ub, lb(1));
-      }
-      finish {
-        async { lbll = binary_search(t_lb, lbl(0), lbl(1), p_lb);}
-        async { lbrr = binary_search(lbr(0),t_ub,p_ub, lbr(1));}
-        async { lblr = binary_search(lbl(0), lb(0), lb(1), lbl(1));}
-        lbrl = binary_search(lb(0), lbr(0), lbr(1), lb(1));
+        finish {
+            async { lbrr = binary_search(lbr(0),t_ub,p_ub, lbr(1));}
+            lbrl = binary_search(lb(0), lbr(0), lbr(1), lb(1));
+        }
       }
 
       val split = 7;

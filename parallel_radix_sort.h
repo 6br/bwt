@@ -613,57 +613,69 @@ void SortPairs(KeyType *keys, ValueType *vals, size_t num_elems, int num_threads
   PairSort<KeyType, ValueType>::InitAndSort(keys, vals, num_elems, num_threads);
 }
 
-static void SortPairsLong(long *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
-  long *sortkeys;
-  sortkeys = (long *) malloc(sizeof(long)*num_elems);
-  for(long i=0; i<num_elems; i++){
+static void SortPairsLong(int64_t *keys, int64_t *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
+  int64_t *sortkeys;
+  sortkeys = (int64_t *) malloc(sizeof(int64_t)*num_elems);
+  for(uint64_t i=0; i<num_elems; i++){
     sortkeys[i] = keys[vals[i]+offset];
   }
-  PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  PairSort<int64_t, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 
-static void SortPairsLongThree(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
-  long long *sortkeys;
-  sortkeys = (long long *) malloc(sizeof(long long)*num_elems);
-  for(long i=0; i<num_elems; i++){
+static void SortPairsLongThreeNormal(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
+  long *sortkeys;
+  sortkeys = (long *) malloc(sizeof(long)*num_elems);
+  for(int offset = 2; offset >=0; offset--){
+    for(long i=0; i<num_elems; i++){
+      sortkeys[i] = keys[vals[i]+offset];
+    }
+    PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  }
+  free(sortkeys);
+}
+
+static void SortPairsLongThree(int64_t *keys, int64_t *vals, size_t num_elems, int num_threads = -1) {
+  int64_t *sortkeys;
+  sortkeys = (int64_t *) malloc(sizeof(int64_t)*num_elems);
+  for(uint64_t i=0; i<num_elems; i++){
     sortkeys[i] = (keys[vals[i]+1] << 32) + keys[vals[i]+2];
   }
-  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
-  for(long i=0; i<num_elems; i++){
+  PairSort<int64_t, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  for(uint64_t i=0; i<num_elems; i++){
     sortkeys[i] = keys[vals[i]];
   }
-  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  PairSort<int64_t, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 
-static void SortPairsLongThreeFast(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
-  long long *sortkeys;
-  sortkeys = (long long *) malloc(sizeof(long long)*num_elems);
-  for(long i=0; i<num_elems; i++){
+static void SortPairsLongThreeFast(int64_t *keys, int64_t *vals, size_t num_elems, int num_threads = -1) {
+  int64_t *sortkeys;
+  sortkeys = (int64_t *) malloc(sizeof(int64_t)*num_elems);
+  for(uint64_t i=0; i<num_elems; i++){
     sortkeys[i] = (keys[vals[i]] << 42) + (keys[vals[i]+1] << 21) + keys[vals[i]+2];
   }
-  PairSort<long long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  PairSort<int64_t, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 
-static void SortPairsByteThree(signed char *keys, long *vals, size_t num_elems, int num_threads = -1) {
+static void SortPairsByteThree(signed char *keys, int64_t *vals, size_t num_elems, int num_threads = -1) {
   short int *sortkeys;
   sortkeys = (short int *) malloc(sizeof(short int)*num_elems);
   for(long i=0; i<num_elems; i++){
     sortkeys[i] = (keys[vals[i]] << 6) + (keys[vals[i]+1] << 3) + keys[vals[i]+2];
   }
-  PairSort<short int, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  PairSort<short int, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 
-static void SortPairsByte(signed char *keys, long *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
+static void SortPairsByte(signed char *keys, int64_t *vals, size_t num_elems, int num_threads = -1, signed char offset = 0) {
   signed char *sortkeys;
   sortkeys = (signed char *) malloc(sizeof(signed char)*num_elems);
   for(long i=0; i<num_elems; i++){
     sortkeys[i] = keys[vals[i]+offset];
   }
-  PairSort<signed char, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+  PairSort<signed char, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   free(sortkeys);
 }
 };  // namespace parallel radix sort

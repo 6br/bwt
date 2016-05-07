@@ -39,10 +39,10 @@ void bwt::SuffixArraySimpleChar::_constructor(::x10::lang::Rail< x10_byte >* inp
                                               x10_long charsize) {
     
     //#line 5 "SuffixArraySimpleChar.x10"
-    ::bwt::SuffixArraySimpleChar* this__15918 = this;
-    ::x10aux::nullCheck(this__15918)->FMGL(R) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
-    ::x10aux::nullCheck(this__15918)->FMGL(SA12) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
-    ::x10aux::nullCheck(this__15918)->FMGL(SA) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
+    ::bwt::SuffixArraySimpleChar* this__21259 = this;
+    ::x10aux::nullCheck(this__21259)->FMGL(R) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
+    ::x10aux::nullCheck(this__21259)->FMGL(SA12) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
+    ::x10aux::nullCheck(this__21259)->FMGL(SA) = (::x10aux::class_cast_unchecked< ::x10::lang::Rail< x10_long >*>(reinterpret_cast< ::x10::lang::NullType*>(X10_NULL)));
     
     //#line 18 "SuffixArraySimpleChar.x10"
     this->FMGL(string) = input;
@@ -85,33 +85,33 @@ void bwt::SuffixArraySimpleChar::radixPass(::x10::lang::Rail< x10_long >* a,
     ::x10::lang::Rail< x10_long >* c = ::x10::lang::Rail< x10_long >::_make(((this->FMGL(k)) + (((x10_long)1ll))));
     
     //#line 30 "SuffixArraySimpleChar.x10"
-    x10_long i__15729max__15926 = this->FMGL(k);
+    x10_long i__21070max__21267 = this->FMGL(k);
     {
-        x10_long i__15927;
-        for (i__15927 = ((x10_long)0ll); ((i__15927) <= (i__15729max__15926));
-             i__15927 = ((i__15927) + (((x10_long)1ll))))
+        x10_long i__21268;
+        for (i__21268 = ((x10_long)0ll); ((i__21268) <= (i__21070max__21267));
+             i__21268 = ((i__21268) + (((x10_long)1ll))))
         {
             ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__set(
-              i__15927, ((x10_long)0ll));
+              i__21268, ((x10_long)0ll));
         }
     }
     
     //#line 31 "SuffixArraySimpleChar.x10"
-    x10_long i__15745max__15929 = ((nt) - (((x10_long)1ll)));
+    x10_long i__21086max__21270 = ((nt) - (((x10_long)1ll)));
     {
-        x10_long i__15930;
-        for (i__15930 = ((x10_long)0ll); ((i__15930) <= (i__15745max__15929));
-             i__15930 = ((i__15930) + (((x10_long)1ll))))
+        x10_long i__21271;
+        for (i__21271 = ((x10_long)0ll); ((i__21271) <= (i__21086max__21270));
+             i__21271 = ((i__21271) + (((x10_long)1ll))))
         {
             
             //#line 32 "SuffixArraySimpleChar.x10"
-            x10_long i__15920 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
+            x10_long i__21261 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                               ((::x10aux::nullCheck(a)->x10::lang::Rail< x10_long >::__apply(
-                                                  i__15930)) + (((x10_long)(rOffs)))))));
-            x10_long r__15921 = ((::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
-                                    i__15920)) + (((x10_long)1ll)));
+                                                  i__21271)) + (((x10_long)(rOffs)))))));
+            x10_long r__21262 = ((::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
+                                    i__21261)) + (((x10_long)1ll)));
             ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__set(
-              i__15920, r__15921);
+              i__21261, r__21262);
         }
     }
     
@@ -119,32 +119,32 @@ void bwt::SuffixArraySimpleChar::radixPass(::x10::lang::Rail< x10_long >* a,
     x10_long sum = ((x10_long)0ll);
     
     //#line 35 "SuffixArraySimpleChar.x10"
-    x10_long i__15761max__15932 = this->FMGL(k);
+    x10_long i__21102max__21273 = this->FMGL(k);
     {
-        x10_long i__15933;
-        for (i__15933 = ((x10_long)0ll); ((i__15933) <= (i__15761max__15932));
-             i__15933 = ((i__15933) + (((x10_long)1ll))))
+        x10_long i__21274;
+        for (i__21274 = ((x10_long)0ll); ((i__21274) <= (i__21102max__21273));
+             i__21274 = ((i__21274) + (((x10_long)1ll))))
         {
             
             //#line 36 "SuffixArraySimpleChar.x10"
-            x10_long t__15922 = ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
-                                  i__15933);
+            x10_long t__21263 = ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
+                                  i__21274);
             
             //#line 37 "SuffixArraySimpleChar.x10"
             ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__set(
-              i__15933, sum);
+              i__21274, sum);
             
             //#line 38 "SuffixArraySimpleChar.x10"
-            sum = ((sum) + (t__15922));
+            sum = ((sum) + (t__21263));
         }
     }
     
     //#line 40 "SuffixArraySimpleChar.x10"
-    x10_long i__15777max__15935 = ((nt) - (((x10_long)1ll)));
+    x10_long i__21118max__21276 = ((nt) - (((x10_long)1ll)));
     {
-        x10_long i__15936;
-        for (i__15936 = ((x10_long)0ll); ((i__15936) <= (i__15777max__15935));
-             i__15936 = ((i__15936) + (((x10_long)1ll))))
+        x10_long i__21277;
+        for (i__21277 = ((x10_long)0ll); ((i__21277) <= (i__21118max__21276));
+             i__21277 = ((i__21277) + (((x10_long)1ll))))
         {
             
             //#line 41 "SuffixArraySimpleChar.x10"
@@ -152,18 +152,18 @@ void bwt::SuffixArraySimpleChar::radixPass(::x10::lang::Rail< x10_long >* a,
               ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
                 ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                               ((::x10aux::nullCheck(a)->x10::lang::Rail< x10_long >::__apply(
-                                  i__15936)) + (((x10_long)(rOffs)))))))),
+                                  i__21277)) + (((x10_long)(rOffs)))))))),
               ::x10aux::nullCheck(a)->x10::lang::Rail< x10_long >::__apply(
-                i__15936));
+                i__21277));
             
             //#line 42 "SuffixArraySimpleChar.x10"
-            x10_long i__15924 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
+            x10_long i__21265 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                               ((::x10aux::nullCheck(a)->x10::lang::Rail< x10_long >::__apply(
-                                                  i__15936)) + (((x10_long)(rOffs)))))));
-            x10_long r__15925 = ((::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
-                                    i__15924)) + (((x10_long)1ll)));
+                                                  i__21277)) + (((x10_long)(rOffs)))))));
+            x10_long r__21266 = ((::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__apply(
+                                    i__21265)) + (((x10_long)1ll)));
             ::x10aux::nullCheck(c)->x10::lang::Rail< x10_long >::__set(
-              i__15924, r__15925);
+              i__21265, r__21266);
         }
     }
     
@@ -209,21 +209,21 @@ void bwt::SuffixArraySimpleChar::constructSample() {
     x10_long j = ((x10_long)0ll);
     
     //#line 59 "SuffixArraySimpleChar.x10"
-    x10_long i__15793max__15938 = ((((((this->FMGL(n)) + (this->FMGL(n0)))) - (this->FMGL(n1)))) - (((x10_long)1ll)));
+    x10_long i__21134max__21279 = ((((((this->FMGL(n)) + (this->FMGL(n0)))) - (this->FMGL(n1)))) - (((x10_long)1ll)));
     {
-        x10_long i__15939;
-        for (i__15939 = ((x10_long)0ll); ((i__15939) <= (i__15793max__15938));
-             i__15939 = ((i__15939) + (((x10_long)1ll))))
+        x10_long i__21280;
+        for (i__21280 = ((x10_long)0ll); ((i__21280) <= (i__21134max__21279));
+             i__21280 = ((i__21280) + (((x10_long)1ll))))
         {
             
             //#line 60 "SuffixArraySimpleChar.x10"
-            if ((!::x10aux::struct_equals(((i__15939) % ::x10aux::zeroCheck(((x10_long)3ll))),
+            if ((!::x10aux::struct_equals(((i__21280) % ::x10aux::zeroCheck(((x10_long)3ll))),
                                           ((x10_long)0ll))))
             {
                 
                 //#line 61 "SuffixArraySimpleChar.x10"
                 ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__set(
-                  j, i__15939);
+                  j, i__21280);
                 
                 //#line 62 "SuffixArraySimpleChar.x10"
                 j = ((j) + (((x10_long)1ll)));
@@ -276,24 +276,24 @@ void bwt::SuffixArraySimpleChar::sortSample() {
     x10_byte c2 = ((x10_byte)-1);
     
     //#line 80 "SuffixArraySimpleChar.x10"
-    x10_long i__15809max__15947 = ((this->FMGL(n02)) - (((x10_long)1ll)));
+    x10_long i__21150max__21288 = ((this->FMGL(n02)) - (((x10_long)1ll)));
     {
-        x10_long i__15948;
-        for (i__15948 = ((x10_long)0ll); ((i__15948) <= (i__15809max__15947));
-             i__15948 = ((i__15948) + (((x10_long)1ll))))
+        x10_long i__21289;
+        for (i__21289 = ((x10_long)0ll); ((i__21289) <= (i__21150max__21288));
+             i__21289 = ((i__21289) + (((x10_long)1ll))))
         {
             
             //#line 81 "SuffixArraySimpleChar.x10"
             if ((((!::x10aux::struct_equals(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                               ::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                                                i__15948)),
+                                                i__21289)),
                                             c0)) || (!::x10aux::struct_equals(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                                                                 ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                                                                                    i__15948)) + (((x10_long)1ll)))),
+                                                                                    i__21289)) + (((x10_long)1ll)))),
                                                                               c1))) ||
                 (!::x10aux::struct_equals(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                             ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                                                i__15948)) + (((x10_long)2ll)))),
+                                                i__21289)) + (((x10_long)2ll)))),
                                           c2)))) {
                 
                 //#line 82 "SuffixArraySimpleChar.x10"
@@ -302,36 +302,36 @@ void bwt::SuffixArraySimpleChar::sortSample() {
                 //#line 83 "SuffixArraySimpleChar.x10"
                 c0 = ::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                        ::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                         i__15948));
+                         i__21289));
                 
                 //#line 84 "SuffixArraySimpleChar.x10"
                 c1 = ::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                        ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                           i__15948)) + (((x10_long)1ll))));
+                           i__21289)) + (((x10_long)1ll))));
                 
                 //#line 85 "SuffixArraySimpleChar.x10"
                 c2 = ::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                        ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                           i__15948)) + (((x10_long)2ll))));
+                           i__21289)) + (((x10_long)2ll))));
             }
             
             //#line 88 "SuffixArraySimpleChar.x10"
             if ((::x10aux::struct_equals(((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                                             i__15948)) % ::x10aux::zeroCheck(((x10_long)3ll))),
+                                             i__21289)) % ::x10aux::zeroCheck(((x10_long)3ll))),
                                          ((x10_long)1ll))))
             {
                 
                 //#line 89 "SuffixArraySimpleChar.x10"
                 ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__set(
                   ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                      i__15948)) / ::x10aux::zeroCheck(((x10_long)3ll))),
+                      i__21289)) / ::x10aux::zeroCheck(((x10_long)3ll))),
                   name);
             } else {
                 
                 //#line 91 "SuffixArraySimpleChar.x10"
                 ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__set(
                   ((((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                        i__15948)) / ::x10aux::zeroCheck(((x10_long)3ll)))) + (this->FMGL(n0))),
+                        i__21289)) / ::x10aux::zeroCheck(((x10_long)3ll)))) + (this->FMGL(n0))),
                   name);
             }
             
@@ -343,7 +343,7 @@ void bwt::SuffixArraySimpleChar::sortSample() {
         
         //#line 96 "SuffixArraySimpleChar.x10"
         ::x10::io::Console::FMGL(ERR__get)()->x10::io::Printer::println(
-          reinterpret_cast< ::x10::lang::Any*>((&::bwt::SuffixArraySimpleChar_Strings::sl__16745)));
+          reinterpret_cast< ::x10::lang::Any*>((&::bwt::SuffixArraySimpleChar_Strings::sl__22092)));
         
         //#line 97 "SuffixArraySimpleChar.x10"
         ::bwt::SuffixArraySimple* bwa =  (new (::x10aux::alloc_z< ::bwt::SuffixArraySimple>()) ::bwt::SuffixArraySimple());
@@ -354,30 +354,30 @@ void bwt::SuffixArraySimpleChar::sortSample() {
         this->FMGL(SA12) = bwa->run();
         
         //#line 100 "SuffixArraySimpleChar.x10"
-        x10_long i__15825max__15941 = ((this->FMGL(n02)) - (((x10_long)1ll)));
+        x10_long i__21166max__21282 = ((this->FMGL(n02)) - (((x10_long)1ll)));
         {
-            x10_long i__15942;
-            for (i__15942 = ((x10_long)0ll); ((i__15942) <= (i__15825max__15941));
-                 i__15942 = ((i__15942) + (((x10_long)1ll))))
+            x10_long i__21283;
+            for (i__21283 = ((x10_long)0ll); ((i__21283) <= (i__21166max__21282));
+                 i__21283 = ((i__21283) + (((x10_long)1ll))))
             {
                 ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__set(
                   ::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                    i__15942), ((i__15942) + (((x10_long)1ll))));
+                    i__21283), ((i__21283) + (((x10_long)1ll))));
             }
         }
         
     } else {
         
         //#line 102 "SuffixArraySimpleChar.x10"
-        x10_long i__15841max__15944 = ((this->FMGL(n02)) - (((x10_long)1ll)));
+        x10_long i__21182max__21285 = ((this->FMGL(n02)) - (((x10_long)1ll)));
         {
-            x10_long i__15945;
-            for (i__15945 = ((x10_long)0ll); ((i__15945) <= (i__15841max__15944));
-                 i__15945 = ((i__15945) + (((x10_long)1ll))))
+            x10_long i__21286;
+            for (i__21286 = ((x10_long)0ll); ((i__21286) <= (i__21182max__21285));
+                 i__21286 = ((i__21286) + (((x10_long)1ll))))
             {
                 ::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__set(
                   ((::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__apply(
-                      i__15945)) - (((x10_long)1ll))), i__15945);
+                      i__21286)) - (((x10_long)1ll))), i__21286);
             }
         }
         
@@ -393,21 +393,21 @@ void bwt::SuffixArraySimpleChar::sortNonSample() {
     (R0B)->::x10::util::RailBuilder<x10_long>::_constructor();
     
     //#line 108 "SuffixArraySimpleChar.x10"
-    x10_long i__15857max__15956 = ((this->FMGL(n02)) - (((x10_long)1ll)));
+    x10_long i__21198max__21297 = ((this->FMGL(n02)) - (((x10_long)1ll)));
     {
-        x10_long i__15957;
-        for (i__15957 = ((x10_long)0ll); ((i__15957) <= (i__15857max__15956));
-             i__15957 = ((i__15957) + (((x10_long)1ll))))
+        x10_long i__21298;
+        for (i__21298 = ((x10_long)0ll); ((i__21298) <= (i__21198max__21297));
+             i__21298 = ((i__21298) + (((x10_long)1ll))))
         {
             
             //#line 109 "SuffixArraySimpleChar.x10"
             if (((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                    i__15957)) < (this->FMGL(n0)))) {
+                    i__21298)) < (this->FMGL(n0)))) {
                 
                 //#line 110 "SuffixArraySimpleChar.x10"
                 reinterpret_cast< ::x10::util::RailBuilder<x10_long>*>(R0B->add(
                                                                          ((((x10_long)3ll)) * (::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
-                                                                                                 i__15957)))));
+                                                                                                 i__21298)))));
             }
             
         }
@@ -450,18 +450,18 @@ void bwt::SuffixArraySimpleChar::sortNonSample() {
         //#line 127 "SuffixArraySimpleChar.x10"
         if (((((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
                   t)) < (this->FMGL(n0))) && (__extension__ ({
-                x10_long a__15906 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
+                x10_long a__21247 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                                   i)));
-                x10_long a__15907 = ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__apply(
+                x10_long a__21248 = ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__apply(
                                       ((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
                                           t)) + (this->FMGL(n0))));
-                x10_long b__15908 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
+                x10_long b__21249 = ((x10_long)(::x10aux::nullCheck(this->FMGL(string))->x10::lang::Rail< x10_byte >::__apply(
                                                   j)));
-                x10_long b__15909 = ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__apply(
+                x10_long b__21250 = ::x10aux::nullCheck(this->FMGL(R))->x10::lang::Rail< x10_long >::__apply(
                                       ((j) / ::x10aux::zeroCheck(((x10_long)3ll))));
-                (((a__15906) < (b__15908)) || ((::x10aux::struct_equals(a__15906,
-                                                                        b__15908)) &&
-                ((a__15907) <= (b__15909))));
+                (((a__21247) < (b__21249)) || ((::x10aux::struct_equals(a__21247,
+                                                                        b__21249)) &&
+                ((a__21248) <= (b__21250))));
             }))
             ) || (((::x10aux::nullCheck(this->FMGL(SA12))->x10::lang::Rail< x10_long >::__apply(
                       t)) >= (this->FMGL(n0))) && this->leq(
@@ -495,11 +495,11 @@ void bwt::SuffixArraySimpleChar::sortNonSample() {
                 k = ((k) + (((x10_long)1ll)));
                 
                 //#line 134 "SuffixArraySimpleChar.x10"
-                x10_long i__15873max__15950 = ((((this->FMGL(n0)) - (p))) - (((x10_long)1ll)));
+                x10_long i__21214max__21291 = ((((this->FMGL(n0)) - (p))) - (((x10_long)1ll)));
                 {
-                    x10_long i__15951;
-                    for (i__15951 = ((x10_long)0ll); ((i__15951) <= (i__15873max__15950));
-                         i__15951 = ((i__15951) + (((x10_long)1ll))))
+                    x10_long i__21292;
+                    for (i__21292 = ((x10_long)0ll); ((i__21292) <= (i__21214max__21291));
+                         i__21292 = ((i__21292) + (((x10_long)1ll))))
                     {
                         
                         //#line 135 "SuffixArraySimpleChar.x10"
@@ -534,11 +534,11 @@ void bwt::SuffixArraySimpleChar::sortNonSample() {
                 k = ((k) + (((x10_long)1ll)));
                 
                 //#line 145 "SuffixArraySimpleChar.x10"
-                x10_long i__15889max__15953 = ((((this->FMGL(n02)) - (t))) - (((x10_long)1ll)));
+                x10_long i__21230max__21294 = ((((this->FMGL(n02)) - (t))) - (((x10_long)1ll)));
                 {
-                    x10_long i__15954;
-                    for (i__15954 = ((x10_long)0ll); ((i__15954) <= (i__15889max__15953));
-                         i__15954 = ((i__15954) + (((x10_long)1ll))))
+                    x10_long i__21295;
+                    for (i__21295 = ((x10_long)0ll); ((i__21295) <= (i__21230max__21294));
+                         i__21295 = ((i__21295) + (((x10_long)1ll))))
                     {
                         
                         //#line 146 "SuffixArraySimpleChar.x10"
@@ -662,7 +662,7 @@ void bwt::SuffixArraySimpleChar::_initRTT() {
     rtt.initStageTwo("bwt.SuffixArraySimpleChar",::x10aux::RuntimeType::class_kind, 0, parents, 0, NULL, NULL);
 }
 
-::x10::lang::String bwt::SuffixArraySimpleChar_Strings::sl__16745("Start Sort Recursively");
+::x10::lang::String bwt::SuffixArraySimpleChar_Strings::sl__22092("Start Sort Recursively");
 
 /* END of SuffixArraySimpleChar */
 /*************************************************/
