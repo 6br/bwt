@@ -18,7 +18,7 @@ public class SuffixArrayChar {
   val n02: Long;
   var R: Rail[Long];
   var SA12: Rail[Long];
-  var SA: Rail[Long];
+  var SA: Rail[Byte];
   var SA0: Rail[Long];
   var c:Rail[Long];
   var name: Long;
@@ -42,6 +42,7 @@ public class SuffixArrayChar {
   native def sortPairsThree(keys: Rail[Byte], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
+/*
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     for(i in 0..k) {c(i) = 0;}
     for(i in 0..(nt-1)) {
@@ -58,8 +59,8 @@ public class SuffixArrayChar {
       c((string(a(i) + rOffs))) += 1;
     }
   }
-
-  def run(): Rail[Long] {
+*/
+  def run(): Rail[Byte] {
     //Console.ERR.println("Start Constructuring Char Sample");
     this.constructSample();
     //Console.ERR.println("Start Sort Char Sample");
@@ -68,15 +69,23 @@ public class SuffixArrayChar {
     this.sortNonSample();
     return this.SA;
   }
-
-  def bwtable(): Rail[Long] {
-    val bwt: RailBuilder[Long] = new RailBuilder[Long]();
+/*
+  def bwtable(): Rail[Byte] {
+    val bwt: RailBuilder[Byte] = new RailBuilder[Byte]();
     for(i in 0..(n-1)){
-      if(SA(i) != 0){
+      if(SA(i) != 0y){
         bwt.add(string(SA(i) - 1));
       }
     }
     return bwt.result();
+  }
+*/
+  def bwt(pos: Long): Byte {
+    if(pos != 0){
+      return string(pos - 1);
+    } else {
+      return 0y;
+    }
   }
 
   def constructSample() {
@@ -95,7 +104,7 @@ public class SuffixArrayChar {
       }
     }
   }
-
+/*
   def constructSampleR() {
     finish {
       async c = new Rail[Long](k+1);
@@ -119,7 +128,7 @@ public class SuffixArrayChar {
     }
     //Console.ERR.println("Malloc End");
   }
-
+*/
   def sortSample() {
     val size = n02 as ULong;
     sortPairsThree(string, SA12, size, num_threads);
@@ -162,17 +171,14 @@ public class SuffixArrayChar {
 
   def sortNonSample() {
     if (name < n02) {
-      SA12 = new Rail[Long](R.size + 3);
-      var sa_iter:(sa12:x10.lang.Rail[x10.lang.Long])=>void = (var sa12:Rail[Long]) => { 
-        val bwa = new SuffixArray(R, name, sa12, num_threads);
-        bwa.run();
-      };
-      sa_iter(SA12);
-      sa_iter = (var sa12:Rail[Long]) => {}; 
+      //SA12 = new Rail[Long](R.size + 3);
+      var bwa:SuffixArray = new SuffixArray(R, name, SA12, num_threads);
+      bwa.run();
+      bwa = null;
       //Console.ERR.println("Ended BWA run");
-      finish{
+      finish {
         async {for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
-        async SA = new Rail[Long](n+3);
+        async SA = new Rail[Byte](n+3);
         SA0 = new Rail[Long](n0);
         var m:Long = 0; 
         for(i in 0..(n02-1)) {
@@ -189,19 +195,19 @@ public class SuffixArrayChar {
     } else {
       finish for(i in 0..(n02-1)) async { SA12(R(i) - 1) = i; }
       finish {
-        async SA = new Rail[Long](n+3);
+        async SA = new Rail[Byte](n+3);
         SA0 = new Rail[Long](n0);
-      var m:Long = 0; 
-      for(i in 0..(n02-1)) {
-        if(SA12(i) < n0) {
-          //R0B.add(3 * SA12(i));
-          SA0(m) = 3 * SA12(i);
-          m += 1;
-        }  
-      }
-      val size = n0 as ULong;
-      //Console.ERR.println("Start SortPairs Char");
-      sortPairs(string, SA0, size, num_threads, 0y);
+        var m:Long = 0; 
+        for(i in 0..(n02-1)) {
+          if(SA12(i) < n0) {
+            //R0B.add(3 * SA12(i));
+            SA0(m) = 3 * SA12(i);
+            m += 1;
+          }  
+        }
+        val size = n0 as ULong;
+        //Console.ERR.println("Start SortPairs Char");
+        sortPairs(string, SA0, size, num_threads, 0y);
       }
     }
 
@@ -275,15 +281,6 @@ public class SuffixArrayChar {
       val nrail = new Rail[Long]([midl+1, midl+1, midlr+1, mid + 1, midrl+1, midr+1, midrr+1, n]);
       val prail = new Rail[Long]([0, lbll(1), lbl(1), lblr(1), lb(1), lbrl(1), lbr(1), lbrr(1)]);
       val trail = new Rail[Long]([n0-n1, lbll(0), lbl(0), lblr(0), lb(0), lbrl(0), lbr(0) ,lbrr(0)]);
-      /*val krail = new Rail[Long]([-1, midl-1, mid-1, midr-1]);
-      val nrail = new Rail[Long]([midl+1,mid + 1,midr+1, n]);
-      val prail = new Rail[Long]([0, lbl(1),lb(1), lbr(1)]);
-      val trail = new Rail[Long]([n0-n1, lbl(0),lb(0),lbr(0)]);
-      *///val prail = new Rail[Long]([0, lb(1)]);
-      //val trail = new Rail[Long]([n0-n1, lb(0)]);
-      
-      //val krail = new Rail[Long]([-1, mid-1]);
-      //val nrail = new Rail[Long]([mid + 1, n]);
 
       finish for (l in 0..split) async {
         var k:Long = krail(l);
@@ -298,26 +295,26 @@ public class SuffixArrayChar {
              SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
             ){ // suffix from SA12 is smaller
             if(!(l != 0 && k <= krail(l)+1)){
-              SA(k) = i;
+              SA(k) = bwt(i);
             }
             t += 1;
             if(t == n02) {
               k += 1;
               for(q in 0..(n0-p-1)){
-                SA(k) = SA0(p);
+                SA(k) = bwt(SA0(p));
                 p += 1;
                 k += 1;
               }
             }
           } else { // suffix from SA0 is smaller
             if(!(l != 0 && k <= krail(l)+1)){
-              SA(k) = j;
+              SA(k) = bwt(j);
             }
             p += 1;
             if(p == n0) {
               k += 1;
               for(q in 0..(n02-t-1)){
-                SA(k) = getI(t);
+                SA(k) = bwt(getI(t));
                 t += 1;
                 k += 1;
               }
@@ -337,79 +334,26 @@ public class SuffixArrayChar {
         if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
            SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
           ){ // suffix from SA12 is smaller
-          SA(k) = i; 
+          SA(k) = bwt(i); 
           t += 1;
           if(t == n02) {
             k += 1;
             for(q in 0..(n0-p-1)){
-              SA(k) = SA0(p);
+              SA(k) = bwt(SA0(p));
               p += 1;
               k += 1;
             }
           }
         } else { // suffix from SA0 is smaller
-          SA(k) = j;
+          SA(k) = bwt(j);
           p += 1;
           if(p == n0) {
             k += 1;
             for(q in 0..(n02-t-1)){
-              SA(k) = getI(t);
+              SA(k) = bwt(getI(t));
               t += 1;
               k += 1;
             }
-          }
-        }
-      }
-    }
-  }
-
-  private def leq(a1: Long, a2: Long, b1: Long, b2: Long):Boolean {
-    return (a1 < b1 || a1 == b1 && a2 <= b2 );
-  }
-
-  private def leq(a1: Long, a2: Long, a3: Long, b1: Long, b2: Long, b3: Long):Boolean {
-    return (a1 < b1 || a1 == b1 && leq(a2, a3, b2, b3));
-  }
-
-  private def getI(t: Long):Long {
-    if(SA12(t) < n0){
-      return SA12(t) * 3 + 1; 
-    } else {
-      return (SA12(t) - n0) * 3 + 2;
-    }
-  }
-/*
-      }
-
-    }
-
-    while(k < n) {
-      k += 1;
-      val i = getI(t);
-      val j = SA0(p);
-      //// different compares for mod 1 and mod 2 suffixes
-      if(SA12(t) < n0 && leq(string(i), R(SA12(t) + n0), string(j), R(j/3)) ||
-         SA12(t) >= n0 && leq(string(i), string(i+1), R(SA12(t) - n0 + 1), string(j), string(j+1), R(j/3 + n0))
-        ){ // suffix from SA12 is smaller
-        SA(k) = i; 
-        t += 1;
-        if(t == n02) {
-          k += 1;
-          for(q in 0..(n0-p-1)){
-            SA(k) = SA0(p);
-            p += 1;
-            k += 1;
-          }
-        }
-      } else { // suffix from SA0 is smaller
-        SA(k) = j;
-        p += 1;
-        if(p == n0) {
-          k += 1;
-          for(q in 0..(n02-t-1)){
-            SA(k) = getI(t);
-            t += 1;
-            k += 1;
           }
         }
       }

@@ -623,14 +623,14 @@ static void SortPairsLong(int64_t *keys, int64_t *vals, size_t num_elems, int nu
   free(sortkeys);
 }
 
-static void SortPairsLongThreeNormal(long *keys, long *vals, size_t num_elems, int num_threads = -1) {
-  long *sortkeys;
-  sortkeys = (long *) malloc(sizeof(long)*num_elems);
+static void SortPairsLongThreeNormal(int64_t *keys, int64_t *vals, size_t num_elems, int num_threads = -1) {
+  int64_t *sortkeys;
+  sortkeys = (int64_t *) malloc(sizeof(int64_t)*num_elems);
   for(int offset = 2; offset >=0; offset--){
-    for(long i=0; i<num_elems; i++){
+    for(int64_t i=0; i<num_elems; i++){
       sortkeys[i] = keys[vals[i]+offset];
     }
-    PairSort<long, long>::InitAndSort(sortkeys, vals, num_elems, num_threads);
+    PairSort<int64_t, int64_t>::InitAndSort(sortkeys, vals, num_elems, num_threads);
   }
   free(sortkeys);
 }

@@ -14,9 +14,6 @@ class Timer;
 namespace bwt { 
 class SuffixArrayChar;
 } 
-namespace bwt { 
-class SuffixArraySimple;
-} 
 namespace x10 { namespace io { 
 class Printer;
 } } 
@@ -52,10 +49,10 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__21303;
-    static ::x10::lang::String sl__21301;
-    static ::x10::lang::String sl__21300;
-    static ::x10::lang::String sl__21302;
+    static ::x10::lang::String sl__15197;
+    static ::x10::lang::String sl__15195;
+    static ::x10::lang::String sl__15194;
+    static ::x10::lang::String sl__15196;
 };
 
 class Bwt : public ::x10::lang::X10Class   {

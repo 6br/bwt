@@ -15,18 +15,19 @@ import x10.compiler.NativeCPPCompilationUnit;
 public class Bwt {
   def this(string: Rail[Byte], k: Long, fast: Byte) {
     val time = Timer.milliTime();
-    var sa:Rail[Long];
-    if(fast > 0) {
+    var sa:Rail[Byte];
+    //if(fast > 0) {
       /*var str:Rail[Long] = new Rail[Long](string.size);
       for(i in 0..(string.size-1)){
         str(i) = string(i) as Long;
       }
-      sa= new Rail[Long](string.size);
+      sa = new Rail[Long](string.size);
       val SAC = new SuffixArray(str, k, sa, fast);
       SAC.run();*/
       val SAC = new SuffixArrayChar(string, k,fast);
       sa = SAC.run();
-    } else {
+    /*}
+   else {
       var str:Rail[Long] = new Rail[Long](string.size);
       for(i in 0..(string.size-1)){
         str(i) = string(i);
@@ -34,7 +35,7 @@ public class Bwt {
       val SAC = new SuffixArraySimple(str, k);
       //val SAC = new SuffixArraySimpleChar(string, k);
       sa = SAC.run();
-    }
+    }*/
     val difftime = Timer.milliTime() - time;
     Console.ERR.printf("Elapsed time: %ld millisec.\n",difftime);
     var j:Long = sa.size - 1;
@@ -106,20 +107,14 @@ public class Bwt {
     Console.ERR.println("Start Malloc");
     var e:Rail[Byte] = new Rail[Byte](length);
     //var e:Rail[Long] = new Rail[Long](length);
-    //N = (Math.pow(5, 9)) as Long;
+    //N = (Math.pow(5, 27)) as Long;
     e(length-1) = 0y;
     e(length-2) = 0y;
     e(length-3) = 0y;
     Console.ERR.println("End Malloc");
 
     fileioCPP(file, e, height);
-    /*
-    for (i in 0..(e.size-1)){
-      Console.OUT.println(e(i));
-    }
-    */ 
     
-
     val bwa = new Bwt(e, N, thread);
   }
 }

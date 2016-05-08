@@ -132,7 +132,7 @@ void input_fgets_fixed_long(const char* filename, int64_t* data, int64_t length)
     FILE *fp;
     char buf[N] = {'\0'};
     int64_t j = 0;
-    int8_t mer = (length <= 100)? 4 : 9; //TODO nEED FIX
+    int8_t mer = (length <= 100)? 4 : 27; //TODO NEED FIX
 
     if ((fp = fopen(filename, "r")) == NULL) {
         fprintf(stderr, "Fail to open %s\n", filename);

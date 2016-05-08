@@ -33,7 +33,7 @@ namespace bwt {
 
 class SuffixArraySimple_Strings {
   public:
-    static ::x10::lang::String sl__22041;
+    static ::x10::lang::String sl__15918;
 };
 
 class SuffixArraySimple : public ::x10::lang::X10Class   {

@@ -48,6 +48,7 @@ public class SuffixArray {
   native def sortPairsThreeFast(keys: Rail[Long], values: Rail[Long], num_elems: ULong, num_threads: Int): void;
 
   // a[0..nt-1] to b[0..nt-1] with keys in 0..k from *(string+rOffs)
+  /*
   def radixPass(a: Rail[Long], b: Rail[Long], rOffs: Byte, nt: Long) {
     var c:Rail[Long] = new Rail[Long](k+1);
     for(i in 0..k) {c(i) = 0;}
@@ -64,7 +65,7 @@ public class SuffixArray {
       b(c(string(a(i) + rOffs))) = a(i);
       c((string(a(i) + rOffs))) += 1;
     }
-  }
+  }*/
 
   def run() {
     //Console.ERR.println("Start Constructuring Sample");
@@ -78,10 +79,10 @@ public class SuffixArray {
 
   def bwtable(): Rail[Long] {
     val bwt: RailBuilder[Long] = new RailBuilder[Long]();
-    for(i in 0..(n-1)){
-      if(SA(i) != 0){
+    for (i in 0..(n-1)) {
+      if (SA(i) != 0) {
         bwt.add(string(SA(i) - 1));
-      }else{
+      } else {
         bwt.add(string(n-1));
       }
     }
@@ -95,7 +96,7 @@ public class SuffixArray {
       SA12(n02+1) = 0;
       SA12(n02+2) = 0;
       var j:Long = 0;
-      for(i in 0..(n + n0 - n1 - 1)) {
+      for (i in 0..(n + n0 - n1 - 1)) {
         if (i % 3 != 0){
           SA12(j) = i;
           j += 1;
@@ -114,14 +115,6 @@ public class SuffixArray {
       sortPairsThreeNormal(string, SA12, size, num_threads);
     }
     Console.ERR.printf("Ended 3rd Radix Sort %ld, max: %ld\n", n02, k);
-    /*
-    sortPairs(string, SA12, size, num_threads, 2y);
-    //Console.ERR.println("Ended 1st Radix Sort");
-    sortPairs(string, SA12, size, num_threads, 1y);
-    //Console.ERR.println("Ended 2nd Radix Sort");
-    sortPairs(string, SA12, size, num_threads, 0y);
-    //Console.ERR.printf("Ended 3rd Radix Sort %ld\n", n02);
-    */
     /*
     radixPass(R, SA12, 2y, n02);
     //Console.ERR.println("Ended 1st Radix Sort");
@@ -154,14 +147,11 @@ public class SuffixArray {
 
   def sortNonSample() {
     if (name < n02) {
-      SA12 = new Rail[Long](R.size + 3);
+      //SA12 = new Rail[Long](R.size + 3);
       Console.ERR.printf("name: %ld, n02: %ld\n", name, n02);
-      var sa_iter:(sa12:x10.lang.Rail[x10.lang.Long])=>void = (var sa12:Rail[Long]) => { 
-        val bwa = new SuffixArray(R, name, sa12, num_threads);
-        bwa.run();
-      };
-      sa_iter(SA12);
-      sa_iter = (var sa12:Rail[Long]) => {}; 
+      var bwa:SuffixArray = new SuffixArray(R, name, SA12, num_threads);
+      bwa.run();
+      bwa = null;
       //Console.ERR.println("End BWA run");
       finish {
         async { for(i in 0..(n02-1)) { R(SA12(i)) = i + 1; }} //futurize
@@ -181,18 +171,18 @@ public class SuffixArray {
       for(i in 0..(n02-1)) { SA12(R(i) - 1) = i; }
       //Console.ERR.println("BWA run End");
       finish {
-      SA0 = new Rail[Long](n0);
-      var m:Long = 0; 
-      for(i in 0..(n02-1)) {
-        if(SA12(i) < n0) {
-          //R0B.add(3 * SA12(i));
-          SA0(m) = 3 * SA12(i);
-          m += 1;
-        }  
-      }
-      val size = n0 as ULong;
-      //Console.ERR.println("Start SortPairs");
-      sortPairs(string, SA0, size, num_threads, 0y);
+        SA0 = new Rail[Long](n0);
+        var m:Long = 0; 
+        for(i in 0..(n02-1)) {
+          if(SA12(i) < n0) {
+            //R0B.add(3 * SA12(i));
+            SA0(m) = 3 * SA12(i);
+            m += 1;
+          }  
+        }
+        val size = n0 as ULong;
+        //Console.ERR.println("Start SortPairs");
+        sortPairs(string, SA0, size, num_threads, 0y);
       }
     }
 
@@ -343,7 +333,11 @@ public class SuffixArray {
         }
       }
     }
+    SA0 = null;
+    SA12 = null;
+    R = null;
   }
+
   private def leq(a1: Long, a2: Long, b1: Long, b2: Long):Boolean {
     return (a1 < b1 || a1 == b1 && a2 <= b2 );
   }
