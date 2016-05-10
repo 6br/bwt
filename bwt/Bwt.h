@@ -23,23 +23,14 @@ class Console;
 namespace x10 { namespace lang { 
 class Any;
 } } 
+namespace bwt { 
+class SuffixArray;
+} 
 namespace x10 { namespace lang { 
 class String;
 } } 
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
-} } 
-namespace x10 { namespace util { 
-class StringBuilder;
-} } 
-namespace x10 { namespace io { 
-class File;
-} } 
-namespace x10 { namespace lang { 
-template<class TPMGL(T)> class Iterator;
-} } 
-namespace x10 { namespace io { 
-template<class TPMGL(T)> class ReaderIterator;
 } } 
 namespace x10 { namespace compiler { 
 class Native;
@@ -58,26 +49,28 @@ namespace bwt {
 
 class Bwt_Strings {
   public:
-    static ::x10::lang::String sl__6255;
-    static ::x10::lang::String sl__6259;
-    static ::x10::lang::String sl__6257;
-    static ::x10::lang::String sl__6256;
-    static ::x10::lang::String sl__6260;
-    static ::x10::lang::String sl__6258;
+    static ::x10::lang::String sl__14782;
+    static ::x10::lang::String sl__14780;
+    static ::x10::lang::String sl__14779;
+    static ::x10::lang::String sl__14781;
 };
 
 class Bwt : public ::x10::lang::X10Class   {
     public:
     RTT_H_DECLS_CLASS
     
-    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_int k);
+    void _constructor(::x10::lang::Rail< x10_byte >* string, x10_long k, x10_byte fast);
     
-    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_int k);
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_byte >* string, x10_long k,
+                             x10_byte fast);
+    
+    void _constructor(::x10::lang::Rail< x10_long >* str, x10_long k, x10_byte fast);
+    
+    static ::bwt::Bwt* _make(::x10::lang::Rail< x10_long >* str, x10_long k,
+                             x10_byte fast);
     
     static ::x10::lang::Rail< x10_long >* strToRail(::x10::lang::String* input,
                                                     x10_boolean isDigit);
-    static ::x10::lang::String* fileioImproved(::x10::lang::String* filename);
-    static ::x10::lang::Rail< x10_long >* fileio(::x10::lang::String* filename);
     static void main(::x10::lang::Rail< ::x10::lang::String* >* args);
     virtual ::bwt::Bwt* bwt__Bwt____this__bwt__Bwt();
     virtual void __fieldInitializers_bwt_Bwt();

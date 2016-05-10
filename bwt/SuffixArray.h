@@ -11,20 +11,17 @@
 #define X10_LANG_LONG_H_NODEPS
 #include <x10/lang/Long.h>
 #undef X10_LANG_LONG_H_NODEPS
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
+#define X10_LANG_BYTE_H_NODEPS
+#include <x10/lang/Byte.h>
+#undef X10_LANG_BYTE_H_NODEPS
 namespace x10 { namespace lang { 
 template<class TPMGL(T)> class Rail;
 } } 
 namespace x10 { namespace compiler { 
 class Native;
-} } 
-namespace x10 { namespace io { 
-class Printer;
-} } 
-namespace x10 { namespace io { 
-class Console;
-} } 
-namespace x10 { namespace lang { 
-class Any;
 } } 
 namespace x10 { namespace util { 
 template<class TPMGL(T)> class RailBuilder;
@@ -36,13 +33,25 @@ namespace x10 { namespace xrx {
 class FinishState;
 } } 
 namespace x10 { namespace lang { 
+class CheckedThrowable;
+} } 
+namespace x10 { namespace io { 
+class Printer;
+} } 
+namespace x10 { namespace io { 
+class Console;
+} } 
+namespace x10 { namespace lang { 
+class Any;
+} } 
+namespace x10 { namespace lang { 
 class VoidFun_0_0;
 } } 
 namespace x10 { namespace compiler { 
 class AsyncClosure;
 } } 
 namespace x10 { namespace lang { 
-class CheckedThrowable;
+class Unsafe;
 } } 
 namespace x10 { namespace compiler { 
 class Synthetic;
@@ -55,14 +64,9 @@ namespace bwt {
 
 class SuffixArray_Strings {
   public:
-    static ::x10::lang::String sl__6284;
-    static ::x10::lang::String sl__6281;
-    static ::x10::lang::String sl__6286;
-    static ::x10::lang::String sl__6283;
-    static ::x10::lang::String sl__6285;
-    static ::x10::lang::String sl__6287;
-    static ::x10::lang::String sl__6282;
-    static ::x10::lang::String sl__6280;
+    static ::x10::lang::String sl__14918;
+    static ::x10::lang::String sl__14917;
+    static ::x10::lang::String sl__14916;
 };
 
 class SuffixArray : public ::x10::lang::X10Class   {
@@ -93,10 +97,14 @@ class SuffixArray : public ::x10::lang::X10Class   {
     
     x10_long FMGL(name);
     
-    void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize);
+    x10_byte FMGL(num_threads);
+    
+    void _constructor(::x10::lang::Rail< x10_long >* input, x10_long charsize,
+                      ::x10::lang::Rail< x10_long >* sa, x10_byte threads);
     
     static ::bwt::SuffixArray* _make(::x10::lang::Rail< x10_long >* input,
-                                     x10_long charsize);
+                                     x10_long charsize, ::x10::lang::Rail< x10_long >* sa,
+                                     x10_byte threads);
     
     virtual void sortPairs(::x10::lang::Rail< x10_long >* keys, ::x10::lang::Rail< x10_long >* values,
                            x10_ulong num_elems, x10_int num_threads,
@@ -104,9 +112,14 @@ class SuffixArray : public ::x10::lang::X10Class   {
     virtual void sortPairsThree(::x10::lang::Rail< x10_long >* keys,
                                 ::x10::lang::Rail< x10_long >* values,
                                 x10_ulong num_elems, x10_int num_threads);
-    virtual void radixPass(::x10::lang::Rail< x10_long >* a, ::x10::lang::Rail< x10_long >* b,
-                           x10_byte rOffs, x10_long nt);
-    virtual ::x10::lang::Rail< x10_long >* run();
+    virtual void sortPairsThreeNormal(::x10::lang::Rail< x10_long >* keys,
+                                      ::x10::lang::Rail< x10_long >* values,
+                                      x10_ulong num_elems,
+                                      x10_int num_threads);
+    virtual void sortPairsThreeFast(::x10::lang::Rail< x10_long >* keys,
+                                    ::x10::lang::Rail< x10_long >* values,
+                                    x10_ulong num_elems, x10_int num_threads);
+    virtual void run();
     virtual ::x10::lang::Rail< x10_long >* bwtable();
     virtual void constructSample();
     virtual void sortSample();

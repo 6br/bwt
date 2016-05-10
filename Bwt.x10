@@ -13,74 +13,53 @@ import x10.compiler.NativeCPPCompilationUnit;
 @NativeCPPCompilationUnit("input.cpp")
 
 public class Bwt {
-  //val SA: SuffixArray;
-  //val SAC: SuffixArrayChar;
-/*
-  def this(input: String, k: int, isDigit: Boolean) {
-    val strBuilder = new RailBuilder[Long](input.length());
-    val inputBytes = input.bytes();
-    val length = input.length();
-
-    for (i in 0..(length-1)) {
-      val c = inputBytes(i);
-      val base:Long;
-      if (isDigit) {
-        base = c - 47; 
-      } else {
-        //base = ((((c >> 2) ^ (c >> 1)) & 3) + 1) as Long;
-        base = ((((c >> 2) ^ (c >> 1)) & 19) % 5) as Long;
-      }
-      if (i % (1024*1024) == 0){
-        Console.ERR.printf("%ld MB loaded.\n", i / (1024*1024));
-      }
-      strBuilder.add(base);
-    }
-    for (i in 0..2){
-      strBuilder.add(0);
-    }
-    val string = strBuilder.result();
-
-    SA = new SuffixArray(string, k);
-    val sa = SA.run();
-    for (i in 0..(sa.size-1)){
-      Console.OUT.println(sa(i));
-    }
-}
-
-  def this(filename: String, k: Int) {
-    val string = fileio(filename);
-    val time = Timer.nanoTime();
-    SA = new SuffixArray(string, k);
-    val sa = SA.run();
-    val difftime = Timer.nanoTime() - time;
-    Console.ERR.printf("Elapsed time: %ld nanotime.\n",difftime);
-    for (i in 0..(sa.size-1)){
-      Console.OUT.println(sa(i));
-    }
-  }
-
-  def this(string: Rail[Long], k: Int) {
-    val time = Timer.nanoTime();
-    SA = new SuffixArray(string, k);
-    val sa = SA.run();
-    val difftime = Timer.nanoTime() - time;
-    Console.ERR.printf("Elapsed time: %ld nanotime.\n",difftime);
-    for (i in 0..(sa.size-1)){
-      Console.OUT.println(sa(i));
-    } 
-  }
-*/
-  def this(string: Rail[Byte], k: Int) {
+  def this(string: Rail[Byte], k: Long, fast: Byte) {
     val time = Timer.milliTime();
-    val SAC = new SuffixArrayChar(string, k);
-    val sa = SAC.run();
+    var sa:Rail[Byte];
+    //if(fast > 0) {
+      /*var str:Rail[Long] = new Rail[Long](string.size);
+      for(i in 0..(string.size-1)){
+        str(i) = string(i) as Long;
+      }
+      sa = new Rail[Long](string.size);
+      val SAC = new SuffixArray(str, k, sa, fast);
+      SAC.run();*/
+      val SAC = new SuffixArrayChar(string, k,fast);
+      sa = SAC.run();
+    /*}
+   else {
+      var str:Rail[Long] = new Rail[Long](string.size);
+      for(i in 0..(string.size-1)){
+        str(i) = string(i);
+      }
+      val SAC = new SuffixArraySimple(str, k);
+      //val SAC = new SuffixArraySimpleChar(string, k);
+      sa = SAC.run();
+    }*/
     val difftime = Timer.milliTime() - time;
-    Console.ERR.printf("Elapsed time: %ld millitime.\n",difftime);
+    Console.ERR.printf("Elapsed time: %ld millisec.\n",difftime);
     var j:Long = sa.size - 1;
     if (j > 15) {j = 15;}
     for (i in 0..j){
       Console.OUT.println(sa(i));
     } 
+  }
+
+  def this(str: Rail[Long], k:Long, fast:Byte) {
+    val time = Timer.milliTime();
+    var sa:Rail[Long];
+    Console.OUT.println(str.size);
+    sa = new Rail[Long](str.size);
+    Console.OUT.println(str);
+    val SAC = new SuffixArray(str, k, sa, fast);
+    SAC.run();
+    val difftime = Timer.milliTime() - time;
+    Console.ERR.printf("Elapsed time: %ld millisec.\n",difftime);
+    var j:Long = sa.size - 1;
+    if (j > 15) {j = 15;}
+    for (i in 0..j){
+      Console.OUT.println(sa(i));
+    }
   }
 
   static def strToRail(input: String, isDigit: Boolean):Rail[Long]{
@@ -106,62 +85,36 @@ public class Bwt {
     return strBuilder.result();
   }
 
-  static def fileioImproved(filename: String):String {
-    val strBuilder = new StringBuilder();
-    val input = new File(filename);
-    var j:Long = 1;
-    for( c in input.lines() ) {
-      strBuilder.addString(c);
-      if (j % (1024*1024) == 0){
-        Console.ERR.printf("%ld MLine loaded.\n", j / (1024*1024));
-      }
-      j += 1;
-    }
-    val string = strBuilder.result();
-    return string;
-  }
-
   @Native("c++", "input_fgets((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Long]): void;
-
-  @Native("c++", "input_fgets_malloc((#1)->c_str(), #2);")
-  native static def fileioCPP(filename: String, data: Long): Rail[Long];
 
   @Native("c++", "input_fgets_char((#1)->c_str(), (#2)->raw);")
   native static def fileioCPP(filename: String, data: Rail[Byte]): void;
 
-  static def fileio(filename: String):Rail[Long]{
-    val strBuilder = new RailBuilder[Long]();
-    val input = new File(filename);
-    var j:Long = 1;
-    for( c in input.bytes() ) {
-      //val base = ((((c >> 2) ^ (c >> 1)) & 3) + 1) as Long;
-      val base = ((((c >> 2) ^ (c >> 1)) & 19) % 5) as Long;
-      strBuilder.add(base);
-      if (j % (1024*1024) == 0){
-        Console.ERR.printf("%ld MB loaded.\n", j / (1024*1024));
-      }
-      j += 1;
-    }
-    for (i in 0..2){
-      strBuilder.add(0);
-    }
-    val string = strBuilder.result();
-    return string;
-  }
+  @Native("c++", "input_fgets_fixed_char((#1)->c_str(), (#2)->raw, #3);")
+  native static def fileioCPP(filename: String, data: Rail[Byte], length: Long): void;
+
+  @Native("c++", "input_fgets_fixed_long((#1)->c_str(), (#2)->raw, #3);")
+  native static def fileioCPP(filename: String, data: Rail[Long], length: Long): void;
 
   public static def main(args:Rail[String]):void {
-    //val string:Rail[Long] = fileio("test.txt");
-    val N:Int = Int.parse(args(0));
-    val length:Long = Long.parse(args(1))+3L;
-    var file:String = args(2); 
+    var N:Long = Long.parse(args(0));
+    val height:Long = Long.parse(args(1));
+    val thread:Byte = Byte.parse(args(2));
+    val length:Long = (height < 20) ? height : height * 101 + 3L;
+    var file:String = args(3); 
+
     Console.ERR.println("Start Malloc");
-    val e = new Rail[Byte](length);//2577003486);
+    var e:Rail[Byte] = new Rail[Byte](length);
+    //var e:Rail[Long] = new Rail[Long](length);
+    //N = (Math.pow(5, 27)) as Long;
+    e(length-1) = 0y;
+    e(length-2) = 0y;
+    e(length-3) = 0y;
     Console.ERR.println("End Malloc");
-    fileioCPP(file, e);
-    Console.ERR.println("Files has read");
-    val bwa = new Bwt(e, N);
-    //val bwa = new Bwt(file, N);
-    //val bwa = new Bwt(file, N, false);
+
+    fileioCPP(file, e, height);
+    
+    val bwa = new Bwt(e, N, thread);
   }
 }

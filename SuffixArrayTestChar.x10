@@ -26,17 +26,17 @@ public class SuffixArrayTestChar {
   
   public static def main(args:Rail[String]):void {
     //val bwa = new SuffixArray([1L,4L,1L,1L,4L,1L,2L,3L,1L,4L,1L,1L,4L,1L,1L,0L,0L,0L,0L], 5);
-    val bwa = new SuffixArray([1L,1L,0L,0L,0L], 5);
-    val sa = bwa.run();
+    //val bwa = new SuffixArray([1L,1L,0L,0L,0L], 5);
+    /*val sa = bwa.run();
     for (i in 0..(sa.size-1)){
       Console.OUT.println(sa(i));
     }
     val bwt = bwa.bwtable();
     for (i in 0..(bwt.size-1)){
       Console.OUT.println(bwt(i));
-    }
+    }*/
 
-    val nmax:Long = 6;
+    val nmax:Long = 10;
     val b:Byte = 4y;
     val bl:Long = b as Long;
     for(n in 2..nmax){
@@ -48,7 +48,7 @@ public class SuffixArrayTestChar {
       s(n+1) = 0y;
       s(n+2) = 0y;
       for(i in 0..(N-1)){
-        val aa = new SuffixArrayChar(s, b);
+        val aa = new SuffixArrayChar(s, b, 11y);
         sa_result = aa.run();
         Console.OUT.println(s);
         Console.OUT.println(sa_result);
