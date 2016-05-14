@@ -28,7 +28,7 @@ The result may be burrows wheeler transform array.
 $ JAVA_HOME=/usr ../x10/bin/x10c++ -g -v -t -O3 -NO_CHECKS Bwt.x10 SuffixArray.x10 SuffixArrayChar.x10 SuffixArraySimple.x10 SuffixArraySimpleChar.x10 -post 'icc # # -fopenmp'
 ```
 
-### Test
+## Test
 
 ```
 $ JAVA_HOME=/usr ../x10/bin/x10c++ -g -v SuffixArrayTest.x10 SuffixArray.x10 -post '# # # -fopenmp' && X10_NPLACES=2 X10_NTHREADS=6 ./a.out
